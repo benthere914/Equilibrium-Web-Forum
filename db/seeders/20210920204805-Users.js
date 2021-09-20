@@ -8,25 +8,25 @@ module.exports = {
 				[
 					{
 						username: "John Doe",
-						hashedPassword: "fekgnsjdfnbgoisdnfg",
+						hashedPassword: "$2a$10$mv.NLmAgbIeuFFcIGNFGGeD0fTI.Q6DxN9e8XF5Tpun37QAQxrfZC",
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					},
 					{
 						username: "Parker",
-						hashedPassword: "fekgnsjdfnbgoisdnfg",
+						hashedPassword: "$2a$10$mv.NLmAgbIeuFFcIGNFGGeD0fTI.Q6DxN9e8XF5Tpun37QAQxrfZC",
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					},
 					{
 						username: "Ben",
-						hashedPassword: "fekgnsjdfnbgoisdnfg",
+						hashedPassword: "$2a$10$mv.NLmAgbIeuFFcIGNFGGeD0fTI.Q6DxN9e8XF5Tpun37QAQxrfZC",
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					},
 					{
 						username: "Nick",
-						hashedPassword: "fekgnsjdfnbgoisdnfg",
+						hashedPassword: "$2a$10$mv.NLmAgbIeuFFcIGNFGGeD0fTI.Q6DxN9e8XF5Tpun37QAQxrfZC",
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					},
