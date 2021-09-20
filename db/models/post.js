@@ -16,10 +16,12 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: "topicId"
 		});
 
-    Post.belongsToMany(models.User, {
-			through: "Comment",
+    Post.hasMany(models.Comment, {
 			foreignKey: "postId",
-			otherKey: "userId",
+		});
+
+    Post.hasMany(models.Vote, {
+			foreignKey: "postId",
 		});
 
   };
