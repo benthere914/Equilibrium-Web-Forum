@@ -3,6 +3,9 @@ var router = express.Router();
 const { csrfProtection, asyncHandler, handleValidationErrors, bcrypt, check } = require('../utils');
 const db = require('../db/models');
 const { User } = db;
+const { loginUser,logoutUser,restoreUser,requireAuth } = require('../auth');
+const { render } = require('../app');
+const { validationResult } = require('express-validator');
 
 const userValidators = [
     check('username')
@@ -40,10 +43,19 @@ const userValidators = [
 const loginValidators = [
     check('username')
       .exists({ checkFalsy: true })
-      .withMessage('Please provide a value for Username'),
+      .withMessage('Please provide a value for Username')
+      .custom((value) => {
+        return db.User.findOne({ where: { username: value } })
+            .then((user) => {
+                if (!user) {
+                    return Promise.reject('Incorrect login credentials');
+                }
+            })}),
     check('password')
       .exists({ checkFalsy: true })
-      .withMessage('Please provide a value for Password'),
+      .withMessage('Please provide a value for Password')
+
+
   ];
 
 /* GET home page. */
@@ -66,13 +78,32 @@ router.post('/sign-up',
     asyncHandler(async (req, res, next) => {
         let {username, password} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
-        let newUser = await User.create({username, hashedPassword})
-        res.send({'message': 'check postbird'})
+        let user = await User.create({username, hashedPassword});
+        console.log(req.session);
+        loginUser(req, res, user);
+        res.redirect('/');
 
   }));
 
-router.post('/log-in', function(req, res, next) {
-    ;
-});
+router.post('/log-in', loginValidators, asyncHandler( async (req, res, next) => {
+    const {username, password} = req.body;
+    let error = [];
+    const validatorErrors = validationResult(req);
+    console.log(validatorErrors)
+    if (validatorErrors.isEmpty()){
+        console.log(123)
+        const user = await User.findOne({where: {username}})
+        const passwordMatches = await bcrypt.compare(password, user.hashedPassword.toString());
+        if (passwordMatches) {loginUser(req, res, user); return res.redirect('/')}
+        error.push('Incorrect login credentials')
+    }
+    else {
+        error = validatorErrors.array().map(e => e.msg)
+    }
+
+    res.render('log-in', {csrfToken: req.csrfToken(), username, error})
+    // res.redirect('/')
+    res.send('abc')
+}));
 
 module.exports = router;
