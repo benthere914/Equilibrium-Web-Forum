@@ -21,12 +21,22 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Vote, {
 			foreignKey: "userId",
 		});
-    User.hasMany(models.UserFollow, {
-        foreignKey: 'userId'
-    });
-     User.hasMany(models.UserFollow, {
-				foreignKey: "followId",
-		});
+    const columnMappingOne = {
+			// User -> User, through UserFollow as follower
+			through: "UserFollow",
+			otherKey: "followId",
+			foreignKey: "userId",
+			as: "followings",
+		};
+		const columnMappingTwo = {
+			// User -> User, through UserFollow as following
+			through: "UserFollow",
+			otherKey: "userId",
+			foreignKey: "followId",
+			as: "followers",
+		};
+		User.belongsToMany(models.User, columnMappingOne);
+		User.belongsToMany(models.User, columnMappingTwo);
   };
   return User;
 };
