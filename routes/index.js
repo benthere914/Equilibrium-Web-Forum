@@ -1,5 +1,62 @@
 var express = require('express');
 var router = express.Router();
+const { csrfProtection, asyncHandler, handleValidationErrors, bcrypt, check } = require('../utils');
+const db = require('../db/models');
+const { User } = db;
+const { loginUser,logoutUser,restoreUser,requireAuth } = require('../auth');
+const { render } = require('../app');
+const { validationResult } = require('express-validator');
+
+const userValidators = [
+    check('username')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a value for UserName')
+        .isLength({ max: 255 })
+        .withMessage('UserName must not be more than 255 characters long')
+        .custom((value) => {
+        return db.User.findOne({ where: { username: value } })
+            .then((user) => {
+            if (user) {
+                return Promise.reject('The provided UserName is already in use by another account');
+            }
+            });
+        }),
+    check('password')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a value for Password')
+        .isLength({ max: 50 })
+        .withMessage('Password must not be more than 50 characters long')
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
+        .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'),
+    check('confirmPassword')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a value for Confirm Password')
+        .isLength({ max: 50 })
+        .withMessage('Confirm Password must not be more than 50 characters long')
+        .custom((value, { req }) => {
+        if (value !== req.body.password) {
+            throw new Error('Confirm Password does not match Password');
+        }
+        return true;
+        })
+];
+const loginValidators = [
+    check('username')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a value for Username')
+      .custom((value) => {
+        return db.User.findOne({ where: { username: value } })
+            .then((user) => {
+                if (!user) {
+                    return Promise.reject('Incorrect login credentials');
+                }
+            })}),
+    check('password')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a value for Password')
+
+
+  ];
 
 /* GET home page. */
 router.get('/', restoreUser, function(req, res, next) {
@@ -8,11 +65,10 @@ router.get('/', restoreUser, function(req, res, next) {
   res.render('layout', {loggedIn: res.locals.authenticated});
 });
 
-<<<<<<< Updated upstream
-=======
 router.get('/sign-up', function(req, res, next) {
     res.render('index', { title: 'a/A Express Skeleton Home' });
   });
+
 
 router.get('/log-in', csrfProtection, function(req, res, next) {
     res.render('log-in', { title: 'log-in',  csrfToken: req.csrfToken()});
@@ -32,7 +88,9 @@ router.post('/sign-up',
 
   }));
 
+
 router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req, res, next) => {
+
     const {username, password} = req.body;
     let error = [];
     const validatorErrors = validationResult(req);
@@ -53,10 +111,10 @@ router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req
     res.send('abc')
 }));
 
+
 router.post('/log-out', asyncHandler(async (req, res, next) => {
     logoutUser(req, res);
     res.redirect('/');
 }))
 
->>>>>>> Stashed changes
 module.exports = router;

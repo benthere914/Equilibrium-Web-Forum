@@ -23,14 +23,19 @@ const restoreUser = async (req, res, next) => {
 
       if (user) {
         res.locals.authenticated = true;
-        console.log(res.locals);
+
+        console.log(res.locals)
+        
         res.locals.user = user;
         next();
       }
     } catch (err) {
 
+
       res.locals.authenticated = false;
       // console.log(res.locals.authenticated);
+
+      res.locals.authenticated = false;
       next(err);
     }
   } else {
