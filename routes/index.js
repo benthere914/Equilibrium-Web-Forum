@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const { csrfProtection, asyncHandler, handleValidationErrors, bcrypt, check } = require('../utils');
 const db = require('../db/models');
 const { User } = db;
@@ -53,9 +53,10 @@ const loginValidators = [
     check('password')
       .exists({ checkFalsy: true })
       .withMessage('Please provide a value for Password')
-
-
   ];
+
+
+
 
 /* GET home page. */
 router.get('/', restoreUser, asyncHandler(async function(req, res, next) {
@@ -85,14 +86,21 @@ router.get('/log-in', csrfProtection, function(req, res, next) {
 router.post('/sign-up',
     csrfProtection,
     userValidators,
-    handleValidationErrors,
-    asyncHandler( async (req, res, next) => {
+    asyncHandler( async (req, res) => {
         let {username, password} = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
-        let user = await User.create({username, hashedPassword});
-        loginUser(req, res, user);
-        res.status(200);
-        res.redirect('/');
+        let error =[];
+        const validatorErrors = validationResult(req);
+
+        if (validatorErrors.isEmpty()) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            let user = await User.create({username, hashedPassword});
+            loginUser(req, res, user);
+            res.status(201);
+        } else {
+            error = validatorErrors.array().map((e) => e.msg);
+            res.status(400).json({error});
+        }
+
   }));
 
 
