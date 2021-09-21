@@ -18,8 +18,7 @@ block content
         .Comment
             ul
                 li
-                    form(method="POST", action = "/posts/#{postId}/comments")
-
+                    form(method="POST", action = '/posts/#{postId}/comments')
                         label(for="Comment") Add a comment
                         input(type="text" name="Comment" )
                         button(type="submit") Submit
