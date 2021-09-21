@@ -17,7 +17,7 @@ module.exports = {
 				type: Sequelize.STRING(255),
 				defaultValue: "An author of Equilibrium.",
 			},
-			img_url: {
+			imgUrl: {
 				type: Sequelize.TEXT,
         defaultValue: ""
 			},
