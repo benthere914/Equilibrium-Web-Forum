@@ -4,7 +4,6 @@ const { csrfProtection, asyncHandler, handleValidationErrors, bcrypt, check } = 
 const db = require('../db/models');
 const { User } = db;
 const { loginUser,logoutUser,restoreUser,requireAuth } = require('../auth');
-const { render } = require('../app');
 const { validationResult } = require('express-validator');
 
 const userValidators = [
@@ -66,8 +65,8 @@ router.get('/', restoreUser, asyncHandler(async function(req, res, next) {
   res.render('index', {loggedIn: res.locals.authenticated, topics, posts});
 }));
 
-router.get('/sign-up', function(req, res, next) {
-    res.render('index', { title: 'a/A Express Skeleton Home' });
+router.get('/sign-up', csrfProtection, function(req, res, next) {
+    res.render("sign-up", { csrfToken: req.csrfToken() });
   });
 
 
@@ -76,17 +75,16 @@ router.get('/log-in', csrfProtection, function(req, res, next) {
   });
 
 router.post('/sign-up',
-    // csrfProtection,
+    csrfProtection,
     userValidators,
     handleValidationErrors,
-    asyncHandler(async (req, res, next) => {
+    asyncHandler( async (req, res, next) => {
         let {username, password} = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
         let user = await User.create({username, hashedPassword});
-        console.log(req.session);
         loginUser(req, res, user);
+        res.status(200);
         res.redirect('/');
-
   }));
 
 
