@@ -1,5 +1,9 @@
+append head
+  link(rel="stylesheet" href="/stylesheets/modal.css")
+  link(rel="stylesheet" href="/stylesheets/modal-forms.css")
 div.nav-bar
-  h1 Equilibrium
+  h1
+    a(href="/") Equilibrium
   ul
     if loggedIn
       li
@@ -8,10 +12,37 @@ div.nav-bar
       li
         a(href="/users/:username" ) Profile
     else
-      li
-        a(href="/sign-up").sign-up Sign Up
-      li
-        a(href="/log-in").log-in Log In
+      li.sign-up-modal-trigger Sign Up
+      li.log-in-modal-trigger Log In
       li
         form(action="/log-in-demo" method="POST")
           input(type="submit" value="Demo" class="")
+div(class="log-in-modal")
+  div(class="modal-content")
+    span(class="close-log-in-modal close-modal") X
+    h2 Log-In
+    div(class="log-in-errors-container")
+    form(class="log-in-form")
+      input(type="hidden" name='_csrf' value=csrfToken)
+      label(for="username") Username
+      input(type="text" name="username" )
+      label(for="password") Password
+      input(type="password" name="password")
+      button(type="submit") Log In
+div(class="sign-up-modal")
+  div(class="modal-content")
+    span(class="close-sign-up-modal close-modal") X
+    h2 Sign-Up
+    div(class="sign-up-errors-container" style="width:50%")
+    form(class="sign-up-form")
+      input(type="hidden" name='_csrf' value=csrfToken)
+      label(for="username") Username
+      input(type="text" name="username" )
+      label(for="password") Password
+      input(type="password" name="password")
+      label(for="confirmPassword") Confirm Password
+      input(type="password" name="confirmPassword")
+      button(type="submit") Sign Up
+script(src="./javascripts/nav-bar.js")
+script(src="./javascripts/log-in.js")
+script(src="./javascripts/sign-up.js")
