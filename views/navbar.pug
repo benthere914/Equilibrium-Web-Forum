@@ -15,7 +15,7 @@ div.nav-bar
       li
         a(href="/posts/create") Write a Story
       li
-        a(href="/users/:username" ) Profile
+        a(href=`/users/${userId}`) Profile
     else
       li.sign-up-modal-trigger Sign Up
       li.log-in-modal-trigger Log In
@@ -48,4 +48,3 @@ div(class="sign-up-modal")
       label(for="confirmPassword") Confirm Password
       input(type="password" name="confirmPassword")
       button(type="submit") Sign Up
-

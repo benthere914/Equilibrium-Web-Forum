@@ -77,6 +77,7 @@ router.get('/', csrfProtection, restoreUser, asyncHandler(async function(req, re
 		topics,
 		posts,
 		csrfToken: req.csrfToken(),
+        userId: req.session.auth.userId
 	});
 }));
 
