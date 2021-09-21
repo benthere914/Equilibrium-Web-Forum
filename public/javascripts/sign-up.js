@@ -10,6 +10,7 @@ signUpForm.addEventListener("submit", async (e) => {
 	const confirmPassword = formData.get("confirmPassword");
 
 	const body = {username, password, confirmPassword };
+
 	try {
 		const res = await fetch("/sign-up", {
 			method: "POST",
@@ -29,7 +30,7 @@ signUpForm.addEventListener("submit", async (e) => {
 
 			const errorJSON = await err.json();
             console.log(errorJSON);
-			const errorsContainer = document.querySelector(".errors-container");
+			const errorsContainer = document.querySelector(".sign-up-errors-container");
 			let errorsHtml = [
 				`
         <div>
@@ -42,7 +43,7 @@ signUpForm.addEventListener("submit", async (e) => {
 			if (error && Array.isArray(error)) {
 				errorsHtml = error.map(
 					(message) => `
-          <div>
+          <div class="err_msg">
               ${message}
           </div>
         `
