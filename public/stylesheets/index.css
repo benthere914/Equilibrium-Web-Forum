@@ -121,12 +121,14 @@ h4 {
     width: 700px;
     margin: 10px 0 10px 20%;
     border: solid blue 1px;
+    order: 2;
 }
 
 .blog div{
     height: 250px;
     width: 300px;
     background-color: brown;
+    order: 2;
 }
 
 .toggled {

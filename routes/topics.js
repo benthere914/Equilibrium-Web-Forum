@@ -12,7 +12,7 @@ router.get('/:id', asyncHandler(async(req,res,next)=>{
     id: topicId
   }})
 
-  res.status(200).json(topics);
+  res.status(200).json({topics});
 }))
 
 
