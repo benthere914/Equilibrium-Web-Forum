@@ -59,9 +59,14 @@ const loginValidators = [
 
 /* GET home page. */
 router.get('/', restoreUser, asyncHandler(async function(req, res, next) {
-    const topics = await db.Topic.findAll();
-    const posts = [];
-    console.log(res.locals);
+    let topics = await db.Topic.findAll();
+    topics = topics.map(e => e.name)
+    console.log(topics)
+    let posts = await db.Post.findAll();
+    posts = posts.map(e => {
+        e.content = e.content.slice(0, 100, '...');
+        return e
+    })
   res.render('index', {loggedIn: res.locals.authenticated, topics, posts});
 }));
 
@@ -93,9 +98,7 @@ router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req
     const {username, password} = req.body;
     let error = [];
     const validatorErrors = validationResult(req);
-    console.log(validatorErrors)
     if (validatorErrors.isEmpty()){
-        console.log(123)
         const user = await User.findOne({where: {username}})
         const passwordMatches = await bcrypt.compare(password, user.hashedPassword.toString());
         if (passwordMatches) {loginUser(req, res, user); return res.redirect('/')}
@@ -115,12 +118,12 @@ router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req
 router.post('/log-in-demo', asyncHandler(async (req, res) => {
     const user = await User.findOne();
     loginUser(req, res, user);
-    return res.redirect('/')
+    res.redirect('/')
 }))
 
-router.post('/log-out', asyncHandler(async (req, res, next) => {
+router.post('/log-out', (req, res, next) => {
     logoutUser(req, res);
     res.redirect('/');
-}))
+})
 
 module.exports = router;

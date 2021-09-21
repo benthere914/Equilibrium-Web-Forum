@@ -10,7 +10,7 @@ block content
 
   div.topics-container
     each topic in topics
-      div.topics topic.name
+      div.topics= topic
     div.social
       a(href="") Ben's links
       a(href="") Parker's
@@ -18,5 +18,5 @@ block content
   div.blogs-container
     each post in posts
       div.blog
-        h3 post.title
-        p post.content
+        h3= post.title
+        p= post.content
