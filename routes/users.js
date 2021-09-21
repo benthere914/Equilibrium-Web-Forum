@@ -6,6 +6,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+
 router.get("/userid", (req, res) => {
   if (req.session.auth.userId){
     res.json({userId: req.session.auth.userId})
@@ -14,4 +15,5 @@ router.get("/userid", (req, res) => {
     res.json({userId: NaN})
     }
   })
+
 module.exports = router;

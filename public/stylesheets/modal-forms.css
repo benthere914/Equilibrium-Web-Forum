@@ -1,0 +1,23 @@
+.sign-up-form {
+    display: flex;
+}
+.sign-up-form input {
+    background-color: white;
+    border: 1px solid black;
+}
+*{
+    box-sizing: border-box;
+}
+
+
+h2{
+    font-size: 2em;
+}
+.sign-up-errors-container + .log-in-errors-container {
+    display: flex;
+    flex-direction: column;
+    background-color: lightpink;
+}
+.err_msg{
+    font-weight: 800;
+}

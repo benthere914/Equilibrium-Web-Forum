@@ -105,6 +105,9 @@ background-color: #C3C1AB;
 
 .blogs-container {
     flex-grow: 2;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
 }
 h3 {
@@ -112,6 +115,12 @@ h3 {
 }
 h4 {
     font-size: 0.8em;
+}
+
+.blog{
+    width: 700px;
+    margin: 10px 0 10px 20%;
+    border: solid blue 1px;
 }
 
 .blog div{
