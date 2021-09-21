@@ -59,16 +59,19 @@ const loginValidators = [
   ];
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'a/A Express Skeleton Home' });
+router.get('/', restoreUser, function(req, res, next) {
+
+    console.log(res.locals);
+  res.render('layout', {loggedIn: res.locals.authenticated});
 });
 
 router.get('/sign-up', function(req, res, next) {
     res.render('index', { title: 'a/A Express Skeleton Home' });
   });
 
-router.get('/log-in', function(req, res, next) {
-    res.render('index', { title: 'a/A Express Skeleton Home' });
+
+router.get('/log-in', csrfProtection, function(req, res, next) {
+    res.render('log-in', { title: 'log-in',  csrfToken: req.csrfToken()});
   });
 
 router.post('/sign-up',
@@ -85,7 +88,9 @@ router.post('/sign-up',
 
   }));
 
-router.post('/log-in', loginValidators, asyncHandler( async (req, res, next) => {
+
+router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req, res, next) => {
+
     const {username, password} = req.body;
     let error = [];
     const validatorErrors = validationResult(req);
@@ -105,5 +110,11 @@ router.post('/log-in', loginValidators, asyncHandler( async (req, res, next) => 
     // res.redirect('/')
     res.send('abc')
 }));
+
+
+router.post('/log-out', asyncHandler(async (req, res, next) => {
+    logoutUser(req, res);
+    res.redirect('/');
+}))
 
 module.exports = router;
