@@ -1,3 +1,4 @@
+
 const signUpModalTrigger = document.querySelector(".sign-up-modal-trigger");
 const signUpModal = document.querySelector(".sign-up-modal");
 const logInModalTrigger = document.querySelector(".log-in-modal-trigger");

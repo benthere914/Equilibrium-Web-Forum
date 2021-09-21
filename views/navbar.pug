@@ -1,6 +1,9 @@
 append head
   link(rel="stylesheet" href="/stylesheets/modal.css")
   link(rel="stylesheet" href="/stylesheets/modal-forms.css")
+  script(src="/javascripts/nav-bar.js" type="module")
+  script(src="/javascripts/log-in.js" type="module")
+  script(src="/javascripts/sign-up.js" type="module")
 div.nav-bar
   h1
     a(href="/") Equilibrium
@@ -9,6 +12,8 @@ div.nav-bar
       li
         form(action="/log-out" method="POST")
           input(type="submit" value="Log Out" class="").input
+      li
+        a(href="/posts/create") Write a Story
       li
         a(href="/users/:username" ) Profile
     else
@@ -43,6 +48,4 @@ div(class="sign-up-modal")
       label(for="confirmPassword") Confirm Password
       input(type="password" name="confirmPassword")
       button(type="submit") Sign Up
-script(src="/javascripts/nav-bar.js")
-script(src="/javascripts/log-in.js")
-script(src="/javascripts/sign-up.js")
+
