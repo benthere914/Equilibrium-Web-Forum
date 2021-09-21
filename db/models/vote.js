@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Vote = sequelize.define('Vote', {
     userId: DataTypes.INTEGER,
     postId: DataTypes.INTEGER,
-    vote_count: DataTypes.INTEGER
+    voteCount: DataTypes.INTEGER
   }, {});
   Vote.associate = function(models) {
     Vote.belongsTo(models.User, {

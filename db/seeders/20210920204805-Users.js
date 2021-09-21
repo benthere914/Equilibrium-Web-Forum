@@ -12,6 +12,12 @@ module.exports = {
 						createdAt: new Date(),
 						updatedAt: new Date(),
 					},
+                    {
+						username: "Jane Doe",
+						hashedPassword: "$2a$10$mv.NLmAgbIeuFFcIGNFGGeD0fTI.Q6DxN9e8XF5Tpun37QAQxrfZC",
+						createdAt: new Date(),
+						updatedAt: new Date(),
+					},
 					{
 						username: "Parker",
 						hashedPassword: "$2a$10$mv.NLmAgbIeuFFcIGNFGGeD0fTI.Q6DxN9e8XF5Tpun37QAQxrfZC",

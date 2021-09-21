@@ -22,7 +22,7 @@ module.exports = {
 					model: "Posts",
 				},
 			},
-			vote_count: {
+			voteCount: {
 				allowNull: false,
 				type: Sequelize.INTEGER,
 			},
