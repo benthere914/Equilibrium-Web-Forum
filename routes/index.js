@@ -113,6 +113,13 @@ router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req
 }));
 
 
+
+router.post('/log-in-demo', asyncHandler(async (req, res) => {
+    const user = await User.findOne();
+    loginUser(req, res, user);
+    return res.redirect('/')
+}))
+
 router.post('/log-out', asyncHandler(async (req, res, next) => {
     logoutUser(req, res);
     res.redirect('/');

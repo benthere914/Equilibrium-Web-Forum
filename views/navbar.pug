@@ -5,16 +5,15 @@ ul
       form(action="/log-out" method="POST")
         input(type="submit" value="Log Out" class="")
     li
-      a(href="/users/:username" ) Profile
+        form(action="/users/:username" method="GET")
+            input(type="submit" value="Profile" class="")
   else
     li
-      a(href="/sign-up") Sign Up
+        form(action="/sign-up" method="GET")
+            input(type="submit" value="Sign Up" class="")
     li
-      a(href="/log-in") Log In
+        form(action="/log-in" method="GET")
+            input(type="submit" value="Log in" class="")
     li
-<<<<<<< Updated upstream
-      a(href="/log-in-demo") Demo
-=======
         form(action="/log-in-demo" method="POST")
             input(type="submit" value="Demo" class="")
->>>>>>> Stashed changes
