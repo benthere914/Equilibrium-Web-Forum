@@ -66,10 +66,11 @@ router.get('/', restoreUser, asyncHandler(async function(req, res, next) {
      });
 
     console.log(topics)
-    let posts = await db.Post.findAll();
+    let posts = await db.Post.findAll({include: User
+    });
     posts = posts.map(e => {
         e.content = e.content.slice(0, 100, '...');
-        return e
+        return e;
     })
   res.render('index', {loggedIn: res.locals.authenticated, topics, posts});
 }));
