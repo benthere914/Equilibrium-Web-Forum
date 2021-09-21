@@ -123,6 +123,7 @@ h4 {
     margin: 10px 0 10px 20%;
     border: solid blue 1px;
     order: 2;
+    cursor: pointer;
 }
 
 .blog div{
