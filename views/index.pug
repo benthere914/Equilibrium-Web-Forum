@@ -27,7 +27,7 @@ block content
         div.blog(id=`post-${post.id}`)
           h4= post.User.username
           h3= post.title
-          - var url = post.img_url;
+          - var url = post.imgUrl;
           - var urlString = `url(${url})`;
           div(style={'background-image': `${urlString}`})
           p= post.content
