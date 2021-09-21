@@ -59,11 +59,12 @@ const loginValidators = [
   ];
 
 /* GET home page. */
-router.get('/', restoreUser, function(req, res, next) {
-
+router.get('/', restoreUser, asyncHandler(async function(req, res, next) {
+    const topics = await db.Topic.findAll();
+    const posts = [];
     console.log(res.locals);
-  res.render('layout', {loggedIn: res.locals.authenticated});
-});
+  res.render('index', {loggedIn: res.locals.authenticated, topics, posts});
+}));
 
 router.get('/sign-up', function(req, res, next) {
     res.render('index', { title: 'a/A Express Skeleton Home' });
