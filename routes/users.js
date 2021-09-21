@@ -30,7 +30,7 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
         return data});
         console.log(user)
         const sameUser = (Number(req.params.id) === Number(req.session.auth.userId));
-    res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated});
+    res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated, userId: req.session.auth.userId});
 }))
 
 

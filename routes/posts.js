@@ -41,6 +41,7 @@ router.get(
 			author: post.User,
 			comments,
 			loggedIn: res.locals.authenticated,
+            userId: req.session.auth.userId
 		});
 		console.log(post);
 	})
@@ -61,6 +62,7 @@ router.get(
 				topics,
 				loggedIn: res.locals.authenticated,
 				csrfToken: req.csrfToken(),
+                userId: req.session.auth.userId
 			});
 		} else {
 			res.redirect("/");
