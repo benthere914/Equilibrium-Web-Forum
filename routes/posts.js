@@ -1,4 +1,3 @@
-
 var express = require("express");
 var router = express.Router();
 const {
@@ -9,13 +8,15 @@ const {
 	bcrypt,
 	csrfProtection,
 } = require("../utils");
+const { restoreUser } = require("../auth");
 const db = require("../db/models");
 const { Post, User, Topic, Comment } = db;
 
 router.get(
-	/\/\d+/,
+	"/:id(\\d+)",
+	restoreUser,
 	asyncHandler(async (req, res) => {
-		const postId = req.url.slice(1);
+		const postId = req.params.id;
 		let post = await Post.findOne({
 			where: { id: postId },
 			include: [{ model: User }, { model: Topic }],
@@ -35,10 +36,36 @@ router.get(
 		post.User = post.User.dataValues;
 		post.Topic = post.Topic.dataValues;
 		console.log(post);
-		res.render("post", { post, author: post.User, comments });
+		res.render("post", {
+			post,
+			author: post.User,
+			comments,
+			loggedIn: res.locals.authenticated,
+		});
 		console.log(post);
 	})
 );
 
+router.get(
+	"/create",
+	csrfProtection,
+	restoreUser,
+	asyncHandler(async (req, res) => {
+		if (res.locals.authenticated === true) {
+			const userId = req.session.auth.userId;
+			const user = await User.findByPk(userId);
+			const topics = await Topic.findAll();
+			console.log(topics);
+			res.render("create-post", {
+				user,
+				topics,
+				loggedIn: res.locals.authenticated,
+				csrfToken: req.csrfToken(),
+			});
+		} else {
+			res.redirect("/");
+		}
+	})
+);
 
 module.exports = router;

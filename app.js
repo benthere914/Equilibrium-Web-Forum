@@ -11,7 +11,8 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const postsRouter = require('./routes/posts');
-const topicsRouter = require('./routes/topics')
+const topicsRouter = require('./routes/topics');
+const { restoreUser } = require('./auth');
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('superSecret'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set up session middleware
@@ -38,7 +39,7 @@ app.use(
 
 // create Session table if it doesn't already exist
 store.sync();
-
+app.use(restoreUser);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
