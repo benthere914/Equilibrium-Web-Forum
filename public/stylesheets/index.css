@@ -136,3 +136,7 @@ h4 {
 .toggled {
     background-color: black;
 }
+.link:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}

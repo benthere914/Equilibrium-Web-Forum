@@ -28,3 +28,7 @@
 .post .postContent{
     width: 1000px;
 }
+.postLikes{
+    display: flex;
+    justify-content: flex-end;
+}
