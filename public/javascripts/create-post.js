@@ -5,28 +5,30 @@ createPostForm.addEventListener("submit", async (e) => {
 
 	const formData = new FormData(createPostForm);
 	const token = formData.get("_csrf");
-	const username = formData.get("title");
-	const password = formData.get("content");
+	const title = formData.get("title");
+	const content = formData.get("content");
 	const topicId = formData.get("topicId");
     const userId = formData.get("userId");
+    const imgUrl = formData.get("imgUrl")
 
-	const body = { username, password, confirmPassword };
+	const body = { userId, topicId, title, content, imgUrl};
 
 	try {
-		const res = await fetch("/sign-up", {
+        console.log(imgUrl)
+		const res = await fetch("/posts/create", {
 			method: "POST",
 			body: JSON.stringify(body),
 			headers: {
 				"Content-Type": "application/json",
-				"CSRF-Token": token,
-				Accept: "application/json",
+				"CSRF-Token": token
 			},
 		});
 
 		if (res.status === 400) {
 			throw res;
 		}
-		window.location.href = "/";
+        const {post} = await res.json();
+        window.location.href = `/posts/${post.id}`;
 	} catch (err) {
 		const errorJSON = await err.json();
 		console.log(errorJSON);
