@@ -13,6 +13,8 @@ div.nav-bar
         form(action="/log-out" method="POST")
           input(type="submit" value="Log Out" class="").input
       li
+        a(href="/posts/create") Write a Story
+      li
         a(href="/users/:username" ) Profile
     else
       li.sign-up-modal-trigger Sign Up

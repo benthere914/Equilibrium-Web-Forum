@@ -68,4 +68,25 @@ router.get(
 	})
 );
 
+router.post(
+	"/create",
+	csrfProtection,
+	asyncHandler(async (req, res) => {
+		const { userId, topicId, title, content, imgUrl} = req.body;
+        if (imgUrl === "") {
+            let post = await Post.create({
+							userId,
+							topicId,
+							title,
+							content,
+						});
+                        res.status(200).json({ post });
+        } else {
+			let post = await Post.create({ userId, topicId, title, content, imgUrl });
+            res.status(200).json({ post });
+        }
+
+	}));
+
+
 module.exports = router;

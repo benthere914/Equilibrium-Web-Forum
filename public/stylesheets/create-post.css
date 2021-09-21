@@ -8,13 +8,14 @@
     width: 100%;
     display: grid;
     grid-template-columns: 3fr 0.5fr 1fr;
-    grid-template-rows: 0.5fr 4fr;
+    grid-template-rows: 0.5fr 0.5fr 4fr;
     grid-template-areas:
    "title . dropdown"
+   "imgUrl . ."
    " content . button"
     ;
 }
-.create-post-form > input {
+.create-post-form input {
     background-color: white;
     border-left: 1px solid gray;
     width: 100%;
@@ -65,4 +66,8 @@
 #create-post-button > button:hover{
     background-color: #0a6a09;
     cursor: pointer;
+}
+
+#imgUrl{
+    grid-area: imgUrl;
 }
