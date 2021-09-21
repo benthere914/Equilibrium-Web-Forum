@@ -28,28 +28,3 @@ h1 {
   font-size: 2.5em;
   font-weight: 600;
 }
-
-.nav-bar {
-  display: flex;
-  align-items: center;
-  margin: 10px;
-  background-color: #C3C1AB;
-  width: 100vw;
-}
-.nav-bar h1 {
-  margin-left: 2em;
-  margin-right: auto;
-  color: #5F7A61;
-}
-.nav-bar a,input, li {
-  color:pink;
-  margin: 10px;
-  display: inline-block;
-  margin-left: auto;
-  padding: 5px;
-  color: #5F7A61;
-  background-color: #C3C1AB;
-  border: none;
-  font-weight: 800;
-  font-size: 1em;
-}

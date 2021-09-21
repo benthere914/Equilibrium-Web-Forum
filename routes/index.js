@@ -5,7 +5,7 @@ const db = require('../db/models');
 const { User } = db;
 const { loginUser,logoutUser,restoreUser,requireAuth } = require('../auth');
 const { validationResult } = require('express-validator');
-
+router.use(express.json());
 const userValidators = [
     check('username')
         .exists({ checkFalsy: true })
@@ -60,7 +60,10 @@ const loginValidators = [
 /* GET home page. */
 router.get('/', restoreUser, asyncHandler(async function(req, res, next) {
     let topics = await db.Topic.findAll();
-    topics = topics.map(e => e.name)
+     topics = topics.map(e => {
+         return {name: e.name, id: e.id}
+     });
+
     console.log(topics)
     let posts = await db.Post.findAll();
     posts = posts.map(e => {
