@@ -29,9 +29,8 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
         data.content =  data.content.slice(0, 100);
         return data});
         console.log(user)
-        let sameUser = (req.params.id === req.session.auth.userId)
-        console.log(req.session.auth)
-    res.render('profilePage', {user, posts, sameUser})
+        const sameUser = (Number(req.params.id) === Number(req.session.auth.userId));
+    res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated});
 }))
 
 

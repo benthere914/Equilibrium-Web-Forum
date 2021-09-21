@@ -20,4 +20,4 @@ block content
                 div(style={'background-image': `${urlString}`})
                 p #{post.content}...
                 if sameUser
-                    a(href="/edit") Edit
+                    a(href=`/users/${user.id}/edit`) Edit
