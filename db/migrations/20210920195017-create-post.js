@@ -30,7 +30,7 @@ module.exports = {
 				allowNull: false,
 				type: Sequelize.TEXT,
 			},
-			img_url: {
+			imgUrl: {
 				allowNull: false,
 				type: Sequelize.TEXT,
 				defaultValue:

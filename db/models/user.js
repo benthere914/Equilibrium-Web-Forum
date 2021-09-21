@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: DataTypes.STRING,
     biography: DataTypes.STRING,
-    img_url: DataTypes.STRING,
+    imgUrl: DataTypes.STRING,
     hashedPassword: DataTypes.STRING
   }, {});
   User.associate = function(models) {
