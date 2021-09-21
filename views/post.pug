@@ -12,6 +12,12 @@ block content
             .authorBio= author.biography
         .post
             .postTitle= post.title
+            .postLikes
+              form(class="post-likes-form")
+                button(value="UpVote" type="submit") UpVote
+                button(value="DownVote" type="submit") DownVote
+              span=voteTotal
+
             .postImage
                 img(src= post.imgUrl alt="Main image for #{post.title}")
             .postContent= post.content

@@ -141,3 +141,7 @@ h4 {
     font-weight: 500  !important;
     color: #C3C1AB;
 }
+.link:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
