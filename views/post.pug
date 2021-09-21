@@ -1,0 +1,30 @@
+extends layout
+append head
+    link(rel="stylesheet" href="/stylesheets/index.css")
+    link(rel="stylesheet" href="/stylesheets/post.css")
+    script(src="/javascripts/index.js" type="module" defer)
+block content
+    .body
+        .author
+            .authorName= author.username
+            .authorImage
+                img(src= author.imgUrl alt= "Profile Picture for #{author.username}")
+            .authorBio= author.biography
+        .post
+            .postTitle= post.title
+            .postImage
+                img(src= post.imgUrl alt="Main image for #{post.title}")
+            .postContent= post.content
+        .Comment
+            ul
+                li
+                    form(method="POST", action = '/posts/#{postId}/comments')
+                        label(for="Comment") Add a comment
+                        input(type="text" name="Comment" )
+                        button(type="submit") Submit
+                each comment in comments
+                    li
+                        h3= comment.User.username
+                        h3= comment.comment
+                        h3= comment.createdAT
+                        h3= comment.updatedAT
