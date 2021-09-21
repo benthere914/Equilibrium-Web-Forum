@@ -24,7 +24,7 @@ block content
           a.linkedIn(href="https://www.linkedin.com/in/shaquilleoneal/")
     div.blogs-container
       each post in posts
-        div.blog(id=`post-${post.id}`)
+        div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`  onclick=`window.location.href='/posts/${post.id}'`)
           h4= post.User.username
           h3= post.title
           - var url = post.imgUrl;

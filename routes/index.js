@@ -77,6 +77,7 @@ router.get('/', csrfProtection, restoreUser, asyncHandler(async function(req, re
 		topics,
 		posts,
 		csrfToken: req.csrfToken(),
+        userId: req.session.auth.userId
 	});
 }));
 
@@ -128,13 +129,13 @@ router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req
 router.post('/log-in-demo', asyncHandler(async (req, res) => {
     const user = await User.findOne();
     loginUser(req, res, user);
-    setTimeout(() => {return res.redirect('/')}, 0);
+    return req.session.save(() => {res.redirect('/')})
 
 }))
 
 router.post('/log-out', (req, res, next) => {
     logoutUser(req, res);
-    res.redirect('/');
+    return req.session.save(() => {res.redirect('/')})
 })
 
 module.exports = router;

@@ -1,0 +1,73 @@
+.main-post-form{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+.create-post-form {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 0.5fr 1fr;
+    grid-template-rows: 0.5fr 0.5fr 4fr;
+    grid-template-areas:
+   "title . dropdown"
+   "imgUrl . ."
+   " content . button"
+    ;
+}
+.create-post-form input {
+    background-color: white;
+    border-left: 1px solid gray;
+    width: 100%;
+    outline: none;
+    color: black;
+    padding: 10px;
+}
+
+#content > textarea {
+    height: 60vh;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 10px;
+}
+#title{
+    grid-area: title;
+    font-size: 2em;
+}
+#content{
+    grid-area: content;
+    border-left: 1px solid gray;
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+}
+#dropdown{
+    grid-area: dropdown;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+#create-post-button{
+    grid-area: button;
+    border:1px black;
+    display: flex;
+    align-items: flex-end;
+}
+#create-post-button > button{
+    width: 100%;
+    height: 10%;
+    border-radius: 10px;
+    background-color: #198917;
+    color: white;
+}
+#create-post-button > button:hover{
+    background-color: #0a6a09;
+    cursor: pointer;
+}
+
+#imgUrl{
+    grid-area: imgUrl;
+}

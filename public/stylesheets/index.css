@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .nav-bar {
     display: flex;
@@ -57,6 +58,9 @@ background-color: #C3C1AB;
     border-radius: 30%;
     margin: 2px;
     order: 2;
+    background-color: #C3C1AB;
+    font-size: 1.2em;
+    font-weight: 700;
 }
 .topics-container a {
     padding: 5px;
@@ -121,6 +125,9 @@ h4 {
     width: 700px;
     margin: 10px 0 10px 20%;
     border: solid blue 1px;
+    order: 9;
+    cursor: pointer;
+
 }
 
 .blog div{
@@ -130,5 +137,7 @@ h4 {
 }
 
 .toggled {
-    background-color: black;
+    background-color: black  !important;;
+    font-weight: 500  !important;
+    color: #C3C1AB;
 }
