@@ -2,7 +2,7 @@ extends layout
 block content
   div(class="errors-container")
   h2 Sign-Up
-    form(action="/sign-up" method="POST")
+    form(class="sign-up-form")
       input(type="hidden" name='_csrf' value=csrfToken)
       label(for="username") Username
       input(type="text" name="username" )
@@ -11,4 +11,4 @@ block content
       label(for="confirmPassword") Confirm Password
       input(type="password" name="confirmPassword")
       button(type="submit") Sign Up
-//-   script(src="./javascripts/sign-up.js")
+  script(src="./javascripts/sign-up.js")

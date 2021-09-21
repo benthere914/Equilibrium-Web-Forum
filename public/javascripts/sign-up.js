@@ -9,35 +9,38 @@ signUpForm.addEventListener("submit", async (e) => {
 	const password = formData.get("password");
 	const confirmPassword = formData.get("confirmPassword");
 
-	const body = {token, username, password, confirmPassword };
+	const body = {username, password, confirmPassword };
 	try {
-		const res = await fetch("http://localhost:8080/sign-up", {
+		const res = await fetch("/sign-up", {
 			method: "POST",
 			body: JSON.stringify(body),
 			headers: {
 				"Content-Type": "application/json",
+				"CSRF-Token": token,
+				'Accept': "application/json",
 			},
 		});
-        console.log(res);
 
-		if (!res.ok) {
+		if (res.status === 400) {
 			throw res;
 		}
 		window.location.href = "/";
 	} catch (err) {
-		if (err.status >= 400 && err.status < 600) {
+
 			const errorJSON = await err.json();
+            console.log(errorJSON);
 			const errorsContainer = document.querySelector(".errors-container");
 			let errorsHtml = [
 				`
-        <div class="alert alert-danger">
-            Something went wrong. Please try again.
+        <div>
+            Please fix the following errors:
         </div>
       `,
 			];
-			const { errors } = errorJSON;
-			if (errors && Array.isArray(errors)) {
-				errorsHtml = errors.map(
+			const { error } = errorJSON;
+            console.log(error)
+			if (error && Array.isArray(error)) {
+				errorsHtml = error.map(
 					(message) => `
           <div>
               ${message}
@@ -46,10 +49,6 @@ signUpForm.addEventListener("submit", async (e) => {
 				);
 			}
 			errorsContainer.innerHTML = errorsHtml.join("");
-		} else {
-			alert(
-				"Something went wrong. Please check your internet connection and try again!"
-			);
-		}
+
 	}
 });
