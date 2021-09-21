@@ -57,7 +57,8 @@ router.get(
 			author: post.User,
 			comments,
 			loggedIn: res.locals.authenticated,
-			voteTotal
+			voteTotal,
+      userId: req.session.auth.userId
 		});
 	})
 );
@@ -77,6 +78,7 @@ router.get(
 				topics,
 				loggedIn: res.locals.authenticated,
 				csrfToken: req.csrfToken(),
+                userId: req.session.auth.userId
 			});
 		} else {
 			res.redirect("/");

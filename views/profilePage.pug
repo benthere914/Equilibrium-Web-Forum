@@ -1,0 +1,23 @@
+extends layout
+block content
+    append head
+    //- add page specific styles by appending to the head
+    link(rel="stylesheet" href="/stylesheets/index.css")
+    link(rel="stylesheet" href="/stylesheets/profile.css")
+    //- add page specific js
+    script(src="/javascripts/index.js" type="module" defer)
+    h2= user.username
+    .profile
+        img(src= user.imgUrl, alt= `Profile picture of ${user.username}`)
+        p= user.biography
+    .posts
+        each post in posts
+            div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`  onclick=`window.location.href='/posts/${post.id}'`)
+                h4= user.username
+                h3= post.title
+                - var url = post.imgUrl;
+                - var urlString = `url(${url})`;
+                div(style={'background-image': `${urlString}`})
+                p #{post.content}...
+                if sameUser
+                    a(href=`/users/${user.id}/edit`) Edit
