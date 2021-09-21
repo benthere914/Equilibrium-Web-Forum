@@ -1,5 +1,6 @@
 *{
     box-sizing: border-box;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .nav-bar {
     display: flex;
@@ -125,6 +126,8 @@ h4 {
     margin: 10px 0 10px 20%;
     border: solid blue 1px;
     order: 9;
+    cursor: pointer;
+
 }
 
 .blog div{

@@ -11,6 +11,10 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const topicsRouter = require('./routes/topics')
 const followsRouter = require('./routes/follows');
+const postsRouter = require('./routes/posts');
+const { restoreUser } = require('./auth');
+
+
 const app = express();
 
 // view engine setup
@@ -36,11 +40,13 @@ app.use(
 
 // create Session table if it doesn't already exist
 store.sync();
-
+app.use(restoreUser);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
 app.use('/topics', topicsRouter);
 app.use('/follows', followsRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
