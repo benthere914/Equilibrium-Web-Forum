@@ -49,7 +49,7 @@ router.get(
 		});
 	}
 
-
+    let postMatches = false;
     if (req.session.auth){
         if (req.session.auth.userId){
             postMatches = (post.User.id === req.session.auth.userId);
@@ -221,5 +221,19 @@ router.put("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
     post.imgUrl = imgUrl;
     await post.save();
     res.json({post})
+}))
+
+router.post("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
+    let {comment} = req.body;
+    let authorId = 0;
+    if (req.session.auth){
+        if (req.session.auth.userId){
+            authorId = req.session.auth.userId
+        }
+    }
+    let author = await User.findByPk(authorId);
+    author = author.dataValues;
+    author = author.username
+    res.json({date: new Date(), commentContent: comment, author})
 }))
 module.exports = router;

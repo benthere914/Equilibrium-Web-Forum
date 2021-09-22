@@ -32,3 +32,13 @@
     display: flex;
     justify-content: flex-end;
 }
+
+.comment{
+    display: flex;
+    flex-direction: column;
+}
+
+.commentsList{
+    display: flex;
+    flex-direction: column;
+}
