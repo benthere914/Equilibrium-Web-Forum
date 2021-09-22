@@ -1,4 +1,4 @@
-export default function convertTime(number, format){
+export function convertTime(number, format){
       number = Number(number);
       if (Number.isNaN(number)){return null}
       if (format === "date"){
@@ -25,7 +25,7 @@ export default function convertTime(number, format){
       if (format === "minutes"){
         if (number < 0 || number > 60){return ""}
         if (number < 10){return `0${number}`}
-        if (number === 60){return `${00}`}
+        if (number === 60){return "00"}
         if (number > 10){return `${number}`}
       }
 
