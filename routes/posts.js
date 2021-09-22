@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const {
 	asyncHandler,
 	handleValidationErrors,
@@ -57,12 +57,12 @@ router.get(
 
 		res.render("post", {
 			post,
+			postId,
 			author: post.User,
 			comments,
 			loggedIn: res.locals.authenticated,
-      userId,
-			voteTotal,
-
+      		userId,
+			voteTotal
 		});
 	})
 );
@@ -111,6 +111,88 @@ router.post(
         }
 
 	}));
+
+router.post('/:id(\\d+)/votes', asyncHandler( async(req,res) => {
+	const postId= req.params.id;
+	const {userId, vote} = req.body;
+	console.log("here");
+	const userVote = await Vote.findOne({
+		where: {
+			postId: postId,
+			userId: userId
+		},
+	});
+	if (!userVote){
+		await Vote.create( {
+			userId,
+			postId,
+			vote
+		})
+		const currentPostVoteCount = await Vote.findAll({
+			where: {
+				postId: postId,
+			},
+		});
+		let voteTotal;
+		const votesArray = currentPostVoteCount.map(
+			(vote) => vote.dataValues.voteCount
+		);
+		if (votesArray.length === 0) {
+			voteTotal = 0;
+		} else {
+			voteTotal = votesArray.reduce((acc, cVal) => {
+				return acc + cVal;
+			});
+		}
+		console.log("New vote total:", voteTotal);
+		res.status(200).json({ voteTotal });
+
+	} else if(userVote.dataValues.voteCount === vote){
+		const currentPostVoteCount = await Vote.findAll({
+			where: {
+				postId: postId,
+			},
+		});
+		let voteTotal;
+		const votesArray = currentPostVoteCount.map(
+			(vote) => vote.dataValues.voteCount
+		);
+		if (votesArray.length === 0) {
+			voteTotal = 0;
+		} else {
+			voteTotal = votesArray.reduce((acc, cVal) => {
+				return acc + cVal;
+			});
+		}
+		console.log("New vote total:", voteTotal)
+		res.status(200).json({voteTotal});
+	} else {
+		await userVote.update({
+			voteCount: vote
+		});
+
+		const currentPostVoteCount = await Vote.findAll({
+			where: {
+				postId: postId,
+			},
+		});
+		let voteTotal;
+		const votesArray = currentPostVoteCount.map(
+			(vote) => vote.dataValues.voteCount
+		);
+		if (votesArray.length === 0) {
+			voteTotal = 0;
+		} else {
+			voteTotal = votesArray.reduce((acc, cVal) => {
+				return acc + cVal;
+			});
+		}
+		console.log("New vote total:", voteTotal);
+		res.status(200).json({voteTotal})
+
+	}
+
+}) );
 
 
 router.get("/:id(\\d+)/edit", asyncHandler(async (req, res) => {

@@ -14,7 +14,6 @@ createPostForm.addEventListener("submit", async (e) => {
 	const body = { userId, topicId, title, content, imgUrl};
 
 	try {
-        console.log(imgUrl)
 		const res = await fetch("/posts/create", {
 			method: "POST",
 			body: JSON.stringify(body),
@@ -31,26 +30,6 @@ createPostForm.addEventListener("submit", async (e) => {
         window.location.href = `/posts/${post.id}`;
 	} catch (err) {
 		const errorJSON = await err.json();
-		console.log(errorJSON);
-		const errorsContainer = document.querySelector(".sign-up-errors-container");
-		let errorsHtml = [
-			`
-        <div>
-            Please fix the following errors:
-        </div>
-      `,
-		];
-		const { error } = errorJSON;
-		console.log(error);
-		if (error && Array.isArray(error)) {
-			errorsHtml = error.map(
-				(message) => `
-          <div class="err_msg">
-              ${message}
-          </div>
-        `
-			);
-		}
-		errorsContainer.innerHTML = errorsHtml.join("");
+		console.log(errorJSON)
 	}
 });

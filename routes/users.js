@@ -11,13 +11,14 @@ router.get('/', function(req, res, next) {
 
 
 router.get("/userid", (req, res) => {
+
   if (req.session.auth){
       if (req.session.auth.userId){
         return res.json({userId: req.session.auth.userId})
       }
   }
     res.json({userId: NaN})
-  })
+  });
 
 router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
     let userId;
