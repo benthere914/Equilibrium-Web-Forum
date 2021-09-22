@@ -11,12 +11,12 @@ router.get('/', function(req, res, next) {
 
 
 router.get("/userid", (req, res) => {
-  if (req.session.auth.userId){
-    res.json({userId: req.session.auth.userId})
-  } else
-  {
+  if (req.session.auth){
+      if (req.session.auth.userId){
+        return res.json({userId: req.session.auth.userId})
+      }
+  }
     res.json({userId: NaN})
-    }
   })
 
 router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
@@ -36,16 +36,7 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
     res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated, userId});
 }))
 
-router.get("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
-    let post = await Post.findOne({where: {id: req.params.id}, include: {model: Topic}});
-    let topics = await Topic.findAll();
-    topics = topics.map(e => e.dataValues)
-    console.log(topics)
-    post = post.dataValues;
-    post.Topic = post.Topic.dataValues;
 
-    res.render('editPost', {post, topics})
-}))
 
 
 module.exports = router;

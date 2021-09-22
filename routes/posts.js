@@ -90,6 +90,8 @@ router.get(
 	})
 );
 
+
+
 router.post(
 	"/create",
 	csrfProtection,
@@ -111,4 +113,25 @@ router.post(
 	}));
 
 
+router.get("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
+    let post = await Post.findOne({where: {id: req.params.id}, include: {model: Topic}});
+    let topics = await Topic.findAll();
+    topics = topics.map(e => e.dataValues)
+    console.log(topics)
+    post = post.dataValues;
+    post.Topic = post.Topic.dataValues;
+
+    res.render('editPost', {post, topics})
+}))
+
+
+router.put("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
+    let {title, content, imgUrl} = req.body;
+    let post = await Post.findByPk(req.params.id);
+    post.title = title;
+    post.content = content;
+    post.imgUrl = imgUrl;
+    await post.save();
+    res.json({post})
+}))
 module.exports = router;
