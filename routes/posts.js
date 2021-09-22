@@ -66,9 +66,9 @@ router.get(
 			author: post.User,
 			comments,
 			loggedIn: res.locals.authenticated,
-      userId,
+      		userId,
 			voteTotal,
-      postMatches
+      		postMatches
 		});
 	})
 );
@@ -150,19 +150,19 @@ router.post(
 				postId: postId
 			}
 		});
-		let voteTotal;
+		let currentVoteTotal;
 		const votesArray = currentPostVoteCount.map(
 			(vote) => vote.dataValues.voteCount
 		);
 		if (votesArray.length === 0) {
-			voteTotal = 0;
+			currentVoteTotal = 0;
 		} else {
-			voteTotal = votesArray.reduce((acc, cVal) => {
+			currentVoteTotal = votesArray.reduce((acc, cVal) => {
 				return acc + cVal;
 			});
 		}
-		console.log("New vote total:", voteTotal);
-		res.json({ voteTotal });
+		console.log("New vote total:", currentVoteTotal);
+		res.json({ currentVoteTotal });
 	}));
 
 router.get(
