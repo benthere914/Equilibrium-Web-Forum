@@ -10,12 +10,15 @@ const {
 } = require("../utils");
 const { restoreUser } = require("../auth");
 const db = require("../db/models");
-const { Post, User, Topic, Comment } = db;
+const { Post, User, Topic, Comment, Vote } = db;
 
 router.get(
 	"/:id(\\d+)",
 	restoreUser,
 	asyncHandler(async (req, res) => {
+        let userId;
+        if (req.session.auth){userId = req.session.auth.userId}
+        else {userId = NaN}
 		const postId = req.params.id;
 		let post = await Post.findOne({
 			where: { id: postId },
@@ -27,23 +30,40 @@ router.get(
 		});
 		comments = comments.map((e) => {
 			let data = e.dataValues;
-			console.log(data);
 			data.User = data.User.dataValues;
 			return data;
 		});
-		console.log(comments);
+		const votes = await Vote.findAll({
+			where: {
+				postId: postId
+			}
+		});
+		let voteTotal;
+
+		const votesArray = votes.map(vote => vote.dataValues.voteCount);
+		if (votesArray.length === 0) {
+			voteTotal = 0;
+		} else {
+		voteTotal = votesArray.reduce((acc, cVal) => {
+			return acc+cVal;
+		});
+	}
+
+
+
 		post = post.dataValues;
 		post.User = post.User.dataValues;
 		post.Topic = post.Topic.dataValues;
-		console.log(post);
+
 		res.render("post", {
 			post,
 			author: post.User,
 			comments,
 			loggedIn: res.locals.authenticated,
-            userId: req.session.auth.userId
+      userId,
+			voteTotal,
+
 		});
-		console.log(post);
 	})
 );
 

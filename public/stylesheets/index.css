@@ -158,10 +158,15 @@ h4 {
     font-weight: 500  !important;
     color: #C3C1AB;
 }
+
 .topics-only {
     flex-wrap: wrap;
     display: flex;
     justify-content: space-evenly;
     overflow-y: none;
+
+.link:hover{
+    cursor: pointer;
+    text-decoration: underline;
 
 }

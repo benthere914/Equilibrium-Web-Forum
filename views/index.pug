@@ -32,3 +32,5 @@ block content
           - var urlString = `url(${url})`;
           div(style={'background-image': `${urlString}`})
           p #{post.content}...
+          if post.matches
+                    a(href=`/users/${userId}/edit`) Edit
