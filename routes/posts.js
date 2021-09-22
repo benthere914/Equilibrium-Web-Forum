@@ -90,6 +90,17 @@ router.get(
 	})
 );
 
+router.get("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
+    let post = await Post.findOne({where: {id: req.params.id}, include: {model: Topic}});
+    let topics = await Topic.findAll();
+    topics = topics.map(e => e.dataValues)
+    console.log(topics)
+    post = post.dataValues;
+    post.Topic = post.Topic.dataValues;
+
+    res.render('editPost', {post, topics})
+}))
+
 router.post(
 	"/create",
 	csrfProtection,
