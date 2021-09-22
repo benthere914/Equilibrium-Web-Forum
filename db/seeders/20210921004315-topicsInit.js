@@ -11,8 +11,10 @@ module.exports = {
         {name: "Swimming", createdAt: new Date(), updatedAt: new Date()},
         {name: "Hiking", createdAt: new Date(), updatedAt: new Date()},
         {name: "Mountain Biking", createdAt: new Date(), updatedAt: new Date()},
-        {name: "boating", createdAt: new Date(), updatedAt: new Date()},
+        {name: "Boating", createdAt: new Date(), updatedAt: new Date()},
         {name: "Bird Watching", createdAt: new Date(), updatedAt: new Date()},
+        {name: "Kayaking", createdAt: new Date(), updatedAt: new Date()},
+        {name: "Horseback Riding", createdAt: new Date(), updatedAt: new Date()}
       ], {});
   },
 
