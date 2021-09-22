@@ -51,7 +51,11 @@ router.get(
 				return acc + cVal;
 			});
 		}
-
+    if (req.session.auth){
+        if (req.session.auth.userId){
+            postMatches = (post.User.id === req.session.auth.userId);
+        }
+    }
 		post = post.dataValues;
 		post.User = post.User.dataValues;
 		post.Topic = post.Topic.dataValues;
@@ -62,8 +66,9 @@ router.get(
 			author: post.User,
 			comments,
 			loggedIn: res.locals.authenticated,
-			userId,
+      userId,
 			voteTotal,
+      postMatches
 		});
 	})
 );
