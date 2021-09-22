@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   TopicFollow.associate = function(models) {
     // associations can be defined here
+    TopicFollow.belongsTo(models.Topic, {foreignKey: 'topicId'});
   };
   return TopicFollow;
 };
