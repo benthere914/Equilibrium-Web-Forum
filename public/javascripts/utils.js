@@ -1,26 +1,4 @@
-const asyncHandler = (handler) => (req, res, next) =>handler(req, res, next).catch(next);
-const {check, validationResult} = require('express-validator');
-
-const handleValidationErrors = (req, res, next) => {
-    const validationErrors = validationResult(req);
-    if (!validationErrors.isEmpty()) {
-        const errors = validationErrors.array().map((error) => error.msg);
-
-        const err = Error("Bad request.");
-        err.errors = errors;
-        err.status = 400;
-        err.title = "Bad request.";
-        return next(err);
-    }
-    next();
-  };
-  const bcrypt = require('bcryptjs')
-
-  const csrf = require('csurf');
-  const csrfProtection = csrf({ cookie: true });
-
-  function convertTime(number, format){
-    console.log(number)
+export default function convertTime(number, format){
       number = Number(number);
       if (Number.isNaN(number)){return null}
       if (format === "date"){
@@ -57,5 +35,3 @@ const handleValidationErrors = (req, res, next) => {
         if (number >= 12){return `PM`}
       }
   }
-
-  module.exports = {asyncHandler, handleValidationErrors, check, validationResult, bcrypt, csrfProtection, convertTime}

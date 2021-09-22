@@ -122,3 +122,13 @@
 .input-comment{
     border: 1px solid black;
 }
+
+.comment{
+    display: flex;
+    flex-direction: column;
+}
+
+.commentsList{
+    display: flex;
+    flex-direction: column;
+}

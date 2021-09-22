@@ -4,6 +4,7 @@ append head
     link(rel="stylesheet" href="/stylesheets/post.css")
     script(src="/javascripts/index.js" type="module")
     script(src="/javascripts/create-vote.js" type="module")
+    script(src="/javascripts/add-comment.js" type="module")
 block content
     .body
         .author
@@ -31,15 +32,13 @@ block content
             .postContent
               .postText=post.content
         .comment
-            ul
+            form(class="add-comment-form")
+                label(for="comment") Add a comment
+                input(type="text" name="comment" class="commentTextBox")
+                button(type="submit") Submit
+            ul.commentsList
+              each comment in comments
                 li
-                    form(method="POST", action = `/posts/${post.id}/comments`)
-                        label(for="Comment" style="color:black") Add a comment
-                        input(type="text" name="Comment" style="color:black; outline: none;" ).input-comment
-                        button(type="submit") Submit
-                each comment in comments
-                    li
-                        h3= comment.User.username
-                        h3= comment.comment
-                        h3= comment.createdAT
-                        h3= comment.updatedAT
+                  h3= comment.User.username
+                  h3= comment.comment
+                  h3= comment.date
