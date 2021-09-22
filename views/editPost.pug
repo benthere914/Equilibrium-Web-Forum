@@ -3,11 +3,12 @@ append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/create-post.css")
   link(rel="stylesheet" href="/stylesheets/index.css")
-  script(src="/javascripts/create-post.js" type="module")
+  script(src="/javascripts/edit-post.js" type="module")
 block content
   div(class="main-post-form")
     form(class="create-post-form")
       input(type="hidden" name='_csrf' value=csrfToken)
+      input(type="hidden" name='postId' value=post.id)
       input(type="hidden" name='userId' value=user.id)
       input(type="text" id="title" name="title" placeholder="  Title" required value= post.title)
       input(type="text" id="imgUrl" name="imgUrl" placeholder="    Insert a Post Image URL here (optional)" value= post.imgUrl)
