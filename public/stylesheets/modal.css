@@ -10,11 +10,13 @@
     position: fixed;
     visibility: hidden;
     opacity: 0;
+
 }
 .modal-content{
     position: absolute;
     background-color: white;
     border: 10px solid black;
+    padding: 20px;
 }
 .close-modal{
     float: right;

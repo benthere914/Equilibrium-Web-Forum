@@ -130,7 +130,7 @@ router.post(
 		});
 		if (!userVote) {
 			console.log("here");
-			const sendVote = await Vote.create({
+			 await Vote.create({
 				userId,
 				postId,
 				voteCount: vote

@@ -1,12 +1,16 @@
 .body{
     display: flex;
+    width: 90%;
+    justify-content: center;
+    margin: 0 auto;
 
 }
 .author{
-    padding: 400px 20px 0 20px;
+    padding: 20px 20px 0 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 300px;
 }
 .author .authorImage img{
@@ -19,16 +23,102 @@
     align-items: center;
 }
 .post > * {padding: 10px;}
-.post .postTitle{
-    font-size: 30px;
-}
-.post .postImage img{
-    width: 1000px;
-}
-.post .postContent{
-    width: 1000px;
-}
-.postLikes{
+
+
+.postImage{
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+}
+.postImage > img {
+    width: 60%;
+}
+
+.postTitle{
+    width: 100%;
+    display: flex;
+    text-align: left;
+    align-items: center;
+    justify-content: flex-start;
+}
+.postTitleContent {
+    width: 70%;
+    font-size: 2.7em;
+    display: flex;
+    border-bottom: 1px solid lightslategray;
+    padding-bottom: 10px;
+}
+.postContent{
+    width:100%;
+    display: flex;
+    justify-content: flex-start;
+}
+.postText{
+     width: 90%;
+   line-height: 1.8;
+    border-top: 1px solid lightslategray;
+    font-size: 1.2em;
+    white-space: pre-wrap;
+}
+.vote {
+  width: 30px;
+  height: 50px;
+  margin: 0.2rem;
+  padding-left: 1em;
+}
+
+.increment {
+  text-align: center;
+  opacity: .5;
+  cursor: pointer;
+}
+
+.upvote-button{
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid green;
+}
+.downvote-button{
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid red;
+}
+
+.increment:hover{
+    opacity: 1;
+}
+
+
+.vote-count-display{
+  text-align: center;
+  width: 30px;
+  pointer-events: none;
+  font-weight: 900;
+}
+
+.edit-button{
+    display: flex;
+    width: 100%;
+}
+.edit-button > a:hover {
+ text-decoration: underline;
+}
+
+.comment{
+    background-color: white;
+    color: black;
+    padding-left: 10px;
+    border-left: 1px solid lightslategray;
+}
+.comment h3{
+    color: black;
+}
+.comment li{
+    border-bottom: 1px solid lightslategray;
+}
+.input-comment{
+    border: 1px solid black;
 }
