@@ -18,10 +18,18 @@ block content
               .postTitleContent= post.title
               form(class="submit-vote")
                 div(class="vote")
-                  div(class="increment upvote-button")
-                  div(class="vote-count-display")
-                    span.vote-total=voteTotal
-                  div(class="increment downvote-button")
+                  if userVoteStatus === 0
+                    div(class="increment upvote-button")
+                    div(class="vote-count-display vote-total")=voteTotal
+                    div(class="increment downvote-button")
+                  if userVoteStatus === 1
+                    div(class="increment-active upvote-button")
+                    div(class="vote-count-display vote-total")=voteTotal
+                    div(class="increment downvote-button")
+                  if userVoteStatus === -1
+                    div(class="increment upvote-button")
+                    div(class="vote-count-display vote-total")=voteTotal
+                    div(class="increment-active downvote-button")
                   input(type="hidden" value=postId name="postId")
                   input(type="hidden" value=userId name="userId")
             if postMatches

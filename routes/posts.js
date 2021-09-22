@@ -16,6 +16,7 @@ const {convertTime} = require('../utils');
 router.get(
 	"/:id(\\d+)",
 	restoreUser,
+	csrfProtection,
 	asyncHandler(async (req, res) => {
 		let userId;
 		if (req.session.auth) {
@@ -72,6 +73,23 @@ router.get(
 		post = post.dataValues;
 		post.User = post.User.dataValues;
 		post.Topic = post.Topic.dataValues;
+		let userVoteStatus;
+		if (!userId){
+			userVoteStatus = 0;
+		} else {
+		const userVote = await Vote.findOne({
+			where: {
+				postId: postId,
+				userId: userId,
+			},
+		});
+
+		if (!userVote){
+			userVoteStatus = 0;
+		} else {
+			userVoteStatus = userVote.dataValues.voteCount;
+		}
+	}
 
 		res.render("post", {
 			post,
@@ -81,6 +99,8 @@ router.get(
 			loggedIn: res.locals.authenticated,
       		userId,
 			voteTotal,
+			userVoteStatus,
+			csrfToken: req.csrfToken(),
       		postMatches
 		});
 	})
@@ -131,6 +151,7 @@ router.post(
 
 router.post(
 	"/:id/votes",
+	restoreUser,
 	asyncHandler(async (req, res) => {
 		const postId = req.params.id;
 		const { userId, vote } = req.body;
@@ -141,6 +162,7 @@ router.post(
 				userId: userId
 			}
 		});
+		let userVoteStatus;
 		if (!userVote) {
 			console.log("here");
 			 await Vote.create({
@@ -148,14 +170,17 @@ router.post(
 				postId,
 				voteCount: vote
 			});
+			userVoteStatus = vote;
 		} else if (userVote.dataValues.voteCount !== vote) {
 			await userVote.update({
 				voteCount: vote,
 			});
+			userVoteStatus = vote;
 		} else if (userVote.dataValues.voteCount === vote){
 			await userVote.update({
 				voteCount: 0,
 			});
+			userVoteStatus = 0;
 		}
 		const currentPostVoteCount = await Vote.findAll({
 			where: {
@@ -163,6 +188,7 @@ router.post(
 			}
 		});
 		let currentVoteTotal;
+
 		const votesArray = currentPostVoteCount.map(
 			(vote) => vote.dataValues.voteCount
 		);
@@ -174,7 +200,7 @@ router.post(
 			});
 		}
 		console.log("New vote total:", currentVoteTotal);
-		res.json({ currentVoteTotal });
+		res.json({ currentVoteTotal, userVoteStatus });
 	}));
 
 router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
@@ -219,6 +245,7 @@ router.post("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
 }));
 
 router.delete("/:id(\\d+)/delete", asyncHandler(async(req,res)=> {
+
 	const postId = parseInt(req.params.id, 10);
 	let postToDelete = await Post.findByPk(postId);
 	console.log(postToDelete);

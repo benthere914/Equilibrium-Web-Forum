@@ -25,8 +25,8 @@ signUpForm.addEventListener("submit", async (e) => {
 		if (res.status === 400) {
 			throw res;
 		}
-        
-		window.location.href = "/";
+
+		window.location.reload();
 	} catch (err) {
 
 			const errorJSON = await err.json();
