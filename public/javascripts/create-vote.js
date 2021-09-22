@@ -16,6 +16,7 @@ upvoteButton.addEventListener("click", async (e) => {
 					body: JSON.stringify(body),
 					headers: {
 						"Content-Type": "application/json",
+						"Accept": "application/json",
 					},
 				});
 				if (res.status === 400) {
