@@ -9,7 +9,7 @@ createPostForm.addEventListener("submit", async (e) => {
 	const content = formData.get("content");
 	const topicId = formData.get("topicId");
     const userId = formData.get("userId");
-    const imgUrl = formData.get("imgUrl")
+    const imgUrl = formData.get("imgUrl");
 
 	const body = { userId, topicId, title, content, imgUrl};
 
