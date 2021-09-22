@@ -11,6 +11,7 @@ const {
 const { restoreUser } = require("../auth");
 const db = require("../db/models");
 const { Post, User, Topic, Comment, Vote } = db;
+const {convertTime} = require('../utils');
 
 router.get(
 	"/:id(\\d+)",
@@ -27,10 +28,18 @@ router.get(
 		let comments = await Comment.findAll({
 			where: { postId },
 			include: { model: User },
+            order: [['createdAt', 'desc']]
 		});
 		comments = comments.map((e) => {
 			let data = e.dataValues;
 			data.User = data.User.dataValues;
+            let day = convertTime(data.updatedAt.getDate(), 'date');
+            let month = convertTime(data.updatedAt.getMonth(), 'month');
+            let year = convertTime(data.updatedAt.getYear(), 'year');
+            let hour = convertTime(data.updatedAt.getHours(), 'hours');
+            let minutes = convertTime(data.updatedAt.getMinutes(), 'minutes');
+            let format = convertTime(data.updatedAt.getHours(), 'format')
+            data.date = `${month}, ${day}, ${year}, ${hour}:${minutes} ${format}`;
 			return data;
 		});
 		const votes = await Vote.findAll({
@@ -231,6 +240,7 @@ router.post("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
             authorId = req.session.auth.userId
         }
     }
+    let newComment = await Comment.create({userId: authorId, postId: req.params.id, comment, createdAt: new Date(), updatedAt: new Date()})
     let author = await User.findByPk(authorId);
     author = author.dataValues;
     author = author.username
