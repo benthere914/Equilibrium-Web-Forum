@@ -113,9 +113,12 @@ router.post(
 	}));
 
 
-router.get("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
+router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
     let post = await Post.findOne({where: {id: req.params.id}, include: {model: Topic}});
     let topics = await Topic.findAll();
+		if (topics == null || post == null){
+			return next()
+		}
     topics = topics.map(e => e.dataValues)
     console.log(topics)
     post = post.dataValues;
@@ -133,5 +136,14 @@ router.put("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
     post.imgUrl = imgUrl;
     await post.save();
     res.json({post})
+}))
+
+router.delete("/:id(\\d+)/delete", asyncHandler(async(req,res)=> {
+	console.log(`WHEW MADE IT TO DELETE ROUTE`)
+	const postId = parseInt(req.params.id, 10);
+	let postToDelete = await Post.findByPk(postId);
+	console.log(postToDelete);
+	await postToDelete.destroy();
+	res.json({post: `${postId}`})
 }))
 module.exports = router;
