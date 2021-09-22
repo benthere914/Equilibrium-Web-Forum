@@ -219,7 +219,6 @@ router.post("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
 }));
 
 router.delete("/:id(\\d+)/delete", asyncHandler(async(req,res)=> {
-	console.log(`WHEW MADE IT TO DELETE ROUTE`)
 	const postId = parseInt(req.params.id, 10);
 	let postToDelete = await Post.findByPk(postId);
 	console.log(postToDelete);
