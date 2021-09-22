@@ -6,32 +6,36 @@ append head
     script(src="/javascripts/create-vote.js" type="module")
 block content
     .body
-        .author(onclick=`window.location.href='/users/${author.id}'`)
-            .authorName= author.username
+        .author
+            .authorName
+              a(href=`/users/${author.id}`)=author.username
             .authorImage
                 img(src= author.imgUrl alt= `Profile Picture for ${author.username}`)
             .authorBio= author.biography
         .post
-            if postMatches
-                a(href=`/posts/${post.id}/edit`) Edit
-            .postTitle= post.title
-            .postLikes
+            .postTitle
+              .postTitleContent= post.title
               form(class="submit-vote")
-                button(value="UpVote" type="submit").upvote-button UpVote
-                button(value="DownVote" type="submit").downvote-button DownVote
-                input(type="hidden" value=postId name="postId")
-                input(type="hidden" value=userId name="userId")
-              span.vote-total=voteTotal
-
+                div(class="vote")
+                  div(class="increment upvote-button")
+                  div(class="vote-count-display")
+                    span.vote-total=voteTotal
+                  div(class="increment downvote-button")
+                  input(type="hidden" value=postId name="postId")
+                  input(type="hidden" value=userId name="userId")
+            if postMatches
+              div.edit-button
+                a(href=`/posts/${post.id}/edit`) Edit Your Post
             .postImage
                 img(src= post.imgUrl alt="Main image for #{post.title}")
-            .postContent= post.content
-        .Comment
+            .postContent
+              .postText=post.content
+        .comment
             ul
                 li
                     form(method="POST", action = `/posts/${post.id}/comments`)
-                        label(for="Comment") Add a comment
-                        input(type="text" name="Comment" )
+                        label(for="Comment" style="color:black") Add a comment
+                        input(type="text" name="Comment" style="color:black; outline: none;" ).input-comment
                         button(type="submit") Submit
                 each comment in comments
                     li
