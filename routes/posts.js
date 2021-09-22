@@ -130,12 +130,11 @@ router.post(
 		});
 		if (!userVote) {
 			console.log("here");
-			const sendVote = await Vote.create({
+			 await Vote.create({
 				userId,
 				postId,
 				voteCount: vote
 			});
-
 		} else if (userVote.dataValues.voteCount !== vote) {
 			await userVote.update({
 				voteCount: vote,
@@ -165,33 +164,38 @@ router.post(
 		res.json({ currentVoteTotal });
 	}));
 
-router.get(
-	"/:id(\\d+)/edit",
-	asyncHandler(async (req, res) => {
-		let post = await Post.findOne({
-			where: { id: req.params.id },
-			include: { model: Topic },
-		});
-		let topics = await Topic.findAll();
-		topics = topics.map((e) => e.dataValues);
-		console.log(topics);
-		post = post.dataValues;
-		post.Topic = post.Topic.dataValues;
+router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
+    let post = await Post.findOne({where: {id: req.params.id}, include: {model: Topic}});
+    let topics = await Topic.findAll();
+		if (topics == null || post == null){
+			return next()
+		}
+    topics = topics.map(e => e.dataValues)
+    console.log(topics)
+    post = post.dataValues;
+    post.Topic = post.Topic.dataValues;
 
 		res.render("editPost", { post, topics });
 	})
 );
 
-router.put(
-	"/:id(\\d+)/edit",
-	asyncHandler(async (req, res) => {
-		let { title, content, imgUrl } = req.body;
-		let post = await Post.findByPk(req.params.id);
-		post.title = title;
-		post.content = content;
-		post.imgUrl = imgUrl;
-		await post.save();
-		res.json({ post });
-	})
-);
+
+router.put("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
+    let {title, content, imgUrl} = req.body;
+    let post = await Post.findByPk(req.params.id);
+    post.title = title;
+    post.content = content;
+    post.imgUrl = imgUrl;
+    await post.save();
+    res.json({post})
+}));
+
+router.delete("/:id(\\d+)/delete", asyncHandler(async(req,res)=> {
+	console.log(`WHEW MADE IT TO DELETE ROUTE`)
+	const postId = parseInt(req.params.id, 10);
+	let postToDelete = await Post.findByPk(postId);
+	console.log(postToDelete);
+	await postToDelete.destroy();
+	res.json({post: `${postId}`})
+}));
 module.exports = router;

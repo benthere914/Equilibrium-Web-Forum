@@ -11,7 +11,7 @@
     grid-template-rows: 0.5fr 0.5fr 4fr;
     grid-template-areas:
    "title . dropdown"
-   "imgUrl . ."
+   "imgUrl . options"
    " content . button"
     ;
 }
@@ -70,4 +70,30 @@
 
 #imgUrl{
     grid-area: imgUrl;
+}
+
+.form-buttons {
+
+    grid-area: options;
+}
+.edit-title {
+    text-align: center;
+
+
+}
+.form-buttons button {
+   background-color: #0a6a09;
+   margin: 5px 0px;
+   padding: 10px;
+   width: 200px;
+    font-size: 1.1em;
+    font-weight: 700;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+
+}
+
+#delete-post-button  button{
+    background-color: #a34528;
+
+
 }
