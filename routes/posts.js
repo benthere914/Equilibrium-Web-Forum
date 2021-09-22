@@ -16,6 +16,9 @@ router.get(
 	"/:id(\\d+)",
 	restoreUser,
 	asyncHandler(async (req, res) => {
+        let userId;
+        if (req.session.auth){userId = req.session.auth.userId}
+        else {userId = NaN}
 		const postId = req.params.id;
 		let post = await Post.findOne({
 			where: { id: postId },
@@ -57,8 +60,9 @@ router.get(
 			author: post.User,
 			comments,
 			loggedIn: res.locals.authenticated,
+      userId,
 			voteTotal,
-      userId: req.session.auth.userId
+
 		});
 	})
 );
