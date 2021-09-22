@@ -67,7 +67,7 @@ router.get('/', csrfProtection, restoreUser, asyncHandler(async function(req, re
          return {name: e.name, id: e.id}
      });
 
-    let posts = await db.Post.findAll({include: User
+    let posts = await db.Post.findAll({include: User, order: [['createdAt', 'DESC']], limit: 30
     });
     posts = posts.map(e => {
         e = e.dataValues

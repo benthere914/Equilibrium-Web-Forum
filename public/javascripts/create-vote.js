@@ -16,13 +16,15 @@ upvoteButton.addEventListener("click", async (e) => {
 					body: JSON.stringify(body),
 					headers: {
 						"Content-Type": "application/json",
+						"Accept": "application/json",
 					},
 				});
 				if (res.status === 400) {
 					throw res;
 				}
-				const { voteTotal: newVotes } = await res.json();
-				voteTotal.innerHTML = newVotes;
+				let { currentVoteTotal } = await res.json();
+                console.log(currentVoteTotal)
+				voteTotal.innerHTML = currentVoteTotal;
     } catch (err) {
         console.log(err);
     }
@@ -46,8 +48,9 @@ downvoteButton.addEventListener("click", async (e) => {
 				if (res.status === 400) {
 					throw res;
 				}
-				const { voteTotal: newVotes } = await res.json();
-				voteTotal.innerHTML = newVotes;
+				let { currentVoteTotal } = await res.json();
+				console.log(currentVoteTotal);
+				voteTotal.innerHTML = currentVoteTotal;
 	} catch (err) {
         console.log(err)
 

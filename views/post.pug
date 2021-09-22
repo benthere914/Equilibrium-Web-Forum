@@ -7,34 +7,38 @@ append head
     script(src="/javascripts/add-comment.js" type="module")
 block content
     .body
-        .author(onclick=`window.location.href='/users/${author.id}'`)
-            .authorName= author.username
+        .author
+            .authorName
+              a(href=`/users/${author.id}`)=author.username
             .authorImage
-                img(src= author.imgUrl alt= "Profile Picture for #{author.username}")
+                img(src= author.imgUrl alt= `Profile Picture for ${author.username}`)
             .authorBio= author.biography
         .post
-            if postMatches
-                a(href=`/posts/${post.id}/edit`) Edit
-            .postTitle= post.title
-            .postLikes
+            .postTitle
+              .postTitleContent= post.title
               form(class="submit-vote")
-                button(value="UpVote" type="submit").upvote-button UpVote
-                button(value="DownVote" type="submit").downvote-button DownVote
-                input(type="hidden" value=postId name="postId")
-                input(type="hidden" value=userId name="userId")
-              span.vote-total=voteTotal
-
+                div(class="vote")
+                  div(class="increment upvote-button")
+                  div(class="vote-count-display")
+                    span.vote-total=voteTotal
+                  div(class="increment downvote-button")
+                  input(type="hidden" value=postId name="postId")
+                  input(type="hidden" value=userId name="userId")
+            if postMatches
+              div.edit-button
+                a(href=`/posts/${post.id}/edit`) Edit Your Post
             .postImage
                 img(src= post.imgUrl alt="Main image for #{post.title}")
-            .postContent= post.content
+            .postContent
+              .postText=post.content
         .comment
             form(class="add-comment-form")
                 label(for="comment") Add a comment
                 input(type="text" name="comment" class="commentTextBox")
                 button(type="submit") Submit
             ul.commentsList
-                each comment in comments
-                    li
-                        h3= comment.User.username
-                        h3= comment.comment
-                        h3= comment.date
+              each comment in comments
+                li
+                  h3= comment.User.username
+                  h3= comment.comment
+                  h3= comment.date
