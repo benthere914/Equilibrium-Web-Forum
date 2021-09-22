@@ -3,6 +3,7 @@
     width: 90%;
     justify-content: center;
     margin: 0 auto;
+    padding-top: 100px;
 
 }
 .author{
@@ -86,6 +87,11 @@
     border-right: 15px solid transparent;
     border-top: 15px solid red;
 }
+.increment-active{
+    text-align: center;
+  opacity: 1;
+  cursor: pointer;
+}
 
 .increment:hover{
     opacity: 1;
@@ -98,7 +104,9 @@
   pointer-events: none;
   font-weight: 900;
 }
-
+.vote-total{
+    width: 30px;
+}
 .edit-button{
     display: flex;
     width: 100%;
@@ -121,4 +129,18 @@
 }
 .input-comment{
     border: 1px solid black;
+}
+
+.comment{
+    display: flex;
+    flex-direction: column;
+}
+
+.commentsList{
+    display: flex;
+    flex-direction: column;
+}
+.comment-input{
+    border: 1px solid black;
+    color: black;
 }

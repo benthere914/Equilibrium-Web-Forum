@@ -2,7 +2,7 @@ var express = require('express');
 const { asyncHandler } = require('../utils');
 var router = express.Router();
 const db = require('../db/models');
-const {User, Post, Topic} = db;
+const {User, Post, Topic, TopicFollow} = db;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -24,7 +24,8 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
     let userId;
     if (req.session.auth){userId = req.session.auth.userId}
     else {userId = NaN}
-    let user = await User.findByPk(req.params.id);
+    let user = await User.findByPk(req.params.id, {include: Topic});
+     console.log(user);
     if (!user){return res.render('404Error', {errors: ['This page does not exist']})}
     let posts = await Post.findAll({where: {userId: user.id}})
     user = user.dataValues;
@@ -34,6 +35,8 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
         return data});
         console.log(user)
         const sameUser = (Number(req.params.id) === Number(userId));
+
+
     res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated, userId});
 }))
 

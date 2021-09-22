@@ -3,6 +3,7 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
+    padding-top: 100px;
 }
 .create-post-form {
     width: 100%;

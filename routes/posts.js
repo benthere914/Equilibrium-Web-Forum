@@ -11,10 +11,12 @@ const {
 const { restoreUser } = require("../auth");
 const db = require("../db/models");
 const { Post, User, Topic, Comment, Vote } = db;
+const {convertTime} = require('../utils');
 
 router.get(
 	"/:id(\\d+)",
 	restoreUser,
+	csrfProtection,
 	asyncHandler(async (req, res) => {
 		let userId;
 		if (req.session.auth) {
@@ -30,10 +32,18 @@ router.get(
 		let comments = await Comment.findAll({
 			where: { postId },
 			include: { model: User },
+            order: [['createdAt', 'desc']]
 		});
 		comments = comments.map((e) => {
 			let data = e.dataValues;
 			data.User = data.User.dataValues;
+            let day = convertTime(data.updatedAt.getDate(), 'date');
+            let month = convertTime(data.updatedAt.getMonth(), 'month');
+            let year = convertTime(data.updatedAt.getYear(), 'year');
+            let hour = convertTime(data.updatedAt.getHours(), 'hours');
+            let minutes = convertTime(data.updatedAt.getMinutes(), 'minutes');
+            let format = convertTime(data.updatedAt.getHours(), 'format')
+            data.date = `${month}, ${day}, ${year}, ${hour}:${minutes} ${format}`;
 			return data;
 		});
 		const votes = await Vote.findAll({
@@ -47,10 +57,14 @@ router.get(
 		if (votesArray.length === 0) {
 			voteTotal = 0;
 		} else {
-			voteTotal = votesArray.reduce((acc, cVal) => {
-				return acc + cVal;
-			});
-		}
+
+		voteTotal = votesArray.reduce((acc, cVal) => {
+			return acc+cVal;
+		});
+	}
+
+    let postMatches = false;
+
     if (req.session.auth){
         if (req.session.auth.userId){
             postMatches = (post.User.id === req.session.auth.userId);
@@ -59,6 +73,23 @@ router.get(
 		post = post.dataValues;
 		post.User = post.User.dataValues;
 		post.Topic = post.Topic.dataValues;
+		let userVoteStatus;
+		if (!userId){
+			userVoteStatus = 0;
+		} else {
+		const userVote = await Vote.findOne({
+			where: {
+				postId: postId,
+				userId: userId,
+			},
+		});
+
+		if (!userVote){
+			userVoteStatus = 0;
+		} else {
+			userVoteStatus = userVote.dataValues.voteCount;
+		}
+	}
 
 		res.render("post", {
 			post,
@@ -68,6 +99,8 @@ router.get(
 			loggedIn: res.locals.authenticated,
       		userId,
 			voteTotal,
+			userVoteStatus,
+			csrfToken: req.csrfToken(),
       		postMatches
 		});
 	})
@@ -118,6 +151,7 @@ router.post(
 
 router.post(
 	"/:id/votes",
+	restoreUser,
 	asyncHandler(async (req, res) => {
 		const postId = req.params.id;
 		const { userId, vote } = req.body;
@@ -128,6 +162,7 @@ router.post(
 				userId: userId
 			}
 		});
+		let userVoteStatus;
 		if (!userVote) {
 			console.log("here");
 			 await Vote.create({
@@ -135,14 +170,17 @@ router.post(
 				postId,
 				voteCount: vote
 			});
+			userVoteStatus = vote;
 		} else if (userVote.dataValues.voteCount !== vote) {
 			await userVote.update({
 				voteCount: vote,
 			});
+			userVoteStatus = vote;
 		} else if (userVote.dataValues.voteCount === vote){
 			await userVote.update({
 				voteCount: 0,
 			});
+			userVoteStatus = 0;
 		}
 		const currentPostVoteCount = await Vote.findAll({
 			where: {
@@ -150,6 +188,7 @@ router.post(
 			}
 		});
 		let currentVoteTotal;
+
 		const votesArray = currentPostVoteCount.map(
 			(vote) => vote.dataValues.voteCount
 		);
@@ -161,7 +200,7 @@ router.post(
 			});
 		}
 		console.log("New vote total:", currentVoteTotal);
-		res.json({ currentVoteTotal });
+		res.json({ currentVoteTotal, userVoteStatus });
 	}));
 
 router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
@@ -190,12 +229,28 @@ router.put("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
     res.json({post})
 }));
 
+router.post("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
+    let {comment} = req.body;
+    let authorId = 0;
+    if (req.session.auth){
+        if (req.session.auth.userId){
+            authorId = req.session.auth.userId
+        }
+    }
+    let newComment = await Comment.create({userId: authorId, postId: req.params.id, comment, createdAt: new Date(), updatedAt: new Date()})
+    let author = await User.findByPk(authorId);
+    author = author.dataValues;
+    author = author.username
+    res.json({date: new Date(), commentContent: comment, author})
+}));
+
 router.delete("/:id(\\d+)/delete", asyncHandler(async(req,res)=> {
-	console.log(`WHEW MADE IT TO DELETE ROUTE`)
+
 	const postId = parseInt(req.params.id, 10);
 	let postToDelete = await Post.findByPk(postId);
 	console.log(postToDelete);
 	await postToDelete.destroy();
 	res.json({post: `${postId}`})
 }));
+
 module.exports = router;
