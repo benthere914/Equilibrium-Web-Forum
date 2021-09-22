@@ -3,6 +3,8 @@ const downvoteButton = document.querySelector(".downvote-button");
 const submitVote = document.querySelector(".submit-vote");
 const voteTotal = document.querySelector(".vote-total");
 
+
+
 upvoteButton.addEventListener("click", async (e) => {
     e.preventDefault();
     const formData = new FormData(submitVote);
@@ -22,10 +24,24 @@ upvoteButton.addEventListener("click", async (e) => {
 				if (res.status === 400) {
 					throw res;
 				}
-				let { currentVoteTotal } = await res.json();
-                console.log(currentVoteTotal)
+				let { currentVoteTotal, userVoteStatus } = await res.json();
+				console.log(userVoteStatus)
+				if (userVoteStatus === 0) {
+					upvoteButton.classList.remove("increment-active");
+					upvoteButton.classList.add("increment");
+				} else if (userVoteStatus === 1){
+				    upvoteButton.classList.remove("increment");
+					upvoteButton.classList.add("increment-active");
+					downvoteButton.classList.remove("increment-active");
+					downvoteButton.classList.add("increment");
+				} else if (userVoteStatus === -1){
+					upvoteButton.classList.remove("increment-active");
+					upvoteButton.classList.add("increment");
+				}
+
 				voteTotal.innerHTML = currentVoteTotal;
-    } catch (err) {
+				}
+     catch (err) {
         console.log(err);
     }
 });
@@ -48,8 +64,20 @@ downvoteButton.addEventListener("click", async (e) => {
 				if (res.status === 400) {
 					throw res;
 				}
-				let { currentVoteTotal } = await res.json();
-				console.log(currentVoteTotal);
+				let { currentVoteTotal, userVoteStatus } = await res.json();
+				console.log(userVoteStatus);
+				if (userVoteStatus === 0) {
+					downvoteButton.classList.remove("increment-active");
+					downvoteButton.classList.add("increment");
+				} else if (userVoteStatus === 1) {
+					downvoteButton.classList.remove("increment-active");
+					downvoteButton.classList.add("increment");
+				} else if (userVoteStatus === -1) {
+					downvoteButton.classList.remove("increment");
+					downvoteButton.classList.add("increment-active");
+					upvoteButton.classList.remove("increment-active");
+					upvoteButton.classList.add("increment");
+				}
 				voteTotal.innerHTML = currentVoteTotal;
 	} catch (err) {
         console.log(err)

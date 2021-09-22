@@ -87,6 +87,11 @@
     border-right: 15px solid transparent;
     border-top: 15px solid red;
 }
+.increment-active{
+    text-align: center;
+  opacity: 1;
+  cursor: pointer;
+}
 
 .increment:hover{
     opacity: 1;
@@ -99,7 +104,9 @@
   pointer-events: none;
   font-weight: 900;
 }
-
+.vote-total{
+    width: 30px;
+}
 .edit-button{
     display: flex;
     width: 100%;
