@@ -1,7 +1,16 @@
 .sign-up-form {
     display: flex;
+    flex-direction: column;
+}
+.log-in-form {
+    display: flex;
+    flex-direction: column;
 }
 .sign-up-form input {
+    background-color: white;
+    border: 1px solid black;
+}
+.log-in-form input {
     background-color: white;
     border: 1px solid black;
 }
