@@ -9,7 +9,7 @@ block content
         .author(onclick=`window.location.href='/users/${author.id}'`)
             .authorName= author.username
             .authorImage
-                img(src= author.imgUrl alt= "Profile Picture for #{author.username}")
+                img(src= author.imgUrl alt= `Profile Picture for ${author.username}`)
             .authorBio= author.biography
         .post
             if postMatches
