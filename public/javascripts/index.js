@@ -6,9 +6,10 @@ window.addEventListener("load", async (event)=>{
     try{
         let userId = await getData('/users/userid');
         userId = userId.userId;
-        loggedIn = true;
 
-        if(userId){
+        if(typeof userId === "number"){
+            loggedIn = true;
+
             let followsTopics = await getData(`follows/topics/${userId}`);
             followsTopics = followsTopics.map(each => {return `topic-${each.topicId}`});
 
@@ -17,11 +18,10 @@ window.addEventListener("load", async (event)=>{
             nodes.forEach(node => {node.classList.add('toggled'); node.style.order = current});
         }
 
-
     }catch(e){
 
     }
-    console.log(loggedIn);
+
     const topics = document.querySelectorAll('.topics').forEach(topic =>{
         topic.addEventListener("click", async(e) => {
             const topicId = topic.id.split('-')[1];
@@ -36,7 +36,8 @@ window.addEventListener("load", async (event)=>{
                 })
 
                 if (loggedIn){
-                    const body = { userId, topicId: parseInt(topicId, 10)};
+                    let userId = await getData('/users/userid');
+                    const body = { userId: userId.userId, topicId: parseInt(topicId, 10)};
                     console.log(body);
                     //this line creates a follow between a user and a topic
                     let res = await fetch('/follows/topics', {

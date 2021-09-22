@@ -61,7 +61,7 @@ background-color: #C3C1AB;
     border: 1px solid black;
     border-radius: 30%;
     margin: 2px;
-    order: 2;
+    order: 9;
     background-color: #C3C1AB;
     font-size: 1.2em;
     font-weight: 700;
@@ -150,6 +150,7 @@ h4 {
     height: 250px;
     width: 350px;
     background-repeat:no-repeat;
+    background-size: contain;
 
 }
 
@@ -164,7 +165,7 @@ h4 {
     display: flex;
     justify-content: space-evenly;
     overflow-y: none;
-
+}
 .link:hover{
     cursor: pointer;
     text-decoration: underline;
