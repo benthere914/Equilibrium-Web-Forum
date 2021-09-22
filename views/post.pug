@@ -12,6 +12,8 @@ block content
                 img(src= author.imgUrl alt= "Profile Picture for #{author.username}")
             .authorBio= author.biography
         .post
+            if postMatches
+                a(href=`/posts/${post.id}/edit`) Edit
             .postTitle= post.title
             .postLikes
               form(class="submit-vote")
