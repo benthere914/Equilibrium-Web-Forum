@@ -137,3 +137,9 @@
     border: 1px solid black;
     color: black;
 }
+.author .authorName{
+    width: 100%;
+}
+.author .authorName h3{
+    text-align: center;
+}

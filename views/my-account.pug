@@ -1,0 +1,32 @@
+extends layout
+
+append head
+    //- add page specific styles by appending to the head
+    link(rel="stylesheet" href="/stylesheets/index.css")
+    link(rel="stylesheet" href="/stylesheets/account.css")
+
+    //- add page specific js
+    script(src="/javascripts/index.js" type="module" defer)
+block content
+    h1(class= "userName")= user.username
+    form(class="accountEditForm")
+        .mainContent
+            .titles
+                h2 User Name
+                h2 Old Password
+                h2 New Password
+                h2 Confirm Password
+                h2 Bio
+                h2 Image Url
+            .textFieldsAccountForm
+                input(type="text", value= user.username)
+                input(type="password", autocomplete="new-password")
+                input(type="password", autocomplete="new-password")
+                input(type="password", autocomplete="new-password")
+                textarea= user.biography
+                input(type="text", value= user.imgUrl, autocomplete="off")
+            .imgAccountForm
+                img(src= user.imgUrl, alt= `photo of ${user.username}`)
+
+        .submit
+            input(type="submit" value="Save")

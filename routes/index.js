@@ -145,4 +145,14 @@ router.post('/log-out', (req, res, next) => {
     return req.session.save(() => {res.redirect('/')})
 })
 
+router.get('/my-account', restoreUser, asyncHandler(async (req, res, next) => {
+    let userId = 0;
+    if (req.session.auth){
+        userId = req.session.auth.userId
+    }
+    if (!userId){return next()}
+    let user = await User.findByPk(userId);
+    user = user.dataValues;
+    res.render('my-account', {user, loggedIn: res.locals.authenticated})
+}))
 module.exports = router;
