@@ -6,6 +6,12 @@
     right: 0;
     z-index: 2;
 }
+.log-in-form input {
+    color: black;
+}
+.sign-up-form input {
+    color: black;
+}
 .log-in-modal{
     position: fixed;
     visibility: hidden;
