@@ -5,19 +5,26 @@ block content
     link(rel="stylesheet" href="/stylesheets/index.css")
     link(rel="stylesheet" href="/stylesheets/profile.css")
     //- add page specific js
-    script(src="/javascripts/index.js" type="module" defer)
-    h2= user.username
-    .profile
-        img(src= user.imgUrl, alt= `Profile picture of ${user.username}`)
-        p= user.biography
-    .posts
-        each post in posts
-            div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`  onclick=`window.location.href='/posts/${post.id}'`)
-                h4= user.username
-                h3= post.title
-                - var url = post.imgUrl;
-                - var urlString = `url(${url})`;
-                div(style={'background-image': `${urlString}`})
-                p #{post.content}...
-                if sameUser
-                    a(href=`/posts/${user.id}/edit`) Edit
+    //- script(src="/javascripts/index.js" type="module" defer)
+    script(src="/javascripts/unfollowTopics.js" type="module" defer)
+    .profile-body
+        .profile-header
+            h2= user.username
+            p= user.biography
+            img(src= `${user.imgUrl}`, alt= `Profile picture of ${user.username}`)
+        .posts
+            each post in posts
+                div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`  onclick=`window.location.href='/posts/${post.id}'`)
+                    h4= user.username
+                    h3= post.title
+                    - var url = post.imgUrl;
+                    - var urlString = `url(${url})`;
+                    div(style={'background-image': `${urlString}`})
+                    p #{post.content}...
+                    if sameUser
+                        a(href=`/posts/${user.id}/edit`) Edit
+        if sameUser
+            .topics-container
+                h2.topics-title Followed Topics
+                each topic in user.Topics
+                    div.topics(id=`topic-${topic.id}-followed`)= topic.name
