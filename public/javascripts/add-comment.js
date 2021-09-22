@@ -23,10 +23,14 @@ addComment.addEventListener('submit', async (e) => {
 	}
 
 	let list = document.querySelector('.commentsList');
-	let newComment = document.createElement('li');
-	let author = document.createElement('h3');
-	let commentContent = document.createElement('h3');
-	let date = document.createElement('h3');
+	let newComment = document.createElement('div');
+	newComment.classList.add("comment-container");
+	let author = document.createElement('p');
+	author.classList.add("comment-username");
+	let commentContent = document.createElement('p');
+	commentContent.classList.add("comment-content");
+	let date = document.createElement('p');
+	date.classList.add("comment-date");
 
     obj.date = new Date(obj.date);
     let month = convertTime(obj.date.getMonth(), 'month');
@@ -34,7 +38,7 @@ addComment.addEventListener('submit', async (e) => {
     let day = convertTime(obj.date.getDate(), 'date');
     let hour = convertTime(obj.date.getHours(), 'hours');
     let minutes = convertTime(obj.date.getMinutes(), 'minutes');
-    let format = convertTime(obj.date.getHours(), 'hours');
+    let format = convertTime(obj.date.getHours(), 'format');
 
 	author.innerText = obj.author;
 	commentContent.innerText = obj.commentContent;
