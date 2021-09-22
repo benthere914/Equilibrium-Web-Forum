@@ -1,5 +1,5 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 const {
 	asyncHandler,
 	handleValidationErrors,
@@ -16,9 +16,12 @@ router.get(
 	"/:id(\\d+)",
 	restoreUser,
 	asyncHandler(async (req, res) => {
-        let userId;
-        if (req.session.auth){userId = req.session.auth.userId}
-        else {userId = NaN}
+		let userId;
+		if (req.session.auth) {
+			userId = req.session.auth.userId;
+		} else {
+			userId = NaN;
+		}
 		const postId = req.params.id;
 		let post = await Post.findOne({
 			where: { id: postId },
@@ -35,34 +38,37 @@ router.get(
 		});
 		const votes = await Vote.findAll({
 			where: {
-				postId: postId
-			}
+				postId: postId,
+			},
 		});
 		let voteTotal;
 
-		const votesArray = votes.map(vote => vote.dataValues.voteCount);
+		const votesArray = votes.map((vote) => vote.dataValues.voteCount);
 		if (votesArray.length === 0) {
 			voteTotal = 0;
 		} else {
-		voteTotal = votesArray.reduce((acc, cVal) => {
-			return acc+cVal;
-		});
-	}
-
-
-
+			voteTotal = votesArray.reduce((acc, cVal) => {
+				return acc + cVal;
+			});
+		}
+    if (req.session.auth){
+        if (req.session.auth.userId){
+            postMatches = (post.User.id === req.session.auth.userId);
+        }
+    }
 		post = post.dataValues;
 		post.User = post.User.dataValues;
 		post.Topic = post.Topic.dataValues;
 
 		res.render("post", {
 			post,
+			postId,
 			author: post.User,
 			comments,
 			loggedIn: res.locals.authenticated,
-      userId,
+      		userId,
 			voteTotal,
-
+      		postMatches
 		});
 	})
 );
@@ -82,7 +88,7 @@ router.get(
 				topics,
 				loggedIn: res.locals.authenticated,
 				csrfToken: req.csrfToken(),
-                userId: req.session.auth.userId
+				userId: req.session.auth.userId,
 			});
 		} else {
 			res.redirect("/");
@@ -90,28 +96,73 @@ router.get(
 	})
 );
 
-
-
 router.post(
 	"/create",
 	csrfProtection,
 	asyncHandler(async (req, res) => {
-		const { userId, topicId, title, content, imgUrl} = req.body;
-        if (imgUrl === "") {
-            let post = await Post.create({
-							userId,
-							topicId,
-							title,
-							content,
-						});
-                        res.status(200).json({ post });
-        } else {
+		const { userId, topicId, title, content, imgUrl } = req.body;
+		if (imgUrl === "") {
+			let post = await Post.create({
+				userId,
+				topicId,
+				title,
+				content,
+			});
+			res.status(200).json({ post });
+		} else {
 			let post = await Post.create({ userId, topicId, title, content, imgUrl });
-            res.status(200).json({ post });
-        }
+			res.status(200).json({ post });
+		}
+	})
+);
 
+router.post(
+	"/:id/votes",
+	asyncHandler(async (req, res) => {
+		const postId = req.params.id;
+		const { userId, vote } = req.body;
+
+		const userVote = await Vote.findOne({
+			where: {
+				postId: postId,
+				userId: userId
+			}
+		});
+		if (!userVote) {
+			console.log("here");
+			 await Vote.create({
+				userId,
+				postId,
+				voteCount: vote
+			});
+		} else if (userVote.dataValues.voteCount !== vote) {
+			await userVote.update({
+				voteCount: vote,
+			});
+		} else if (userVote.dataValues.voteCount === vote){
+			await userVote.update({
+				voteCount: 0,
+			});
+		}
+		const currentPostVoteCount = await Vote.findAll({
+			where: {
+				postId: postId
+			}
+		});
+		let currentVoteTotal;
+		const votesArray = currentPostVoteCount.map(
+			(vote) => vote.dataValues.voteCount
+		);
+		if (votesArray.length === 0) {
+			currentVoteTotal = 0;
+		} else {
+			currentVoteTotal = votesArray.reduce((acc, cVal) => {
+				return acc + cVal;
+			});
+		}
+		console.log("New vote total:", currentVoteTotal);
+		res.json({ currentVoteTotal });
 	}));
-
 
 router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
     let post = await Post.findOne({where: {id: req.params.id}, include: {model: Topic}});
@@ -124,8 +175,9 @@ router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
     post = post.dataValues;
     post.Topic = post.Topic.dataValues;
 
-    res.render('editPost', {post, topics})
-}))
+		res.render("editPost", { post, topics });
+	})
+);
 
 
 router.put("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
@@ -136,7 +188,7 @@ router.put("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
     post.imgUrl = imgUrl;
     await post.save();
     res.json({post})
-}))
+}));
 
 router.delete("/:id(\\d+)/delete", asyncHandler(async(req,res)=> {
 	console.log(`WHEW MADE IT TO DELETE ROUTE`)
@@ -145,5 +197,5 @@ router.delete("/:id(\\d+)/delete", asyncHandler(async(req,res)=> {
 	console.log(postToDelete);
 	await postToDelete.destroy();
 	res.json({post: `${postId}`})
-}))
+}));
 module.exports = router;
