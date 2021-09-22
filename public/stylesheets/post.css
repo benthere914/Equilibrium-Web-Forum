@@ -124,12 +124,7 @@
 .comment h3{
     color: black;
 }
-.comment li{
-    border-bottom: 1px solid lightslategray;
-}
-.input-comment{
-    border: 1px solid black;
-}
+
 
 .comment{
     display: flex;
@@ -143,4 +138,34 @@
 .comment-input{
     border: 1px solid black;
     color: black;
+}
+
+.comment-username{
+    color: #0f570f;
+    margin: 0 auto;
+    font-weight: 400;
+    padding: 3px;
+}
+
+.comment-content{
+    color: black;
+    margin: 0 auto;
+    padding: 6px;
+}
+.comment-date{
+    color: black;
+    font-weight: normal;
+    font-style: italic;
+    margin: 0 auto;
+    font-size: 0.8em;
+    padding: 3px;
+}
+.comment-container{
+    width: 100%;
+    border-bottom: 1px solid lightslategray;
+}
+
+.comment > form {
+    padding-bottom: 5px;
+     border-bottom: 1px solid lightslategray;
 }
