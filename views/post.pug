@@ -5,7 +5,7 @@ append head
     script(src="/javascripts/index.js" type="module")
 block content
     .body
-        .author(onclick=`window.location.href='/posts/${author.id}'`)
+        .author(onclick=`window.location.href='/users/${author.id}'`)
             .authorName= author.username
             .authorImage
                 img(src= author.imgUrl alt= "Profile Picture for #{author.username}")
@@ -24,7 +24,7 @@ block content
         .Comment
             ul
                 li
-                    form(method="POST", action = '/posts/#{postId}/comments')
+                    form(method="POST", action = `/posts/${post.id}/comments`)
                         label(for="Comment") Add a comment
                         input(type="text" name="Comment" )
                         button(type="submit") Submit
