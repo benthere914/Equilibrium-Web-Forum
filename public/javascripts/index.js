@@ -7,6 +7,7 @@ window.addEventListener("load", async (event)=>{
         let userId = await getData('/users/userid');
         userId = userId.userId;
         loggedIn = true;
+
         if(userId){
             let followsTopics = await getData(`follows/topics/${userId}`);
             followsTopics = followsTopics.map(each => {return `topic-${each.topicId}`});
@@ -15,6 +16,7 @@ window.addEventListener("load", async (event)=>{
             followsTopics.forEach(x => {nodes.push(document.getElementById(`${x}`))});
             nodes.forEach(node => {node.classList.add('toggled'); node.style.order = current});
         }
+
 
     }catch(e){
 
