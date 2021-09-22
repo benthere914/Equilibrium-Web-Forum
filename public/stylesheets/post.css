@@ -3,6 +3,7 @@
     width: 90%;
     justify-content: center;
     margin: 0 auto;
+    padding-top: 100px;
 
 }
 .author{
@@ -131,4 +132,7 @@
 .commentsList{
     display: flex;
     flex-direction: column;
+}
+.comment-input{
+    border: 1px solid black;
 }
