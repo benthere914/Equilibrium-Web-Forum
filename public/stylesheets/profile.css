@@ -27,8 +27,9 @@
 
 
 }
-.topics-followed-container {
+.topics-container {
     display: inline-block;
+    min-width: 400px;
 }
 .profile-body {
     display: grid;
@@ -38,6 +39,10 @@
                             'body body';
 
 }
+.topics-title{
+    width: 100%;
+    margin-bottom: 20px;
+}
 .topics-container {
     overflow-y: visible !important;
 
@@ -46,12 +51,7 @@
     cursor: pointer;
     position: relative;
 }
-.topics:hover {
-    background-color: #c3c1ab6b;
-    color: white;
 
-}
- /* To Do figure out why after element is clipping. */
 .topics:hover::after{
     content: "Unfollow?";
     position: absolute;
@@ -62,8 +62,22 @@
     background-color: black;
     color: white;
     padding: 0.5em;
-    border-radius: 40%;
-    z-index: 1;
+    padding-top: 0.7em;
+    border-radius: 50%;
+
     text-align: center;
 
+}
+
+.topics:hover::before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid black;
+    border-bottom: 10px solid transparent;
+    right: 40%;
+    bottom: 32px;
 }

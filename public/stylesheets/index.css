@@ -41,7 +41,7 @@ font-size: 1em;
     max-width: 30%;
     padding: 0px;
     margin-top: 2em;
-    overflow-y:hidden;
+    /* overflow-y:hidden; */
     overflow-x:hidden;
     margin-right: 3em;
 }
@@ -59,15 +59,20 @@ font-size: 1em;
 
 .topics-container div[id^=topic] {
     display: inline-block;
-    padding: 0.7em;
-    border: 1px solid black;
-    border-radius: 30%;
+    padding: 1.5em 1.0em;
+    /* border: 1px solid black; */
+    border-radius: 100%;
     margin: 2px;
     order: 9;
-    background-color: #C3C1AB;
-    font-size: 1.2em;
+    background-color: rgba(242, 242, 242, 0.733);
+    font-size: 0.8em;
     font-weight: 700;
 }
+.topics-container div[id^=topic]:hover {
+    cursor: pointer;
+    background-color: rgba(137, 138, 134, 0.733);
+}
+
 .topics-container a {
     padding: 5px;
     display:block;
@@ -159,9 +164,9 @@ h4 {
 }
 
 .toggled {
-    background-color: black  !important;;
+    background-color: rgba(25, 29, 25, 0.589)  !important;;
     font-weight: 500  !important;
-    color: #C3C1AB;
+    color: #eeede6;
 }
 
 .topics-only {
