@@ -7,9 +7,9 @@ append head
     script(src="/javascripts/add-comment.js" type="module")
 block content
     .body
-        .author
+        .author(onclick=`window.location.href='/users/${author.id}'`)
             .authorName
-              a(href=`/users/${author.id}`)=author.username
+                h3= author.username
             .authorImage
                 img(src= author.imgUrl alt= `Profile Picture for ${author.username}`)
             .authorBio= author.biography
@@ -46,7 +46,7 @@ block content
                 button(type="submit") Submit
             ul.commentsList
               each comment in comments
-                li
-                  h3= comment.User.username
-                  h3= comment.comment
-                  h3= comment.date
+                div.comment-container
+                  p(class="comment-username")= comment.User.username
+                  p(class="comment-content")= comment.comment
+                  p(class="comment-date")= comment.date
