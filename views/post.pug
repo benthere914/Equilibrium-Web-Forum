@@ -54,7 +54,8 @@ block content
                         input(type="hidden", value= comment.id)
                         .top-of-comment
                             p(class="comment-username")= comment.User.username
-                            p(class="comment-edit" ) Edit
-                            p(class="comment-delete") Delete
+                            if comment.matches
+                                p(class="comment-edit" ) Edit
+                                p(class="comment-delete") Delete
                         p(class="comment-content")= comment.comment
                         p(class="comment-date")= comment.date

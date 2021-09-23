@@ -31,8 +31,9 @@ async function editEle(e){
                     "Content-Type": "application/json",
                 },
             });
-            let {newCommentText, date} = await res.json()
-
+            let {newCommentText, date, err} = await res.json();
+            console.log(err)
+            if (err){throw new Error('Permission Denied');}
             commentText.innerText = newCommentText;
             updateDiv.parentElement.replaceChild(commentText, updateDiv);
             date = new Date(date);
@@ -56,3 +57,5 @@ async function editEle(e){
 }
 
 export {editEle}
+
+

@@ -21,18 +21,31 @@ router.get("/latest", asyncHandler(async (req, res) => {
 }))
 
 router.delete("/:id(\\d+)", asyncHandler(async (req, res)=> {
-    let comment = await Comment.findByPk(req.params.id);
-    if (comment){comment.destroy()}
-    res.json({"message": "successfully Destroyed"})
+    let userId;
+    let err;
+    if (req.session.auth){userId = req.session.auth.userId;}
+    let currentComment = await Comment.findByPk(req.params.id);
+    if (currentComment.userId !== userId){err = 'Permission Denied'}
+    if (currentComment && !err){
+        currentComment.destroy();
+        return res.json({"message": "successfully Destroyed"})
+    }else{
+        return res.json({"message": "Permission Denied"}).status(403)
+    }
 }))
 
 router.put("/:id(\\d+)", asyncHandler(async (req, res) => {
-    console.log(req.body);
+    let userId;
+    let err;
+    if (req.session.auth){userId = req.session.auth.userId;}
     let currentComment = await Comment.findByPk(req.params.id);
+    if (currentComment.userId !== userId){err = 'Permission Denied'}
     currentComment.comment = req.body.comment;
     currentComment.updatedAt = new Date();
-    await currentComment.save()
-    res.json({newCommentText: req.body.comment, date: currentComment.updatedAt})
+    if (!err){
+        await currentComment.save()
+        return res.json({newCommentText: req.body.comment, date: currentComment.updatedAt, err})
+    }
 }))
 
 

@@ -44,6 +44,7 @@ router.get(
             let minutes = convertTime(data.updatedAt.getMinutes(), 'minutes');
             let format = convertTime(data.updatedAt.getHours(), 'format')
             data.date = `${month}, ${day}, ${year}, ${hour}:${minutes} ${format}`;
+            data.matches = (data.User.id === userId)
 			return data;
 		});
 		const votes = await Vote.findAll({

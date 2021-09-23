@@ -33,22 +33,22 @@ addComment.addEventListener('submit', async (e) => {
 
 	let list = document.querySelector('.commentsList');
 	let newComment = document.createElement('div');
-	newComment.classList.add("comment-container");
 	let author = document.createElement('p');
-	author.classList.add("comment-username");
 	let commentContent = document.createElement('p');
-	commentContent.classList.add("comment-content");
 	let date = document.createElement('p');
-	date.classList.add("comment-date");
     let topContent = document.createElement("div");
-    topContent.classList.add("top-of-comment");
     let editText = document.createElement("p");
+    let deleteText = document.createElement("p");
+    let commentId = document.createElement("input");
+	newComment.classList.add("comment-container");
+	author.classList.add("comment-username");
+	commentContent.classList.add("comment-content");
+	date.classList.add("comment-date");
+    topContent.classList.add("top-of-comment");
     editText.classList.add("comment-edit");
     editText.innerText = "Edit"
-    let deleteText = document.createElement("p");
     deleteText.classList.add("comment-delete")
     deleteText.innerText = "Delete"
-    let commentId = document.createElement("input");
     commentId.setAttribute("type", "hidden");
     commentId.setAttribute("value", id)
 

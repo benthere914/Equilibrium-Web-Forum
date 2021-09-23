@@ -194,6 +194,8 @@
 }
 
 .top-of-comment .comment-username{
+    width: 100%;
+    text-align: left;
     justify-self: flex-start;
     padding: 0;
     margin: 5px;
@@ -201,7 +203,6 @@
 
 .top-of-comment .comment-edit {
     position: relative;
-    left: 50px;
 }
 
 .edit-comment-text-box{
