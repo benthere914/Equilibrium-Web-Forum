@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: "topicId",
 			otherKey: "userId",
 		});
+    Topic.hasMany(models.TopicFollow, {foreignKey: 'topicId'})
   };
   return Topic;
 };

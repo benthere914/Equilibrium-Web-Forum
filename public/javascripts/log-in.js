@@ -19,10 +19,10 @@ logInForm.addEventListener("submit", async (e) => {
 			},
 		});
 
-		if (res.status === 400) {
+		if (!res.ok) {
 			throw res;
 		}
-		window.location.href = "/";
+		window.location.reload();
 	} catch (err) {
 		const errorJSON = await err.json();
 		const errorsContainer = document.querySelector(".log-in-errors-container");

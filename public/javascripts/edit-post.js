@@ -57,7 +57,7 @@ deleteButton.addEventListener('click', async (e)=> {
 			 throw res;
 		 }
 		}catch(e){
-
+			console.log(e);
 		}
 		window.location.href = "/";
 	}

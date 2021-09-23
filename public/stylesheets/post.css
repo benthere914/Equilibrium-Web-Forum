@@ -88,6 +88,11 @@
     border-right: 15px solid transparent;
     border-top: 15px solid red;
 }
+.increment-active{
+    text-align: center;
+  opacity: 1;
+  cursor: pointer;
+}
 
 .increment:hover{
     opacity: 1;
@@ -100,7 +105,9 @@
   pointer-events: none;
   font-weight: 900;
 }
-
+.vote-total{
+    width: 30px;
+}
 .edit-button{
     display: flex;
     width: 100%;
@@ -118,12 +125,7 @@
 .comment h3{
     color: black;
 }
-.comment li{
-    border-bottom: 1px solid lightslategray;
-}
-.input-comment{
-    border: 1px solid black;
-}
+
 
 .comment{
     display: flex;
@@ -138,9 +140,42 @@
     border: 1px solid black;
     color: black;
 }
+
 .author .authorName{
     width: 100%;
 }
 .author .authorName h3{
     text-align: center;
+}
+
+
+.comment-username{
+    color: #0f570f;
+    margin: 0 auto;
+    font-weight: 400;
+    padding: 3px;
+}
+
+.comment-content{
+    color: black;
+    margin: 0 auto;
+    padding: 6px;
+}
+.comment-date{
+    color: black;
+    font-weight: normal;
+    font-style: italic;
+    margin: 0 auto;
+    font-size: 0.8em;
+    padding: 3px;
+}
+.comment-container{
+    width: 100%;
+    border-bottom: 1px solid lightslategray;
+}
+
+.comment > form {
+    padding-bottom: 5px;
+     border-bottom: 1px solid lightslategray;
+
 }
