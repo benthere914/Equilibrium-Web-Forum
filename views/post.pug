@@ -5,6 +5,10 @@ append head
     script(src="/javascripts/index.js" type="module")
     script(src="/javascripts/create-vote.js" type="module")
     script(src="/javascripts/add-comment.js" type="module")
+    script(src="/javascripts/delete-comment.js" type="module")
+    script(src="/javascripts/edit-comment.js" type="module")
+
+
 block content
     .body
         .author(onclick=`window.location.href='/users/${author.id}'`)
@@ -47,9 +51,11 @@ block content
             ul.commentsList
                 each comment in comments
                     div.comment-container
+                        input(type="hidden", value= comment.id)
                         .top-of-comment
                             p(class="comment-username")= comment.User.username
-                            p(class="comment-edit" ) Edit
-                            p(class="comment-delete") Delete
+                            if comment.matches
+                                p(class="comment-edit" ) Edit
+                                p(class="comment-delete") Delete
                         p(class="comment-content")= comment.comment
                         p(class="comment-date")= comment.date
