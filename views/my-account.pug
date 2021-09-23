@@ -14,7 +14,8 @@ block content
             .errorsContainer
                 each error in errors
                     div.errorMsg= error
-
+        .profileImg
+            img(src= user.imgUrl, alt= `photo of ${user.username}`)
         form(class="accountEditForm" action=`/users/${user.id}/edit` method="POST")
             input(type="hidden" name='_csrf' value=csrfToken)
             input(type="hidden" name='userId' value=user.id)
@@ -40,6 +41,4 @@ block content
                 button.submitEditForm() Submit
 
                 span.goBackButton(onclick=`window.location.href='/users/${user.id}'`) Back
-
-    .profileImg
-        img(src= user.imgUrl, alt= `photo of ${user.username}`)
+        button.deleteAccount Delete Account
