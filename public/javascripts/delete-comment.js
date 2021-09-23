@@ -1,10 +1,16 @@
-let deleteText = document.querySelectorAll(".comment-delete")
+let deleteText = document.querySelectorAll(".comment-delete");
+deleteText.forEach(e => {e.addEventListener("click",(e) => {deleteEle(e)})})
 
-const res = await fetch("/posts/comments/delete", {
-    method: "Delete",
-    body: JSON.stringify(body),
-    headers: {
-        "Content-Type": "application/json",
-        
-    },
-});
+async function deleteEle(e){
+    try {
+        let commentId = e.target.parentElement.previousSibling.value
+        let commentDiv = e.target.parentElement.previousSibling.parentElement;
+        const res = await fetch(`/comments/${commentId}`, {method: "Delete",});
+        if (!res.ok){throw (res)}
+        console.log(commentDiv)
+        commentDiv.remove()
+    } catch (error) {
+        return
+    }
+
+}

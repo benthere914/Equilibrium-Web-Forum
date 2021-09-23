@@ -20,5 +20,11 @@ router.get("/latest", asyncHandler(async (req, res) => {
     res.json(latestComment.id)
 }))
 
+router.delete("/:id(\\d+)", asyncHandler(async (req, res)=> {
+    let comment = await Comment.findByPk(req.params.id);
+    if (comment){comment.destroy()}
+    res.json({"message": "successfully Destroyed"})
+}))
+
 
 module.exports = router

@@ -5,6 +5,8 @@ append head
     script(src="/javascripts/index.js" type="module")
     script(src="/javascripts/create-vote.js" type="module")
     script(src="/javascripts/add-comment.js" type="module")
+    script(src="/javascripts/delete-comment.js" type="module")
+
 block content
     .body
         .author(onclick=`window.location.href='/users/${author.id}'`)
