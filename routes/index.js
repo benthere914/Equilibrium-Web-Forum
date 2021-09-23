@@ -57,7 +57,6 @@ const loginValidators = [
 
 
 
-
 /* GET home page. */
 router.get('/', csrfProtection, restoreUser, asyncHandler(async function(req, res, next) {
 
@@ -145,7 +144,7 @@ router.post('/log-out', (req, res, next) => {
     return req.session.save(() => {res.redirect('/')})
 })
 
-router.get('/my-account', restoreUser, asyncHandler(async (req, res, next) => {
+router.get('/my-account',csrfProtection, restoreUser, asyncHandler(async (req, res, next) => {
     let userId = 0;
     if (req.session.auth){
         userId = req.session.auth.userId
@@ -153,6 +152,6 @@ router.get('/my-account', restoreUser, asyncHandler(async (req, res, next) => {
     if (!userId){return next()}
     let user = await User.findByPk(userId);
     user = user.dataValues;
-    res.render('my-account', {user, loggedIn: res.locals.authenticated})
+    res.render('my-account', {user, loggedIn: res.locals.authenticated, csrfToken: req.csrfToken()})
 }))
-module.exports = router;
+module.exports = {router};
