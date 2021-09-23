@@ -26,5 +26,14 @@ router.delete("/:id(\\d+)", asyncHandler(async (req, res)=> {
     res.json({"message": "successfully Destroyed"})
 }))
 
+router.put("/:id(\\d+)", asyncHandler(async (req, res) => {
+    console.log(req.body);
+    let currentComment = await Comment.findByPk(req.params.id);
+    currentComment.comment = req.body.comment;
+    currentComment.updatedAt = new Date();
+    await currentComment.save()
+    res.json(req.body.comment)
+}))
+
 
 module.exports = router
