@@ -16,6 +16,7 @@
 }
 div.bioContainer {
     grid-area: bio;
+
 }
 div .bioTitle {
     font-size: 1.5em;
@@ -42,7 +43,6 @@ div .bioTitle {
     grid-template-areas: "name img bio"
                         "edit img bio";
 
-    align-items: center;
 }
 .profile-header h3 {
     grid-area: edit;
@@ -55,10 +55,10 @@ div .bioTitle {
 }
 .profile-body {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 0.5fr;
     grid-template-rows: 350px 1fr;
-    grid-template-areas: 'header header'
-                            'body topics';
+    grid-template-areas: 'header header topics'
+                            'body body topics';
 
 }
 .topics-title{
@@ -68,6 +68,7 @@ div .bioTitle {
 .topics-container {
     overflow-y: visible !important;
     grid-area: topics;
+    padding-top: 100px;
 
 }
 .posts {
