@@ -64,7 +64,6 @@ check('password')
 
 router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandler((async(req, res)=>{
   const {username, oldPassword, password, confirmPassword, biography, imgUrl} = req.body;
-  console.log( `!!!!!!!`, biography);
     // console.log( "Yesssss", userId);
     let userId = req.session.auth.userId;
     const errors = [];
@@ -84,7 +83,7 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
       if (!passwordMatches) {
 
         errors.push(`Incorrect password`);
-        console.log(errors);
+
         // return res.render("my-account", {user,errors, csrfToken: req.csrfToken()})
       } errors.push(validationErrors.array().map(err => err.msg));
 
