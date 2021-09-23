@@ -7,10 +7,11 @@ async function deleteEle(e){
         let commentDiv = e.target.parentElement.previousSibling.parentElement;
         const res = await fetch(`/comments/${commentId}`, {method: "Delete",});
         if (!res.ok){throw (res)}
-        console.log(commentDiv)
         commentDiv.remove()
     } catch (error) {
+        console.log(error)
         return
     }
-
 }
+
+export {deleteEle}

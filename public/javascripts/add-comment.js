@@ -1,4 +1,5 @@
 import { convertTime } from "./utils.js";
+import { deleteEle } from "./delete-comment.js";
 const addComment = document.querySelector('.add-comment-form');
 addComment.addEventListener('submit', async (e) => {
 	e.preventDefault();
@@ -10,9 +11,7 @@ addComment.addEventListener('submit', async (e) => {
     let url = window.location.href;
     url = url.split("/");
     url = url[url.length - 1]
-    console.log(url, content)
     let textBox = document.querySelector(".commentTextBox");
-    console.log(String(content.comment).trim().length)
     if (!content.comment || !String(content.comment).trim().length){textBox.setAttribute("placeholder", "Invalid Comment");textBox.value= ""; return}
 
     textBox.removeAttribute("placeholder");
@@ -63,8 +62,9 @@ addComment.addEventListener('submit', async (e) => {
 	author.innerText = obj.author;
 	commentContent.innerText = obj.commentContent;
 	date.innerText = `${month}, ${day}, ${year}, ${hour}:${minutes} ${format}`;
-    topContent.append(commentId, author, editText, deleteText)
-	newComment.append(topContent, commentContent, date);
+    topContent.append(author, editText, deleteText)
+	newComment.append(commentId, topContent, commentContent, date);
 	list.prepend(newComment);
+    newComment.addEventListener("click", (e) => {deleteEle(e)})
     document.querySelector(".commentTextBox").value = ""
 });
