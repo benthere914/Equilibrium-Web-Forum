@@ -6,6 +6,7 @@ addComment.addEventListener('submit', async (e) => {
 	const comment = formData.get('comment');
 	const content = { comment };
 	let obj;
+    let id;
     let url = window.location.href;
     url = url.split("/");
     url = url[url.length - 1]
@@ -13,6 +14,7 @@ addComment.addEventListener('submit', async (e) => {
     let textBox = document.querySelector(".commentTextBox");
     console.log(String(content.comment).trim().length)
     if (!content.comment || !String(content.comment).trim().length){textBox.setAttribute("placeholder", "Invalid Comment");textBox.value= ""; return}
+
     textBox.removeAttribute("placeholder");
 	try {
 		const res = await fetch(`/posts/${url}/comments`, {
@@ -21,9 +23,12 @@ addComment.addEventListener('submit', async (e) => {
 			headers: {'Content-Type': 'application/json',},
 		});
 		obj = await res.json();
-		if (!res.ok) {throw res;}
+        const response = await fetch(`/comments/latest`);
+		id = await response.json();
+		if (!res.ok || !response.ok) {throw res;}
 	} catch (err) {
 		const errorJSON = await err.json();
+        textBox.setAttribute("placeholder", "Commenting not available"); textBox.value = "";return
 	}
 
 	let list = document.querySelector('.commentsList');
@@ -43,6 +48,9 @@ addComment.addEventListener('submit', async (e) => {
     let deleteText = document.createElement("p");
     deleteText.classList.add("comment-delete")
     deleteText.innerText = "Delete"
+    let commentId = document.createElement("input");
+    commentId.setAttribute("type", "hidden");
+    commentId.setAttribute("value", id)
 
     obj.date = new Date(obj.date);
     let month = convertTime(obj.date.getMonth(), 'month');
@@ -55,7 +63,7 @@ addComment.addEventListener('submit', async (e) => {
 	author.innerText = obj.author;
 	commentContent.innerText = obj.commentContent;
 	date.innerText = `${month}, ${day}, ${year}, ${hour}:${minutes} ${format}`;
-    topContent.append(author, editText, deleteText)
+    topContent.append(commentId, author, editText, deleteText)
 	newComment.append(topContent, commentContent, date);
 	list.prepend(newComment);
     document.querySelector(".commentTextBox").value = ""

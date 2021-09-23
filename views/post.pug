@@ -47,6 +47,7 @@ block content
             ul.commentsList
                 each comment in comments
                     div.comment-container
+                        input(type="hidden", value= comment.id)
                         .top-of-comment
                             p(class="comment-username")= comment.User.username
                             p(class="comment-edit" ) Edit
