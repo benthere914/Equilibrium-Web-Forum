@@ -13,6 +13,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 300px;
+    height: min-content;
 }
 .author .authorImage img{
     width: 200px;
@@ -140,6 +141,14 @@
     color: black;
 }
 
+.author .authorName{
+    width: 100%;
+}
+.author .authorName h3{
+    text-align: center;
+}
+
+
 .comment-username{
     color: #0f570f;
     margin: 0 auto;
@@ -168,4 +177,5 @@
 .comment > form {
     padding-bottom: 5px;
      border-bottom: 1px solid lightslategray;
+
 }

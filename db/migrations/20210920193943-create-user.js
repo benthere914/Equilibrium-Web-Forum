@@ -19,7 +19,7 @@ module.exports = {
 			},
 			imgUrl: {
 				type: Sequelize.TEXT,
-        defaultValue: ""
+        defaultValue: "https://p.kindpng.com/picc/s/78-786207_user-avatar-png-user-avatar-icon-png-transparent.png"
 			},
 			hashedPassword: {
 				allowNull: false,
