@@ -1,18 +1,40 @@
 import { convertTime } from "./utils.js";
+
+
+const logInModal = document.querySelector(".log-in-modal");
+const mainBody = document.querySelector(".body-encapsulation");
+
+function toggleLogInModal() {
+	logInModal.classList.toggle("show-modal");
+}
+
+function toggleBlur() {
+	mainBody.classList.toggle("blur");
+}
+
+
 import { deleteEle } from "./delete-comment.js";
 import { editEle } from "./edit-comment.js";
+
 const addComment = document.querySelector('.add-comment-form');
 addComment.addEventListener('submit', async (e) => {
 
 	e.preventDefault();
 	const formData = new FormData(addComment);
 	const comment = formData.get('comment');
+	const userId = formData.get("userId");
+	if (userId === "null"){
+		toggleLogInModal();
+		toggleBlur();
+	} else {
 	const content = { comment };
 	let obj;
     let id;
     let url = window.location.href;
     url = url.split("/");
-    url = url[url.length - 1]
+
+    url = url[url.length - 1];
+
     let textBox = document.querySelector(".commentTextBox");
     try {
         let userIdResponse = await fetch('/users/userid');
@@ -26,6 +48,7 @@ addComment.addEventListener('submit', async (e) => {
     if (!content.comment || !String(content.comment).trim().length){textBox.setAttribute("placeholder", "Invalid Comment");textBox.value= ""; return}
 
     textBox.removeAttribute("placeholder");
+
 	try {
 		const res = await fetch(`/posts/${url}/comments`, {
 			method: 'POST',
@@ -79,4 +102,5 @@ addComment.addEventListener('submit', async (e) => {
     newComment.firstChild.nextSibling.firstChild.nextSibling.nextSibling.addEventListener("click", (e) => {deleteEle(e)})
     newComment.firstChild.nextSibling.firstChild.nextSibling.addEventListener("click", (e) => {editEle(e)})
     document.querySelector(".commentTextBox").value = ""
-});
+
+}});

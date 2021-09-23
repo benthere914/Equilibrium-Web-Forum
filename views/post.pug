@@ -2,7 +2,6 @@ extends layout
 append head
     link(rel="stylesheet" href="/stylesheets/index.css")
     link(rel="stylesheet" href="/stylesheets/post.css")
-    script(src="/javascripts/index.js" type="module")
     script(src="/javascripts/create-vote.js" type="module")
     script(src="/javascripts/add-comment.js" type="module")
     script(src="/javascripts/delete-comment.js" type="module")
@@ -10,6 +9,7 @@ append head
 
 
 block content
+  div.body-encapsulation
     .body
         .author(onclick=`window.location.href='/users/${author.id}'`)
             .authorName
@@ -47,6 +47,7 @@ block content
             form(class="add-comment-form")
                 label(for="comment") Add a comment
                 input(type="text" name="comment" class="commentTextBox").comment-input
+                input(type="hidden" value=userId name="userId")
                 button(type="submit") Submit
             ul.commentsList
                 each comment in comments

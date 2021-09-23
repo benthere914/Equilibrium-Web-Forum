@@ -32,24 +32,20 @@ signUpForm.addEventListener("submit", async (e) => {
 			const errorJSON = await err.json();
             console.log(errorJSON);
 			const errorsContainer = document.querySelector(".sign-up-errors-container");
-			let errorsHtml = [
-				`
-        <div>
-            Please fix the following errors:
-        </div>
-      `,
-			];
+			let errorsHtml;
 			const { error } = errorJSON;
             console.log(error)
 			if (error && Array.isArray(error)) {
 				errorsHtml = error.map(
 					(message) => `
-          <div class="err_msg">
+          <li>
               ${message}
-          </div>
+          </li>
         `
 				);
 			}
+			errorsHtml.unshift(`<ul class="err_msg">`);
+			errorsHtml.push("</ul>");
 			errorsContainer.innerHTML = errorsHtml.join("");
 
 	}

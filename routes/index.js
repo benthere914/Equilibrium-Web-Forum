@@ -39,6 +39,7 @@ const userValidators = [
         return true;
         })
 ];
+
 const loginValidators = [
     check('username')
       .exists({ checkFalsy: true })
@@ -77,7 +78,6 @@ router.get('/', csrfProtection, restoreUser, asyncHandler(async function(req, re
                 e.matches = (e.User.id === req.session.auth.userId);
             }
         }
-        console.log(e.matches)
         return e;
     })
     if (req.session.auth){userId = req.session.auth.userId}

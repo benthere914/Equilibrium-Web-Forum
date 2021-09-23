@@ -1,5 +1,6 @@
+
+
 window.addEventListener("load", async (event)=>{
-    console.log("hello from javascript!");
     let current = 8;
 
     let loggedIn = false;
