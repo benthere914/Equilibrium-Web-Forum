@@ -13,7 +13,9 @@ block content
             h2= user.username
             if sameUser
                 h3(onclick=`window.location.href='/my-account'`) Edit Account
-            p= user.biography
+            div.bioContainer
+                h4.bioTitle Biography
+                p= user.biography
             img(src= `${user.imgUrl}`, alt= `Profile picture of ${user.username}`)
         .posts
             each post in posts
@@ -31,4 +33,3 @@ block content
                 h2.topics-title Followed Topics
                 each topic in user.Topics
                     div.topics(id=`topic-${topic.id}-followed`)= topic.name
-
