@@ -1,5 +1,6 @@
 import { convertTime } from "./utils.js";
 import { deleteEle } from "./delete-comment.js";
+import { editEle } from "./edit-comment.js";
 const addComment = document.querySelector('.add-comment-form');
 addComment.addEventListener('submit', async (e) => {
 	e.preventDefault();
@@ -65,6 +66,7 @@ addComment.addEventListener('submit', async (e) => {
     topContent.append(author, editText, deleteText)
 	newComment.append(commentId, topContent, commentContent, date);
 	list.prepend(newComment);
-    newComment.addEventListener("click", (e) => {deleteEle(e)})
+    newComment.firstChild.nextSibling.firstChild.nextSibling.nextSibling.addEventListener("click", (e) => {deleteEle(e)})
+    newComment.firstChild.nextSibling.firstChild.nextSibling.addEventListener("click", (e) => {editEle(e)})
     document.querySelector(".commentTextBox").value = ""
 });

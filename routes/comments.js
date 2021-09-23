@@ -32,7 +32,7 @@ router.put("/:id(\\d+)", asyncHandler(async (req, res) => {
     currentComment.comment = req.body.comment;
     currentComment.updatedAt = new Date();
     await currentComment.save()
-    res.json(req.body.comment)
+    res.json({newCommentText: req.body.comment, date: currentComment.updatedAt})
 }))
 
 
