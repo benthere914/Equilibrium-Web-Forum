@@ -13,6 +13,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 300px;
+    height: min-content;
 }
 .author .authorImage img{
     width: 200px;

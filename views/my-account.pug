@@ -29,4 +29,7 @@ block content
                 img(src= user.imgUrl, alt= `photo of ${user.username}`)
 
         .submit
-            input(type="submit" value="Save")
+            .saveButton
+                h3(onclick=`document.choose.submit();`) Save
+            .backButton
+                h3(onclick=`window.location.href='/users/${user.id}'`) Back

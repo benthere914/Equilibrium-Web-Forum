@@ -63,13 +63,60 @@ h1.userName{
     margin-left: 20px;
 }
 
-
-
-.submit, .submit input{
+.submit{
     position: relative;
-    width: 200px;
-    height: 120px;
-    top: 50px;
+    top: 100px;
     left: 700px;
-    cursor: pointer;
+    width: min-content;
+    display: flex;
 }
+
+.submit > * {
+    padding: 10px 40px 10px 40px;
+    margin: 0 20px 0 20px;
+    background-color: lightgray;
+}
+
+.submit > *:hover{
+    cursor: pointer;
+    background-color: darkgrey;
+}
+
+/* .submit, .submit input{ */
+
+
+/* }
+
+.submit{
+    position: relative;
+    top: 70px;
+    left: 700px;
+    display: flex;
+    justify-content: flex-end;
+    width: 25%;
+}
+.submit input,.backButton{
+    color: white;
+    background-color: gray;
+    cursor: pointer;
+    width: 200px;
+}
+
+.submit input{
+
+}
+.submit .backButton{
+    text-align: center;
+    padding: auto;
+    border: solid red 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit .backButton h3{
+    width: min-content;
+    height: min-content;
+
+} */
