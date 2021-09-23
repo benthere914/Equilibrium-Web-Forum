@@ -96,6 +96,13 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 
 })));
 
-
+router.delete('/:id(\\d+)', asyncHandler(async (req, res)=>{
+    let userId;
+    if (req.session.auth){userId = req.session.auth.userId;}
+    if (!userId || userId !== req.params.id){return res.json({"message": "Permission Denied"}).status(403)}
+    let user = await User.findByPk(req.params.id);
+    if (!user){return res.json({"message": "Permission Denied"}).status(403)}
+    await user.destroy();
+}))
 
 module.exports = router;
