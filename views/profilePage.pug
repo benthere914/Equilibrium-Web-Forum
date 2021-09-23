@@ -5,8 +5,6 @@ block content
     //- add page specific styles by appending to the head
     link(rel="stylesheet" href="/stylesheets/index.css")
     link(rel="stylesheet" href="/stylesheets/profile.css")
-    //- add page specific js
-    //- script(src="/javascripts/index.js" type="module" defer)
     script(src="/javascripts/unfollowTopics.js" type="module" defer)
     .profile-body
         .profile-header
@@ -31,4 +29,3 @@ block content
                 h2.topics-title Followed Topics
                 each topic in user.Topics
                     div.topics(id=`topic-${topic.id}-followed`)= topic.name
-

@@ -11,6 +11,7 @@ div.nav-bar
     if loggedIn
       li
         form(action="/log-out" method="POST")
+          input(type="hidden").sign-up-modal-trigger.log-in-modal-trigger
           input(type="submit" value="Log Out" class="").input.link
       li
         a(href="/posts/create").link Write a Story
@@ -26,8 +27,7 @@ div.nav-bar
           input(type="submit" value="Demo" class="").link
 div(class="log-in-modal")
   div(class="modal-content")
-    span(class="close-log-in-modal close-modal") X
-    h2 Log-In
+    h2 Log-In to Equilibrium
     div(class="log-in-errors-container")
     form(class="log-in-form")
       input(type="hidden" name='_csrf' value=csrfToken)
@@ -35,12 +35,11 @@ div(class="log-in-modal")
       input(type="text" name="username" )
       label(for="password") Password
       input(type="password" name="password")
-      button(type="submit") Log In
+      input(type="submit" value="Log In")
 div(class="sign-up-modal")
   div(class="modal-content")
-    span(class="close-sign-up-modal close-modal") X
     h2 Sign-Up
-    div(class="sign-up-errors-container" style="width:50%")
+    div(class="sign-up-errors-container")
     form(class="sign-up-form")
       input(type="hidden" name='_csrf' value=csrfToken)
       label(for="username") Username
@@ -49,4 +48,5 @@ div(class="sign-up-modal")
       input(type="password" name="password")
       label(for="confirmPassword") Confirm Password
       input(type="password" name="confirmPassword")
-      button(type="submit") Sign Up
+      input(type="submit" value="Sign Up")
+

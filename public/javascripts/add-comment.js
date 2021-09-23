@@ -1,14 +1,31 @@
 import { convertTime } from "./utils.js";
+
+const logInModal = document.querySelector(".log-in-modal");
+const mainBody = document.querySelector(".body-encapsulation");
+
+function toggleLogInModal() {
+	logInModal.classList.toggle("show-modal");
+}
+
+function toggleBlur() {
+	mainBody.classList.toggle("blur");
+}
+
 const addComment = document.querySelector('.add-comment-form');
 addComment.addEventListener('submit', async (e) => {
 	e.preventDefault();
 	const formData = new FormData(addComment);
 	const comment = formData.get('comment');
+	const userId = formData.get("userId");
+	if (userId === "null"){
+		toggleLogInModal();
+		toggleBlur();
+	} else {
 	const content = { comment };
 	let obj;
     let url = window.location.href;
     url = url.split("/");
-    url = url[url.length - 1]
+    url = url[url.length - 1];
     console.log(url, content)
 	try {
 		const res = await fetch(`/posts/${url}/comments`, {
@@ -47,4 +64,5 @@ addComment.addEventListener('submit', async (e) => {
 	newComment.append(author, commentContent, date);
 	list.prepend(newComment);
     document.querySelector(".commentTextBox").value = ""
-});
+
+}});

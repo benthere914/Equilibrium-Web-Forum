@@ -1,11 +1,4 @@
-.sign-up-form {
-    display: flex;
-    flex-direction: column;
-}
-.log-in-form {
-    display: flex;
-    flex-direction: column;
-}
+
 .sign-up-form input {
     background-color: white;
     border: 1px solid black;
@@ -22,10 +15,12 @@
 h2{
     font-size: 2em;
 }
-.sign-up-errors-container + .log-in-errors-container {
+.sign-up-errors-container, .log-in-errors-container {
     display: flex;
     flex-direction: column;
     background-color: lightpink;
+    border-radius: 5px;
+    width: 100%;
 }
 .err_msg{
     font-weight: 800;

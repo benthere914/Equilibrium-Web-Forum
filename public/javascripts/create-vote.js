@@ -2,16 +2,26 @@ const upvoteButton = document.querySelector(".upvote-button");
 const downvoteButton = document.querySelector(".downvote-button");
 const submitVote = document.querySelector(".submit-vote");
 const voteTotal = document.querySelector(".vote-total");
+const mainBody = document.querySelector(".body-encapsulation");
 
-
+function toggleLogInModal() {
+	logInModal.classList.toggle("show-modal");
+}
+function toggleBlur() {
+	mainBody.classList.toggle("blur");
+}
 
 upvoteButton.addEventListener("click", async (e) => {
-    e.preventDefault();
     const formData = new FormData(submitVote);
 	const postId = formData.get("postId");
     const userId = formData.get("userId")
     const vote = 1;
     const body = { userId, vote };
+
+	if (userId === "null"){
+	document.querySelector(".log-in-modal-trigger").click();
+	return;
+	} else {
     try {
         const res = await fetch(`/posts/${postId}/votes`, {
 					method: "POST",
@@ -44,6 +54,7 @@ upvoteButton.addEventListener("click", async (e) => {
      catch (err) {
         console.log(err);
     }
+}
 });
 
 downvoteButton.addEventListener("click", async (e) => {
@@ -53,6 +64,10 @@ downvoteButton.addEventListener("click", async (e) => {
     const userId = formData.get("userId")
 	const vote = -1;
 	const body = { userId, vote };
+
+	if (userId === "null"){
+		logInModalTrigger.click();
+	} else {
 	try {
         const res = await fetch(`/posts/${postId}/votes`, {
 					method: "POST",
@@ -83,4 +98,4 @@ downvoteButton.addEventListener("click", async (e) => {
         console.log(err)
 
 	}
-});
+}});

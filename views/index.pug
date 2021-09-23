@@ -7,30 +7,32 @@ append head
   script(src="/javascripts/index.js" type="module" defer)
 
 block content
-  div.main-body
-    div.topics-container
-      h2.topics-title Recommended Topics
-      div.topics-only
-        each topic in topics
-          div.topics(id=`topic-${topic.id}`)= topic.name
-      div.social
-          div.ben
-            a(href="https://github.com/benthere914") Ben
-            a.linkedIn(href="https://www.linkedin.com/in/shaquilleoneal/")
-          div.parker
-            a(href="https://github.com/parkerbo") Parker
-            a.linkedIn(href="https://www.linkedin.com/in/shaquilleoneal/")
-          div.nick
-            a(href="https://github.com/nkfrs3") Nick
-            a.linkedIn(href="https://www.linkedin.com/in/shaquilleoneal/")
-    div.blogs-container
-      each post in posts
-        div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`  onclick=`window.location.href='/posts/${post.id}'`)
-          h4= post.User.username
-          h3= post.title
-          - var url = post.imgUrl;
-          - var urlString = `url(${url})`;
-          div(style={'background-image': `${urlString}`})
-          p #{post.content}...
-          if post.matches
-                    a(href=`/posts/${userId}/edit`) Edit
+  div.body-encapsulation
+    div.main-body
+      div.topics-container
+        h2.topics-title Recommended Topics
+        div.topics-only
+          each topic in topics
+            div.topics(id=`topic-${topic.id}`)= topic.name
+        div.social
+            div.ben
+              a(href="https://github.com/benthere914") Ben
+              a.linkedIn(href="https://www.linkedin.com/in/shaquilleoneal/")
+            div.parker
+              a(href="https://github.com/parkerbo") Parker
+              a.linkedIn(href="https://www.linkedin.com/in/shaquilleoneal/")
+            div.nick
+              a(href="https://github.com/nkfrs3") Nick
+              a.linkedIn(href="https://www.linkedin.com/in/shaquilleoneal/")
+      div.blogs-container
+        each post in posts
+          div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`)
+            a(href=`/posts/${post.id}`)
+              h4= post.User.username
+              h3= post.title
+              - var url = post.imgUrl;
+              - var urlString = `url(${url})`;
+              div(style={'background-image': `${urlString}`})
+              p #{post.content}...
+              if post.matches
+                        a(href=`/posts/${userId}/edit`) Edit
