@@ -51,6 +51,13 @@ h1.userName {
     background-color: rgb(93, 211, 70);
 
 }
+.errorsContainer {
+ background-color: black;
+ padding: 10px 5px;
+}
+.errorsContainer div {
+    color: red;
+}
 /* .mainContent{
     display: flex;
     justify-content: center;

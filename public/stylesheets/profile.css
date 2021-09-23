@@ -4,6 +4,7 @@
     padding-top: 1em;
     width: 25%;
     background-color: white;
+    max-height: 300px;
 }
 .profile-body{
     grid-template-columns: 1fr 0.2fr 5fr 0.2fr 3fr;
@@ -16,42 +17,40 @@
     margin-left: 20%;
 
 }
-.profile p{
+div.bioContainer {
+    grid-area: bio;
 
-    border: gray solid 3px;
-
-    /* border: red solid 3px; */
-
-    text-align: center;
-    padding-top: 10%;
-    width: 350px;
 }
+div .bioTitle {
+    font-size: 1.5em;
+}
+
 
 .username{
     position: relative;
     top: 120px;
     width:  300px;
 }
-.username h2{
-    background-color: white;
-    text-align: center;
-    width:100%;
-}
-
-.profile h3{
-    position: relative;
-    left: 750px;
-    top: 20px;
-    cursor: pointer;
-    height: min-content;
+.profile-header img {
+    grid-area: img;
+    object-fit: contain;
+    height: 15em;
 }
 .profile-header {
     background-color: none;
-    display: flex;
     padding-top: 90px;
     grid-area: header;
+    display: grid;
+    grid-template-columns: 15em 30em 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas: "name img bio"
+                        "edit img bio";
 
-
+}
+.profile-header h3 {
+    grid-area: edit;
+    align-self: flex-start;
+    padding-left: 1em;
 }
 .topics-container {
     display: inline-block;
@@ -59,10 +58,10 @@
 }
 .profile-body {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 250px 1fr;
-    grid-template-areas: 'header header'
-                            'body body';
+    grid-template-columns: 1fr 1fr 0.5fr;
+    grid-template-rows: 350px 1fr;
+    grid-template-areas: 'header header topics'
+                            'body body topics';
 
 }
 .topics-title{
@@ -71,7 +70,12 @@
 }
 .topics-container {
     overflow-y: visible !important;
+    grid-area: topics;
+    padding-top: 100px;
 
+}
+.posts {
+    grid-area: body;
 }
 .topics {
     cursor: pointer;
