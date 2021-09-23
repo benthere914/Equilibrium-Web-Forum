@@ -26,24 +26,22 @@ logInForm.addEventListener("submit", async (e) => {
 	} catch (err) {
 		const errorJSON = await err.json();
 		const errorsContainer = document.querySelector(".log-in-errors-container");
-		let errorsHtml = [
-			`
-        <div>
-            Please fix the following errors:
-        </div>
-      `,
-		];
+
 		const { error } = errorJSON;
 		console.log(error);
+		let errorsHtml
 		if (error && Array.isArray(error)) {
 			errorsHtml = error.map(
 				(message) => `
-          <div class="err_msg">
+          <li>
               ${message}
-          </div>
+          </li>
         `
 			);
 		}
+		errorsHtml.unshift("<ul>");
+		errorsHtml.push("</ul>");
 		errorsContainer.innerHTML = errorsHtml.join("");
+
 	}
 });
