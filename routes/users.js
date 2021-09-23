@@ -1,5 +1,7 @@
 var express = require('express');
-const { asyncHandler } = require('../utils');
+const { validationResult } = require('express-validator');
+const { asyncHandler, csrfProtection, bcrypt, check } = require('../utils');
+const {userEditValidators } = require('./index.js')
 var router = express.Router();
 const db = require('../db/models');
 const {User, Post, Topic, TopicFollow} = db;
@@ -38,6 +40,62 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
     res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated, userId});
 }))
 
+const passWordValidators = [
+check('password')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a value for Password')
+        .isLength({ max: 50 })
+        .withMessage('Password must not be more than 50 characters long')
+        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, 'g')
+        .withMessage('Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'),
+    check('confirmPassword')
+        .exists({ checkFalsy: true })
+        .withMessage('Please provide a value for Confirm Password')
+        .isLength({ max: 50 })
+        .withMessage('Confirm Password must not be more than 50 characters long')
+        .custom((value, { req }) => {
+        if (value !== req.body.password) {
+            throw new Error('Confirm Password does not match Password');
+        }
+        return true;
+        })];
+
+router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandler((async(req, res)=>{
+  const {username, oldPassword, password, confirmPassword, biography, imgUrl} = req.body;
+  console.log( `!!!!!!!`, biography);
+    // console.log( "Yesssss", userId);
+    let userId = req.session.auth.userId;
+    const errors = [];
+    const validationErrors = validationResult(req);
+    const user = await User.findByPk(userId);
+
+    if (username !== user.username) {
+      let userToCheck = await User.findOne({where: {username}});
+        if (userToCheck !== null){
+          errors.push(`Name already in use`);
+          console.log(errors)
+          // return res.render("my-account", {user, errors, csrfToken: req.csrfToken()});
+        }
+    }
+    if (oldPassword.length) {
+      const passwordMatches = await bcrypt.compare(oldPassword, user.hashedPassword.toString());
+      if (!passwordMatches) {
+
+        errors.push(`Incorrect password`);
+        console.log(errors);
+        // return res.render("my-account", {user,errors, csrfToken: req.csrfToken()})
+      } errors.push(validationErrors.array().map(err => err.msg));
+
+    }
+    console.log(errors);
+    if (errors.length){
+      return res.render("my-account", {user, errors, csrfToken: req.csrfToken()})
+    }
+    const newHashedPassword = await bcrypt.hash(password, 10);
+    await user.update({hashedPassword: newHashedPassword, username, biography, imgUrl})
+    res.redirect(`/users/${userId}`);
+
+})));
 
 
 

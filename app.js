@@ -7,11 +7,13 @@ const { sequelize } = require('./db/models');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
-const indexRouter = require('./routes/index');
+const {router: indexRouter} = require('./routes/index');
 const usersRouter = require('./routes/users');
 const topicsRouter = require('./routes/topics')
 const followsRouter = require('./routes/follows');
 const postsRouter = require('./routes/posts');
+const commentsRouter = require('./routes/comments');
+
 const { restoreUser } = require('./auth');
 
 
@@ -44,6 +46,7 @@ app.use(restoreUser);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/comments', commentsRouter);
 app.use('/topics', topicsRouter);
 app.use('/follows', followsRouter);
 

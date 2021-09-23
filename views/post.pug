@@ -4,6 +4,10 @@ append head
     link(rel="stylesheet" href="/stylesheets/post.css")
     script(src="/javascripts/create-vote.js" type="module")
     script(src="/javascripts/add-comment.js" type="module")
+    script(src="/javascripts/delete-comment.js" type="module")
+    script(src="/javascripts/edit-comment.js" type="module")
+
+
 block content
   div.body-encapsulation
     .body
@@ -15,30 +19,30 @@ block content
             .authorBio= author.biography
         .post
             .postTitle
-              .postTitleContent= post.title
-              form(class="submit-vote")
-                div(class="vote")
-                  if userVoteStatus === 0
-                    div(class="increment upvote-button")
-                    div(class="vote-count-display vote-total")=voteTotal
-                    div(class="increment downvote-button")
-                  if userVoteStatus === 1
-                    div(class="increment-active upvote-button")
-                    div(class="vote-count-display vote-total")=voteTotal
-                    div(class="increment downvote-button")
-                  if userVoteStatus === -1
-                    div(class="increment upvote-button")
-                    div(class="vote-count-display vote-total")=voteTotal
-                    div(class="increment-active downvote-button")
-                  input(type="hidden" value=postId name="postId")
-                  input(type="hidden" value=userId name="userId")
+                .postTitleContent= post.title
+                form(class="submit-vote")
+                    div(class="vote")
+                        if userVoteStatus === 0
+                            div(class="increment upvote-button")
+                            div(class="vote-count-display vote-total")=voteTotal
+                            div(class="increment downvote-button")
+                        if userVoteStatus === 1
+                            div(class="increment-active upvote-button")
+                            div(class="vote-count-display vote-total")=voteTotal
+                            div(class="increment downvote-button")
+                        if userVoteStatus === -1
+                            div(class="increment upvote-button")
+                            div(class="vote-count-display vote-total")=voteTotal
+                            div(class="increment-active downvote-button")
+                        input(type="hidden" value=postId name="postId")
+                        input(type="hidden" value=userId name="userId")
             if postMatches
-              div.edit-button
-                a(href=`/posts/${post.id}/edit`) Edit Your Post
+                div.edit-button
+                    a(href=`/posts/${post.id}/edit`) Edit Your Post
             .postImage
                 img(src= post.imgUrl alt="Main image for #{post.title}")
             .postContent
-              .postText=post.content
+                .postText=post.content
         .comment
             form(class="add-comment-form")
                 label(for="comment") Add a comment
@@ -46,8 +50,13 @@ block content
                 input(type="hidden" value=userId name="userId")
                 button(type="submit") Submit
             ul.commentsList
-              each comment in comments
-                div.comment-container
-                  p(class="comment-username")= comment.User.username
-                  p(class="comment-content")= comment.comment
-                  p(class="comment-date")= comment.date
+                each comment in comments
+                    div.comment-container
+                        input(type="hidden", value= comment.id)
+                        .top-of-comment
+                            p(class="comment-username")= comment.User.username
+                            if comment.matches
+                                p(class="comment-edit" ) Edit
+                                p(class="comment-delete") Delete
+                        p(class="comment-content")= comment.comment
+                        p(class="comment-date")= comment.date

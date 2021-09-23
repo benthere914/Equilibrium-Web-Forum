@@ -6,30 +6,40 @@ append head
     link(rel="stylesheet" href="/stylesheets/account.css")
 
     //- add page specific js
-    script(src="/javascripts/index.js" type="module" defer)
+    //- script(src="/javascripts/index.js" type="module" defer)
 block content
-    h1(class= "userName")= user.username
-    form(class="accountEditForm")
-        .mainContent
-            .titles
-                h2 User Name
-                h2 Old Password
-                h2 New Password
-                h2 Confirm Password
-                h2 Bio
-                h2 Image Url
-            .textFieldsAccountForm
-                input(type="text", value= user.username)
-                input(type="password", autocomplete="new-password")
-                input(type="password", autocomplete="new-password")
-                input(type="password", autocomplete="new-password")
-                textarea= user.biography
-                input(type="text", value= user.imgUrl, autocomplete="off")
-            .imgAccountForm
-                img(src= user.imgUrl, alt= `photo of ${user.username}`)
+    .mainContent
+        h1(class= "userName")= user.username
+        if errors
+            .errorsContainer
+                each error in errors
+                    div.errorMsg= error
 
-        .submit
-            .saveButton
-                h3(onclick=`document.choose.submit();`) Save
-            .backButton
-                h3(onclick=`window.location.href='/users/${user.id}'`) Back
+        form(class="accountEditForm" action=`/users/${user.id}/edit` method="POST")
+            input(type="hidden" name='_csrf' value=csrfToken)
+            input(type="hidden" name='userId' value=user.id)
+            label(for="username") User Name
+            input(type="text", id="username",name="username", value= user.username)
+
+            label(for="oldPassword" ) Old Password
+            input(type="password",id="oldPassword", name="oldPassword", autocomplete="new-password")
+
+            label(for="password") New Password
+            input(type="password", name="password", id="password",autocomplete="new-password")
+
+            label(for="confirmPassword") Confirm Password
+            input(type="password", id="confirmPassword", name="confirmPassword",autocomplete="new-password")
+
+            label(for="biography") Bio
+            textarea(id="biography", name="biography", value=user.biography)= user.biography
+
+            label(for="imgUrl") Image Url
+            input(type="text", id="imgUrl", name="imgUrl", value= user.imgUrl, autocomplete="off")
+
+            .saveButtons
+                button.submitEditForm() Submit
+
+                span.goBackButton(onclick=`window.location.href='/users/${user.id}'`) Back
+
+    .profileImg
+        img(src= user.imgUrl, alt= `photo of ${user.username}`)
