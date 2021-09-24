@@ -1,0 +1,29 @@
+.footer{
+
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    background-color: #B08666;
+}
+
+.footer * img{
+    height: 35px;
+}
+
+.footer > div{
+    display: flex;
+    align-items: center;
+}
+
+.footer > div > *{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.footer > div > img{
+    cursor: pointer;
+    margin: 0 5px;
+    padding: 0;
+    width: min-content;
+}

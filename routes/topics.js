@@ -7,7 +7,6 @@ router.use(express.json());
 
 router.get('/:id', asyncHandler(async(req,res,next)=>{
   const topicId = req.params.id;
-  console.log(req.params.id)
   const topics = await Topic.findAll({where: {
     id: topicId
   }})

@@ -44,6 +44,7 @@ router.get(
             let minutes = convertTime(data.updatedAt.getMinutes(), 'minutes');
             let format = convertTime(data.updatedAt.getHours(), 'format')
             data.date = `${month}, ${day}, ${year}, ${hour}:${minutes} ${format}`;
+            data.matches = (data.User.id === userId)
 			return data;
 		});
 		const votes = await Vote.findAll({
@@ -155,7 +156,9 @@ router.post(
 	asyncHandler(async (req, res) => {
 		const postId = req.params.id;
 		const { userId, vote } = req.body;
-
+		if(!userId){
+			
+		}
 		const userVote = await Vote.findOne({
 			where: {
 				postId: postId,
@@ -164,7 +167,6 @@ router.post(
 		});
 		let userVoteStatus;
 		if (!userVote) {
-			console.log("here");
 			 await Vote.create({
 				userId,
 				postId,

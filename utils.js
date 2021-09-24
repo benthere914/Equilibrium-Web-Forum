@@ -37,7 +37,7 @@ const handleValidationErrors = (req, res, next) => {
         return 2021
       }
       if (format === "hours"){
-        if (number < 0 || number > 24){return ""}
+        if (number < 0 || number > 24){return "00"}
         if (number < 10){return `0${number}`}
         if (number > 12){return `${Number(number) - 12}`}
 
@@ -45,10 +45,10 @@ const handleValidationErrors = (req, res, next) => {
         if (number === 24){return `${12}`}
       }
       if (format === "minutes"){
-        if (number < 0 || number > 60){return ""}
+        if (number < 0 || number > 60){return "00"}
         if (number < 10){return `0${number}`}
-        if (number === 60){return `${00}`}
-        if (number > 10){return `${number}`}
+        if (number === 60){return `00`}
+        if (number >= 10){return `${number}`}
       }
 
       if (format === "format"){

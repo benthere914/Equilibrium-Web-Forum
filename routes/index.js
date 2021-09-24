@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { csrfProtection, asyncHandler, handleValidationErrors, bcrypt, check } = require('../utils');
 const db = require('../db/models');
-const { User } = db;
+const { User , Post, Topic} = db;
 const { loginUser,logoutUser,restoreUser,requireAuth } = require('../auth');
 const { validationResult } = require('express-validator');
 router.use(express.json());
@@ -39,6 +39,7 @@ const userValidators = [
         return true;
         })
 ];
+
 const loginValidators = [
     check('username')
       .exists({ checkFalsy: true })
@@ -66,7 +67,7 @@ router.get('/', csrfProtection, restoreUser, asyncHandler(async function(req, re
          return {name: e.name, id: e.id}
      });
 
-    let posts = await db.Post.findAll({include: User, order: [['createdAt', 'DESC']], limit: 30
+    let posts = await db.Post.findAll({include: [User, Topic], order: [['createdAt', 'DESC']], limit: 30
     });
     posts = posts.map(e => {
         e = e.dataValues
@@ -77,10 +78,12 @@ router.get('/', csrfProtection, restoreUser, asyncHandler(async function(req, re
                 e.matches = (e.User.id === req.session.auth.userId);
             }
         }
-        console.log(e.matches)
         return e;
     })
-    if (req.session.auth){userId = req.session.auth.userId}
+    let userId
+    if (req.session.auth){
+         userId = req.session.auth.userId
+    }
     else {userId = NaN}
   res.render("index", {
 		loggedIn: res.locals.authenticated,
@@ -134,7 +137,7 @@ router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req
 
 
 router.post('/log-in-demo', asyncHandler(async (req, res) => {
-    const user = await User.findOne();
+    const user = await User.findByPk(1);
     loginUser(req, res, user);
     return req.session.save(() => {res.redirect("back");})
 }))

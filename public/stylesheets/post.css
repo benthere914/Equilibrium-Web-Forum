@@ -161,7 +161,7 @@
     margin: 0 auto;
     padding: 6px;
 }
-.comment-date{
+.comment-date, .comment-edit, .comment-delete{
     color: black;
     font-weight: normal;
     font-style: italic;
@@ -178,4 +178,37 @@
     padding-bottom: 5px;
      border-bottom: 1px solid lightslategray;
 
+}
+
+.comment #links{
+    display: flex;
+    width: min-content;
+    height: 0;
+    margin: 0;
+}
+
+.top-of-comment{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-of-comment .comment-username{
+    width: 100%;
+    text-align: left;
+    justify-self: flex-start;
+    padding: 0;
+    margin: 5px;
+}
+
+.top-of-comment .comment-edit {
+    position: relative;
+}
+
+.edit-comment-text-box{
+    border: solid red 5px;
+    font-size: 15px;
+    color: black;
+    width: 250px;
+    height: 150px
 }

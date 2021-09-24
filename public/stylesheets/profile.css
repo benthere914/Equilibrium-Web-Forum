@@ -4,8 +4,21 @@
     width: 25%;
     background-color: white;
     max-height: 300px;
+
     grid-area: name;
     place-self: start start;
+
+}
+.profile-body{
+    grid-template-columns: 1fr 0.2fr 5fr 0.2fr 3fr;
+    grid-template-rows: 0.2fr auto;
+}
+.profile{
+	/* display: flex; */
+    padding-top: 10px;
+    width: 40%;
+    margin-left: 20%;
+
 
 }
 
