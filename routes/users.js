@@ -31,10 +31,17 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
     if (!user){return res.render('404Error', {errors: ['This page does not exist']})}
     let posts = await Post.findAll({where: {userId: user.id}, include: [Topic, User]})
     user = user.dataValues;
-    posts = posts.map(e => {
-        let data = e.dataValues;
-        data.content =  data.content.slice(0, 100);
-        return data});
+			posts = posts.map((e) => {
+				e = e.dataValues;
+				e.content = e.content.slice(0, 100, "...");
+				if (req.session.auth) {
+					if (req.session.auth.userId) {
+						e.matches = (e.User.id === req.session.auth.userId);
+					}
+				}
+				return e;
+			});
+
         const sameUser = (Number(req.params.id) === Number(userId));
 
 

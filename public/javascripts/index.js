@@ -69,24 +69,9 @@ function toggle(element) {
 	element.classList.add("toggled");
 }
 
-const signUpModalTrigger = document.querySelector("#signUpSplashButton");
-const signUp = document.querySelector(".sign-up-modal");
+const startWriting = document.getElementById("signUp");
+const signUp = document.querySelector(".sign-up-modal-trigger")
 
-const mainBodyDiv = document.querySelector(".body-encapsulation");
-
-
-signUpModalTrigger.addEventListener("click", (ev) => {
-    const clickEvent = new Event("click", { bubbles: true, cancelable: false });
-
-		//call event on element
-		signUp.dispatchEvent(clickEvent);
-	// mainBodyDiv.addEventListener(
-	// 	"click",
-	// 	(ev) => {
-	// 		ev.preventDefault();
-	// 		signUp.classList.toggle("show-modal");
-	// 		mainBodyDiv.classList.toggle("blur");
-	// 	},
-	// 	{ once: true }
-	// );
-});
+startWriting.onclick = () => {
+	signUp.click();
+}
