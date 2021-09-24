@@ -211,6 +211,12 @@ h2 {
 	font-weight: 500 !important;
 	color: #eeede6;
 }
+
+.toggled:hover {
+    background-color: rgba(242, 242, 242, 0.733) !important;
+    color: black;
+}
+
 #topic-display{
     background-color: #F2F2F2;
     color: #757575;
@@ -218,6 +224,7 @@ h2 {
     padding: 3px 5px 3px 5px;
     float: right;
 }
+
 .topics-only {
 	flex-wrap: wrap;
 	display: flex;
