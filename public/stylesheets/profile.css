@@ -87,19 +87,20 @@
 	position: relative;
 }
 
-.topics:hover::after {
-	content: "Unfollow?" !important;
-	position: absolute;
-	width: 90px !important;
-	height: 35px !important;
-	left: 0px !important;
-	top: -50px !important;
-	background-color: black;
-	color: white;
-	padding: 10px 10px 0px 10px !important;
-	border-radius: 17px !important;
 
-	text-align: center;
+.topics:hover::after{
+    content: "Unfollow?" !important;
+    position: absolute;
+    width: 90px !important;
+    height:35px !important;
+    left: 0px !important;
+    top: -50px !important;
+    background-color: black;
+    color: white;
+    padding: 10px 10px 0px 10px !important;
+    border-radius: 17px !important;
+    text-align: center;
+
 }
 
 .topics:hover::before {
