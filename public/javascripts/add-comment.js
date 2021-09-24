@@ -4,11 +4,11 @@ import { convertTime } from "./utils.js";
 const logInModal = document.querySelector(".log-in-modal");
 const mainBody = document.querySelector(".body-encapsulation");
 
-toggleLogInModal = () => {
+let toggleLogInModal = () => {
 	logInModal.classList.toggle("show-modal");
 }
 
-toggleBlur = () => {
+let toggleBlur = () => {
 	mainBody.classList.toggle("blur");
 }
 
