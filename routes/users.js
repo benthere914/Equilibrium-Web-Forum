@@ -4,7 +4,8 @@ const { asyncHandler, csrfProtection, bcrypt, check } = require('../utils');
 const {userEditValidators } = require('./index.js')
 var router = express.Router();
 const db = require('../db/models');
-const {User, Post, Topic, TopicFollow} = db;
+const { logoutUser } = require('../auth');
+const {User, Post, Topic, TopicFollow, UserFollow, Vote, Comment} = db;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -99,10 +100,62 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 router.delete('/:id(\\d+)', asyncHandler(async (req, res)=>{
     let userId;
     if (req.session.auth){userId = req.session.auth.userId;}
-    if (!userId || userId !== req.params.id){return res.json({"message": "Permission Denied"}).status(403)}
+    if (!userId || String(userId) !== String(req.params.id)){return res.json({error: "Permission Denied"}).status(403)}
     let user = await User.findByPk(req.params.id);
-    if (!user){return res.json({"message": "Permission Denied"}).status(403)}
-    await user.destroy();
+    if (user.username === "John Doe"){
+        return res.json({error: "Cannot Delete this user"})
+    }
+    if (!user){return res.json({error: "Permission Denied"}).status(403)}
+    let passwordMatches = await bcrypt.compare(req.body.password, user.hashedPassword.toString());
+    if (passwordMatches){
+        try {
+                //grabs all posts made by user
+                    //grabs all comments on each post
+                        //deletes each comment
+                    //grabs all votes on each post
+                        //deletes each vote
+                    //deletes each post
+                //grabs all comments made by user
+                    //deletes each comment
+                //grabs all votes made by user
+                    //deletes each vote
+                //grabs all userfollows where user is following
+                    //deletes each follow
+                //grabs all userfollows where user is followed
+                    //deletes each follow
+                let posts = await Post.findAll({where: {userId}})
+                posts.forEach(async post => {
+                    let comments = await Comment.findAll({where: {postId: post.dataValues.id}})
+                    comments.forEach(async comment => comment.destroy())
+                    let votes = await Vote.findAll({where: {postId: post.dataValues.id}})
+                    votes.forEach(async vote => vote.destroy())
+                    await post.destroy()
+                })
+
+                let usersComments = await Comment.findAll({where: {userId}})
+                usersComments.forEach(async userComment => userComment.destroy())
+
+                let usersVotes = await Vote.findAll({where: {userId}})
+                usersVotes.forEach(async usersVote => usersVote.destroy())
+
+                let TopicFollows = await TopicFollow.findAll({where: {userId}})
+                TopicFollows.forEach(async TopicFollow => TopicFollow.destroy())
+
+                let userFollowsU = await UserFollow.findAll({where: {userId}})
+                userFollowsU.forEach(async userFollowU => userFollowU.destroy())
+
+                let userFollowsF = await UserFollow.findAll({where: {followId: userId}})
+                userFollowsF.forEach(async userFollowF => userFollowF.destroy())
+
+                logoutUser(req, res);
+                await user.destroy();
+            } catch (error) {
+                return res.json({error: "Server Error, Please Try again Later"})
+            }
+
+        return res.json({message: "Successfully Deleted"})}
+
+    else {res.json({error: "Invalid Password"})};
 }))
 
 module.exports = router;

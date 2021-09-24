@@ -2,6 +2,7 @@
 
 window.addEventListener("load", async (event) => {
 	let current = 11;
+
 	let loggedIn = false;
 	try {
 		let userId = await getData("/users/userid");

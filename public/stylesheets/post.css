@@ -7,6 +7,7 @@
 
 }
 .author{
+    cursor: pointer;
     padding: 20px 20px 0 20px;
     display: flex;
     flex-direction: column;
@@ -143,11 +144,17 @@
 
 .author .authorName{
     width: 100%;
+    margin-bottom: 5px;
 }
 .author .authorName h3{
     text-align: center;
 }
 
+.authorBio{
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
+}
 
 .comment-username{
     color: #0f570f;
@@ -211,4 +218,7 @@
     color: black;
     width: 250px;
     height: 150px
+}
+.comment-edit, .comment-delete{
+    cursor: pointer;
 }

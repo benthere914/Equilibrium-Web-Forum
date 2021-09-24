@@ -137,7 +137,7 @@ router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req
 
 
 router.post('/log-in-demo', asyncHandler(async (req, res) => {
-    const user = await User.findByPk(1);
+    const user = await User.findOne({where: {username: 'John Doe'}});
     loginUser(req, res, user);
     return req.session.save(() => {res.redirect("back");})
 }))
