@@ -28,7 +28,7 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
     else {userId = NaN}
     let user = await User.findByPk(req.params.id, {include: Topic});
     if (!user){return res.render('404Error', {errors: ['This page does not exist']})}
-    let posts = await Post.findAll({where: {userId: user.id}})
+    let posts = await Post.findAll({where: {userId: user.id}, include: [Topic, User]})
     user = user.dataValues;
     posts = posts.map(e => {
         let data = e.dataValues;
