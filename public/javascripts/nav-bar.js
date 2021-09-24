@@ -13,7 +13,6 @@ window.addEventListener('load', async (ev) => {
             loggedIn = true;
         }
     }catch (e){
-        console.log(e);
     }
 
 

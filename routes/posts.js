@@ -116,7 +116,6 @@ router.get(
 			const userId = req.session.auth.userId;
 			const user = await User.findByPk(userId);
 			const topics = await Topic.findAll();
-			console.log(topics);
 			res.render("create-post", {
 				user,
 				topics,
@@ -157,7 +156,7 @@ router.post(
 		const postId = req.params.id;
 		const { userId, vote } = req.body;
 		if(!userId){
-			
+
 		}
 		const userVote = await Vote.findOne({
 			where: {
@@ -201,7 +200,6 @@ router.post(
 				return acc + cVal;
 			});
 		}
-		console.log("New vote total:", currentVoteTotal);
 		res.json({ currentVoteTotal, userVoteStatus });
 	}));
 
@@ -212,7 +210,6 @@ router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
 			return next()
 		}
     topics = topics.map(e => e.dataValues)
-    console.log(topics)
     post = post.dataValues;
     post.Topic = post.Topic.dataValues;
 
@@ -250,7 +247,6 @@ router.delete("/:id(\\d+)/delete", asyncHandler(async(req,res)=> {
 
 	const postId = parseInt(req.params.id, 10);
 	let postToDelete = await Post.findByPk(postId);
-	console.log(postToDelete);
 	await postToDelete.destroy();
 	res.json({post: `${postId}`})
 }));

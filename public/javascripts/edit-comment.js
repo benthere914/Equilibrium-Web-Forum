@@ -13,7 +13,7 @@ async function editEle(e){
         let cancelButton = document.createElement('button');
         updateText.setAttribute('class', 'edit-comment-text-box')
         updateText.value = commentText.innerText;
-        updateText.addEventListener('keydown', (e) => {console.log(e.key);if (e.key === 'Enter'){updateFromEnter(e)}})
+        updateText.addEventListener('keydown', (e) => {if (e.key === 'Enter'){updateFromEnter(e)}})
         updateButton.innerText = "Submit"
         updateButton.addEventListener('click', (e) => {updateFromButton(e)})
         cancelButton.setAttribute('value', 'Back');
@@ -32,7 +32,6 @@ async function editEle(e){
                 },
             });
             let {newCommentText, date, err} = await res.json();
-            console.log(err)
             if (err){throw new Error('Permission Denied');}
             commentText.innerText = newCommentText;
             updateDiv.parentElement.replaceChild(commentText, updateDiv);
@@ -43,19 +42,14 @@ async function editEle(e){
             let hour = convertTime(date.getHours(), 'hours');
             let minutes = convertTime(date.getMinutes(), 'minutes');
             let format = convertTime(date.getHours(), 'format');
-            console.log(commentDiv.lastChild.innerText)
             commentDiv.lastChild.innerText = `${month}, ${day}, ${year}, ${hour}:${minutes} ${format}`;
         }
 
 
-        // if (!res.ok){throw (res)}
         commentText.parentElement.replaceChild(updateDiv, commentText)
     } catch (error) {
-        console.log(error)
         return
     }
 }
 
 export {editEle}
-
-

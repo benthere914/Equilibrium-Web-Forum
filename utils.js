@@ -20,7 +20,6 @@ const handleValidationErrors = (req, res, next) => {
   const csrfProtection = csrf({ cookie: true });
 
   function convertTime(number, format){
-    console.log(number)
       number = Number(number);
       if (Number.isNaN(number)){return null}
       if (format === "date"){

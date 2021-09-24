@@ -22,14 +22,12 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: "userId",
 		});
     const columnMappingOne = {
-			// User -> User, through UserFollow as follower
 			through: "UserFollow",
 			otherKey: "followId",
 			foreignKey: "userId",
 			as: "followings",
 		};
 		const columnMappingTwo = {
-			// User -> User, through UserFollow as following
 			through: "UserFollow",
 			otherKey: "userId",
 			foreignKey: "followId",

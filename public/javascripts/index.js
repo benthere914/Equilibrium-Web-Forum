@@ -1,5 +1,5 @@
 
-  
+
 
 window.addEventListener("load", async (event) => {
     document.querySelector(".nav-bar").scrollIntoView();
@@ -49,8 +49,6 @@ window.addEventListener("load", async (event) => {
 						userId: userId.userId,
 						topicId: parseInt(topicId, 10),
 					};
-					console.log(body);
-					//this line creates a follow between a user and a topic
 					let res = await fetch("/follows/topics", {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
@@ -81,15 +79,6 @@ const mainBodyDiv = document.querySelector(".body-encapsulation");
 signUpModalTrigger.addEventListener("click", (ev) => {
     const clickEvent = new Event("click", { bubbles: true, cancelable: false });
 
-		//call event on element
 		signUp.dispatchEvent(clickEvent);
-	// mainBodyDiv.addEventListener(
-	// 	"click",
-	// 	(ev) => {
-	// 		ev.preventDefault();
-	// 		signUp.classList.toggle("show-modal");
-	// 		mainBodyDiv.classList.toggle("blur");
-	// 	},
-	// 	{ once: true }
-	// );
+
 });

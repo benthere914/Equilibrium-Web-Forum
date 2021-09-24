@@ -63,7 +63,6 @@ check('password')
 
 router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandler((async(req, res)=>{
   const {username, oldPassword, password, confirmPassword, biography, imgUrl} = req.body;
-    // console.log( "Yesssss", userId);
     let userId = req.session.auth.userId;
     const errors = [];
     const validationErrors = validationResult(req);
@@ -73,8 +72,6 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
       let userToCheck = await User.findOne({where: {username}});
         if (userToCheck !== null){
           errors.push(`Name already in use`);
-          console.log(errors)
-          // return res.render("my-account", {user, errors, csrfToken: req.csrfToken()});
         }
     }
     if (oldPassword.length) {
@@ -83,11 +80,9 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 
         errors.push(`Incorrect password`);
 
-        // return res.render("my-account", {user,errors, csrfToken: req.csrfToken()})
       } errors.push(validationErrors.array().map(err => err.msg));
 
     }
-    console.log(errors);
     if (errors.length){
       return res.render("my-account", {user, errors, csrfToken: req.csrfToken()})
     }
@@ -109,20 +104,6 @@ router.delete('/:id(\\d+)', asyncHandler(async (req, res)=>{
     let passwordMatches = await bcrypt.compare(req.body.password, user.hashedPassword.toString());
     if (passwordMatches){
         try {
-                //grabs all posts made by user
-                    //grabs all comments on each post
-                        //deletes each comment
-                    //grabs all votes on each post
-                        //deletes each vote
-                    //deletes each post
-                //grabs all comments made by user
-                    //deletes each comment
-                //grabs all votes made by user
-                    //deletes each vote
-                //grabs all userfollows where user is following
-                    //deletes each follow
-                //grabs all userfollows where user is followed
-                    //deletes each follow
                 let posts = await Post.findAll({where: {userId}})
                 posts.forEach(async post => {
                     let comments = await Comment.findAll({where: {postId: post.dataValues.id}})

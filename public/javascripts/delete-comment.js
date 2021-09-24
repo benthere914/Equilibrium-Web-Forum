@@ -9,7 +9,6 @@ async function deleteEle(e){
         if (!res.ok){throw (res)}
         commentDiv.remove()
     } catch (error) {
-        console.log(error)
         return
     }
 }
