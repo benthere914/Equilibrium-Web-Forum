@@ -23,7 +23,7 @@ block content
             input(type="hidden" name='_csrf' value=csrfToken)
             input(type="hidden" name='userId' value=user.id)
             label(for="username") User Name
-            input(type="text", id="username",name="username", value= user.username)
+            input(type="text", id="username",name="username", value= user.username, autocomplete="username")
 
             label(for="oldPassword" ) Old Password
             input(type="password",id="oldPassword", name="oldPassword", autocomplete="new-password")
