@@ -1,6 +1,9 @@
 
+  
 
 window.addEventListener("load", async (event) => {
+    document.querySelector(".nav-bar").scrollIntoView();
+
 	let current = 11;
 
 	let loggedIn = false;

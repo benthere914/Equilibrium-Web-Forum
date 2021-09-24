@@ -60,7 +60,6 @@ const loginValidators = [
 
 /* GET home page. */
 router.get('/', csrfProtection, restoreUser, asyncHandler(async function(req, res, next) {
-
     let topics = await db.Topic.findAll();
      topics = topics.map(e => {
          e = e.dataValues
