@@ -53,11 +53,12 @@ li {
 }
 .topics-container {
 	margin-left: auto;
-	max-width: 30%;
+	max-width: 20%;
 	padding: 0px;
 	margin-top: 2em;
 	overflow-x: hidden;
-	margin-right: 3em;
+	margin-right: 7em;
+
 }
 h2 {
 	margin-top: 0;
@@ -74,7 +75,7 @@ h2 {
 
 .topics-container div[id^="topic"] {
 	display: inline-block;
-	padding: 1.5em 1em;
+	padding: 1.2em 0.8em;
 	border-radius: 25px;
 	margin: 2px;
 	order: 12;
@@ -86,14 +87,14 @@ h2 {
 .topics-container div[id^="topic"].loggedIn:not(.toggled):hover::after{
     content: "Follow?";
     position: absolute;
-    width: 90px;
-    height:35px;
-    left: -20px;
+    width: 80px;
+    height:22px;
+    left: -12px;
     top: -47px;
     background-color: black;
     color: white;
     font-weight: 700;
-    padding: 10px 10px 0px 10px;
+    padding: 10px 8px 0px 8px;
     border-radius: 17px;
     z-index: 10;
     text-align: center;
@@ -101,11 +102,11 @@ h2 {
 .topics-container div[id^="topic"].loggedIn:not(.toggled):hover::before{
     content: "";
     width: 0px;
-    height: 0px;
+    height: 7px;
     position: absolute;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 10px solid black;
+    border-top: 8px solid black;
     border-bottom: 10px solid transparent;
     right: 55%;
     bottom: 37px;
@@ -205,6 +206,7 @@ h2 {
 	align-items: center;
 	height: 180px;
 	width: 200px;
+    object-fit: cover;
 }
 
 #username {
@@ -260,8 +262,10 @@ h2 {
 .topics-only {
 	flex-wrap: wrap;
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: start;
 	overflow-y: none;
+    padding-left: 10px;
+    gap: 2px;
 }
 .link:hover {
 	cursor: pointer;
