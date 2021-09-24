@@ -1,0 +1,75 @@
+.container {
+  color: #283f0d;
+  width: 500px;
+  text-align: start;
+  line-height: 2px;
+  text-shadow: 28em 10px black;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 9px;
+  color: white;
+  grid-area: splashImg;
+  box-sizing: border-box;
+  z-index: 1;
+  font-weight: 700;
+}
+.container p:nth-child(20) {
+  margin-left: 14em;
+
+}
+.container p:nth-child(21) {
+  margin-left: 13em;
+
+}
+.container p:nth-child(22) {
+  margin-left: 13em;
+}
+.container p:nth-child(23) {
+  margin-left: 13em;
+}
+.container p:nth-child(24) {
+  margin-left: 12em;
+}
+.container p:nth-child(25) {
+  margin-left: 12em;
+}
+.container p:nth-child(26) {
+  margin-left: 11em;
+}
+.container p:nth-child(27) {
+  margin-left: 10em;
+}
+.container p:nth-child(28) {
+  margin-left: 9em;
+}
+.container p:nth-child(29) {
+  margin-left: 8em;
+}
+.container p:nth-child(30) {
+  margin-left: 7em;
+}
+.container p:nth-child(31) {
+  margin-left: 6em;
+}
+.container p:nth-child(32) {
+  margin-left: 5em;
+}
+.container p:nth-child(33) {
+  margin-left: 4em;
+}
+.container p:nth-child(34) {
+  margin-left: 3em;
+}
+.container p:nth-child(35) {
+  margin-left: 2em;
+}
+.container p:nth-child(34) {
+  margin-left: 1em;
+}
+.container p:nth-child(35) {
+  margin-left: 0em;
+}
+.container p:nth-child(36) {
+  margin-left: 0em;
+}
