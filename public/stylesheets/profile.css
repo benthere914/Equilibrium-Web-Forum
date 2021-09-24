@@ -1,10 +1,13 @@
 .profile-header h2 {
-    text-align: left;
-    padding-left: 25px;
-    padding-top: 1em;
+    padding-left: 20px;
+    /* padding-top: 1em; */
     width: 25%;
     background-color: white;
     max-height: 300px;
+
+    grid-area: name;
+    place-self: start start;
+
 }
 .profile-body{
     grid-template-columns: 1fr 0.2fr 5fr 0.2fr 3fr;
@@ -16,15 +19,21 @@
     width: 40%;
     margin-left: 20%;
 
+
 }
+
 div.bioContainer {
     grid-area: bio;
+    margin-top: 10px;
 
+}
+.bioContainer p {
+    font-size: 0.8em;
 }
 div .bioTitle {
-    font-size: 1.5em;
+    font-size: 1em;
+    margin-left: 4px;
 }
-
 
 .username{
     position: relative;
@@ -34,23 +43,29 @@ div .bioTitle {
 .profile-header img {
     grid-area: img;
     object-fit: contain;
-    height: 15em;
+    height: 12em;
 }
 .profile-header {
     background-color: none;
     padding-top: 90px;
     grid-area: header;
     display: grid;
-    grid-template-columns: 15em 30em 1fr;
-    grid-template-rows: 100px 1fr;
-    grid-template-areas: "name img bio"
-                        "edit img bio";
+    grid-template-columns: 20em 20em;
+    grid-template-rows: 12em 4em 2em;
+    grid-template-areas: "img  bio "
+                        "name  bio "
+                        "edit bio";
 
 }
 .profile-header h3 {
     grid-area: edit;
-    align-self: flex-start;
+    place-self: center start;
     padding-left: 1em;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+.profile-header h3:hover {
+    color: blue;
 }
 .topics-container {
     display: inline-block;
@@ -58,11 +73,14 @@ div .bioTitle {
 }
 .profile-body {
     display: grid;
-    grid-template-columns: 1fr 1fr 0.5fr;
-    grid-template-rows: 350px 1fr;
-    grid-template-areas: 'header header topics'
-                            'body body topics';
+    grid-template-columns: 40em 1fr 0.5fr;
+    grid-template-rows: 325px 1fr;
+    grid-template-areas: 'header body topics'
+                            '. body topics';
 
+}
+.posts .blog{
+    margin-left: 0px !important;
 }
 .topics-title{
     width: 100%;
@@ -76,6 +94,9 @@ div .bioTitle {
 }
 .posts {
     grid-area: body;
+    margin-right: 1em;
+    place-self: start start;
+    margin-top: 110px;
 }
 .topics {
     cursor: pointer;
