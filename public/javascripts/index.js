@@ -11,7 +11,7 @@
 // })
 
 window.addEventListener("load", async (event) => {
-	let current = 8;
+	let current = 11;
 
 	let loggedIn = false;
 	try {

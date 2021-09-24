@@ -4,9 +4,9 @@
     width: 25%;
     background-color: white;
     max-height: 300px;
-
     grid-area: name;
     place-self: start start;
+    font-size: 1em;
 
 }
 .profile-body{
@@ -18,7 +18,6 @@
     padding-top: 10px;
     width: 40%;
     margin-left: 20%;
-
 
 }
 
@@ -131,5 +130,5 @@ div .bioTitle {
     border-top: 10px solid black;
     border-bottom: 10px solid transparent;
     right: 40%;
-    bottom: 32px;
+    bottom: 33px;
 }
