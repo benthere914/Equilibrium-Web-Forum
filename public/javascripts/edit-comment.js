@@ -20,9 +20,9 @@ const editEle = async (e) => {
         cancelButton.innerText = "Back"
         cancelButton.addEventListener('click', e => {updateDiv.parentElement.replaceChild(commentText, updateDiv)})
         updateDiv.append(updateText, updateButton, cancelButton)
-         updateFromButton = (e) => {update(e.target.previousSibling.value)}
-         updateFromEnter = (e) => {update(e.target.value)}
-         update = async (comment) => {
+         const updateFromButton = (e) => {update(e.target.previousSibling.value)}
+         const updateFromEnter = (e) => {update(e.target.value)}
+         const update = async (comment) => {
             console.log(123)
             let body = {comment}
             const res = await fetch(`/comments/${commentId}`, {
@@ -49,6 +49,7 @@ const editEle = async (e) => {
 
         commentText.parentElement.replaceChild(updateDiv, commentText)
     } catch (error) {
+        console.log(error)
         return
     }
 }
