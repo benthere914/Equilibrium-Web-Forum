@@ -1,22 +1,11 @@
 import { convertTime } from "./utils.js";
 
 
-const logInModal = document.querySelector(".log-in-modal");
-const mainBody = document.querySelector(".body-encapsulation");
-
-toggleLogInModal = () => {
-	logInModal.classList.toggle("show-modal");
-}
-
-toggleBlur = () => {
-	mainBody.classList.toggle("blur");
-}
-
-
 import { deleteEle } from "./delete-comment.js";
 import { editEle } from "./edit-comment.js";
 
 const addComment = document.querySelector('.add-comment-form');
+
 addComment.addEventListener('submit', async (e) => {
 
 	e.preventDefault();
