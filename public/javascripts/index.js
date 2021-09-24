@@ -4,7 +4,7 @@
 window.addEventListener("load", async (event) => {
     document.querySelector(".nav-bar").scrollIntoView();
 
-	let current = 12;
+	let current = 50;
 
 	let loggedIn = false;
 	try {
@@ -52,10 +52,11 @@ window.addEventListener("load", async (event) => {
 				toggle(e.target);
 				e.target.style.order = 1;
 				let cssId = `relevant-${topicId}`;
-				current--;
+
 				const relevantPosts = document.querySelectorAll(`.${cssId}`);
 				relevantPosts.forEach((post) => {
 					post.style.order = current;
+					current--;
 				});
 
 				if (loggedIn) {
@@ -73,7 +74,7 @@ window.addEventListener("load", async (event) => {
 			} else if (e.target.classList.contains("toggled")){
 				e.target.classList.remove('toggled');
 				e.target.style.order = 12;
-				if (current < 12) current ++;
+				if (current < 50) current ++;
 			}let cssId = `relevant-${topicId}`;
 			const relevantPosts = document.querySelectorAll(`.${cssId}`);
 			relevantPosts.forEach((post) => {
@@ -93,4 +94,3 @@ let getData = async (url) => {
  let toggle = (element) => {
 	element.classList.add("toggled");
 };
-

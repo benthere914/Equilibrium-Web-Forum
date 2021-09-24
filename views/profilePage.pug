@@ -26,19 +26,21 @@ block content
         .posts
            each post in posts
              div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`)
-               div(id="username")
-                 a(href=`/users/${post.User.id}` id="username-link")=post.User.username
-                 span(id="topic-display")= post.Topic.name
-               a(href=`/posts/${post.id}` id="title")
-                 div(id="title")=post.title
-               - var url = post.imgUrl;
-               - var urlString = `${url}`;
-               div(id="blog_img")
-               img(src=`${urlString}` id="blog_img")
-               div(id="content") #{post.content}...
-               div(id="details")
-                 if post.matches
-                   a(href=`/posts/${userId}/edit`) Edit
+              div(id="username")
+                a(href=`/users/${post.User.id}` id="username-link")=post.User.username
+                span(id="topic-display")= post.Topic.name
+              a(href=`/posts/${post.id}` id="title")
+                div(id="title")=post.title
+              - var url = post.imgUrl;
+              - var urlString = `${url}`;
+              div(id="blog_img")
+                a(href=`/posts/${post.id}`)
+                  img(src=`${urlString}` id="blog_img")
+              div(id="content")
+                a(href=`/posts/${post.id}`) #{post.content}...
+              div(id="details")
+                if post.matches
+                  a(href=`/posts/${post.id}/edit`) Edit
         if sameUser
             .topics-container
                 h2.topics-title Your Followed Topics

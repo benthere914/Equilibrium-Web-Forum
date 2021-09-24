@@ -41,8 +41,10 @@ block content
             - var url = post.imgUrl;
             - var urlString = `${url}`;
             div(id="blog_img")
-            img(src=`${urlString}` id="blog_img")
-            div(id="content") #{post.content}...
+              a(href=`/posts/${post.id}`)
+                img(src=`${urlString}` id="blog_img")
+            div(id="content")
+              a(href=`/posts/${post.id}`) #{post.content}...
             div(id="details")
               if post.matches
-                a(href=`/posts/${userId}/edit`) Edit
+                a(href=`/posts/${post.id}/edit`) Edit

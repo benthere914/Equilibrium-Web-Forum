@@ -156,7 +156,7 @@ router.get('/my-account',csrfProtection, restoreUser, asyncHandler(async (req, r
     if (!userId){return next()}
     let user = await User.findByPk(userId);
     user = user.dataValues;
-    res.render('my-account', {user, loggedIn: res.locals.authenticated, csrfToken: req.csrfToken()})
+    res.render('my-account', {user, loggedIn: res.locals.authenticated, csrfToken: req.csrfToken(), bioLength: user.biography.length})
 }))
 
 router.get('/404', (req, res) => {

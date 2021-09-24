@@ -1,94 +1,92 @@
 .profile-header h2 {
-    padding-left: 20px;
-    /* padding-top: 1em; */
-    width: 25%;
-    background-color: white;
-    max-height: 300px;
-    grid-area: name;
-    place-self: start start;
-    font-size: 1em;
-
+	padding-left: 20px;
+	/* padding-top: 1em; */
+	width: 25%;
+	background-color: white;
+	max-height: 300px;
+	grid-area: name;
+	place-self: start start;
+	font-size: 1em;
 }
-.profile-body{
-    padding-top: 100px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 0.3fr 4fr 3fr 1fr;
-    grid-template-rows: 0.2fr 1fr;
-    grid-template-areas:
-    ". userDiv . profile-title . ."
-    " . userDiv . posts topics .";
+.profile-body {
+	padding-top: 100px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 0.3fr 4fr 3fr 1fr;
+	grid-template-rows: 0.2fr 1fr;
+	grid-template-areas:
+		". userDiv . profile-title . ."
+		" . userDiv . posts topics .";
 }
-.profile-header{
+.profile-header {
 	grid-area: userDiv;
-    padding-top: 20px;
-    height: fit-content;
-    padding-right: 10px;
-    border-right: 1px solid lightslategray;
-    border-bottom: 1px solid lightslategray;
+	padding-top: 20px;
+	height: fit-content;
+	padding-right: 10px;
+	border-right: 1px solid lightslategray;
+	border-bottom: 1px solid lightslategray;
 }
 
-.username{
-    position: relative;
-    top: 120px;
-    width:  300px;
+.username {
+	position: relative;
+	top: 120px;
+	width: 300px;
 }
 .profile-image img {
-    border-radius: 100px;
-    width: 200px;
-    height: 200px;
+	border-radius: 100px;
+	width: 200px;
 }
-.profile-username{
-    font-size: 1.5em;
-    text-align: center;
-    padding-bottom: 10px;
+.profile-username {
+	font-size: 1.5em;
+	text-align: center;
+	padding-bottom: 10px;
 }
-.profile-title{
-    grid-area: profile-title;
-    width: 100%;
+.profile-title {
+	grid-area: profile-title;
+	width: 100%;
 }
 .bioTitle {
-    font-size: 1.2em;
-    padding-top: 15px;
-    text-decoration: underline;
+	font-size: 1.2em;
+	padding-top: 15px;
+	text-decoration: underline;
 }
-.profile-title h2{
-    background-color: white;
-    text-align: left;
-    margin: 0 auto;
+.profile-title h2 {
+	background-color: white;
+	text-align: left;
+	margin: 0 auto;
 }
-.profile-edit-account{
-    display: flex;
-    justify-content: flex-end;
-    font-style: italic;
+.profile-edit-account {
+	display: flex;
+	justify-content: flex-end;
+	font-style: italic;
 }
-.profile-edit-account:hover{
-    text-decoration: underline;
-    color:mediumblue;
-    cursor: pointer;
+.profile-edit-account:hover {
+	text-decoration: underline;
+	color: mediumblue;
+	cursor: pointer;
 }
-.posts .blog{
-    margin-left: 0px !important;
+.posts .blog {
+	margin-left: 0px !important;
 }
-.topics-title{
-    width: 100%;
-    margin-bottom: 20px;
+.topics-title {
+	width: 100%;
+	margin-bottom: 20px;
 }
 .profile-body .topics-container {
-    overflow-y: visible !important;
-    grid-area: topics;
-    min-width: 200px;
-    width: 100%;
-    margin: 0 auto;
-
+	overflow-y: visible !important;
+	grid-area: topics;
+	min-width: 200px;
+	width: 100%;
+	margin: 0 auto;
 }
 .posts {
-    grid-area: posts;
-    margin-right: 1em;
+	grid-area: posts;
+	margin-right: 1em;
 }
 .topics {
-    cursor: pointer;
-    position: relative;
+	cursor: pointer;
+	position: relative;
 }
+
 
 .topics:hover::after{
     content: "Unfollow?" !important;
@@ -103,18 +101,17 @@
     border-radius: 17px !important;
     text-align: center;
 
-
 }
 
 .topics:hover::before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid black;
-    border-bottom: 10px solid transparent;
-    right: 40%;
-    bottom: 39px !important;
+	content: "";
+	width: 0px;
+	height: 0px;
+	position: absolute;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 10px solid black;
+	border-bottom: 10px solid transparent;
+	right: 40%;
+	bottom: 39px !important;
 }
