@@ -1,12 +1,11 @@
 extends layout
 block content
     append head
-    //- add page specific styles by appending to the head
     link(rel="stylesheet" href="/stylesheets/index.css")
-    //- add page specific js
+    link(rel="stylesheet" href="/stylesheets/error.css")
+
     script(src="/javascripts/index.js" type="module" defer)
-    h1 404 Error
-    ul: h2 reasons for this error
-        each error in errors
-            li= error
-    
+    .ErrorContent
+        h1 404 Error
+        h2 Please make sure you are trying to reach the correct url and try again. If you continue to reach this page, please contact us at the links found at the bottom of the page
+    button(onclick=`window.location.href='/'`) Back To Home

@@ -13,6 +13,7 @@
   box-sizing: border-box;
   z-index: 1;
   font-weight: 700;
+  pointer-events: none;
 }
 .container p:nth-child(20) {
   margin-left: 14em;

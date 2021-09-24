@@ -11,8 +11,8 @@ div.nav-bar
     if loggedIn
       li
         form(action="/log-out" method="POST")
-          input(type="hidden").sign-up-modal-trigger.log-in-modal-trigger
-          input(type="submit" value="Log Out" class="").input.link
+          input(type="hidden" autocomplete="off").sign-up-modal-trigger.log-in-modal-trigger
+          input(type="submit" value="Log Out" class="" autocomplete="off").input.link
       li
         a(href="/posts/create").link Write a Story
       li
@@ -24,17 +24,17 @@ div.nav-bar
       li.log-in-modal-trigger Log In
       li.demo-login
         form(action="/log-in-demo" method="POST")
-          input(type="submit" value="Demo" class="").link
+          input(type="submit" value="Demo" class="" autocomplete="off").link
 div(class="log-in-modal")
   div(class="modal-content")
     h2 Log-In to Equilibrium
     div(class="log-in-errors-container")
     form(class="log-in-form")
-      input(type="hidden" name='_csrf' value=csrfToken)
+      input(type="hidden" name='_csrf' value=csrfToken autocomplete="off")
       label(for="username") Username
-      input(type="text" name="username" )
+      input(type="text" name="username" autocomplete="username")
       label(for="password") Password
-      input(type="password" name="password")
+      input(type="password" name="password" autocomplete="current-password")
       input(type="submit" value="Log In")
 div(class="sign-up-modal")
   div(class="modal-content")
@@ -43,10 +43,9 @@ div(class="sign-up-modal")
     form(class="sign-up-form")
       input(type="hidden" name='_csrf' value=csrfToken)
       label(for="username") Username
-      input(type="text" name="username" )
+      input(type="text" name="username" autocomplete="username")
       label(for="password") Password
-      input(type="password" name="password")
+      input(type="password" name="password" autocomplete="new-password")
       label(for="confirmPassword") Confirm Password
-      input(type="password" name="confirmPassword")
+      input(type="password" name="confirmPassword" autocomplete="confirm-password")
       input(type="submit" value="Sign Up")
-

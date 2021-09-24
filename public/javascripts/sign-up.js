@@ -1,5 +1,6 @@
 const signUpForm = document.querySelector(".sign-up-form");
 
+
 signUpForm.addEventListener("submit", async (e) => {
 	e.preventDefault();
 
@@ -29,11 +30,9 @@ signUpForm.addEventListener("submit", async (e) => {
 		window.location.reload();
 	} catch (err) {
 		const errorJSON = await err.json();
-		console.log(errorJSON);
 		const errorsContainer = document.querySelector(".sign-up-errors-container");
 		let errorsHtml;
 		const { error } = errorJSON;
-		console.log(error);
 		if (error && Array.isArray(error)) {
 			errorsHtml = error.map(
 				(message) => `

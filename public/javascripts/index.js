@@ -61,8 +61,6 @@ window.addEventListener("load", async (event) => {
 						userId: userId.userId,
 						topicId: parseInt(topicId, 10),
 					};
-					console.log(body);
-					//this line creates a follow between a user and a topic
 					let res = await fetch("/follows/topics", {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
@@ -83,13 +81,13 @@ window.addEventListener("load", async (event) => {
 	});
 });
 
-async function getData(url) {
+let getData = async (url) => {
 	const response = await fetch(url);
 
 	return response.json();
 }
 
-function toggle(element) {
+ let toggle = (element) => {
 	element.classList.add("toggled");
-}
-;
+};
+

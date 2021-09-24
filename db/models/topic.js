@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Topic = sequelize.define('Topic', {
     name: DataTypes.STRING
   }, {});
-  Topic.associate = function(models) {
+  Topic.associate = (models) => {
     Topic.hasMany(models.Post, {
 			foreignKey: "topicId",
 		});

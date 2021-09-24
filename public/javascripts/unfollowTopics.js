@@ -11,7 +11,6 @@ const topics = document.querySelectorAll('.topics').forEach(topic =>{
           throw deleted;
         }
       }catch(e){
-        console.log(e);
       }
       topicToDelete.remove();
     })

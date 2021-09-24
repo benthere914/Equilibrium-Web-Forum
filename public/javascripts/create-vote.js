@@ -3,13 +3,6 @@ const downvoteButton = document.querySelector(".downvote-button");
 const submitVote = document.querySelector(".submit-vote");
 const voteTotal = document.querySelector(".vote-total");
 
-function toggleLogInModal() {
-	logInModal.classList.toggle("show-modal");
-}
-function toggleBlur() {
-	mainBody.classList.toggle("blur");
-}
-
 upvoteButton.addEventListener("click", async (e) => {
 	const formData = new FormData(submitVote);
 	const postId = formData.get("postId");
@@ -33,7 +26,6 @@ upvoteButton.addEventListener("click", async (e) => {
 				throw res;
 			}
 			let { currentVoteTotal, userVoteStatus } = await res.json();
-			console.log(userVoteStatus);
 			if (userVoteStatus === 0) {
 				upvoteButton.classList.remove("increment-active");
 				upvoteButton.classList.add("increment");
@@ -49,7 +41,6 @@ upvoteButton.addEventListener("click", async (e) => {
 
 			voteTotal.innerHTML = currentVoteTotal;
 		} catch (err) {
-			console.log(err);
 		}
 	}
 });
@@ -77,7 +68,6 @@ downvoteButton.addEventListener("click", async (e) => {
 				throw res;
 			}
 			let { currentVoteTotal, userVoteStatus } = await res.json();
-			console.log(userVoteStatus);
 			if (userVoteStatus === 0) {
 				downvoteButton.classList.remove("increment-active");
 				downvoteButton.classList.add("increment");
@@ -92,7 +82,6 @@ downvoteButton.addEventListener("click", async (e) => {
 			}
 			voteTotal.innerHTML = currentVoteTotal;
 		} catch (err) {
-			console.log(err);
 		}
 	}
 });

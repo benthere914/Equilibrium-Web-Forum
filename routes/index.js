@@ -43,14 +43,7 @@ const userValidators = [
 const loginValidators = [
     check('username')
       .exists({ checkFalsy: true })
-      .withMessage('Please provide a value for Username')
-      .custom((value) => {
-        return db.User.findOne({ where: { username: value } })
-            .then((user) => {
-                if (!user) {
-                    return Promise.reject('Incorrect login credentials');
-                }
-            })}),
+      .withMessage('Please provide a value for Username'),
     check('password')
       .exists({ checkFalsy: true })
       .withMessage('Please provide a value for Password')
@@ -59,7 +52,7 @@ const loginValidators = [
 
 
 /* GET home page. */
-router.get('/', csrfProtection, restoreUser, asyncHandler(async function(req, res, next) {
+router.get('/', csrfProtection, restoreUser, asyncHandler(async (req, res, next) =>{
     let topics = await db.Topic.findAll();
      topics = topics.map(e => {
          e = e.dataValues
@@ -156,4 +149,8 @@ router.get('/my-account',csrfProtection, restoreUser, asyncHandler(async (req, r
     user = user.dataValues;
     res.render('my-account', {user, loggedIn: res.locals.authenticated, csrfToken: req.csrfToken()})
 }))
+
+router.get('/404', (req, res) => {
+    res.render('404Error')
+})
 module.exports = {router};

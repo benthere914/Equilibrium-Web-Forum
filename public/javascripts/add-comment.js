@@ -1,22 +1,12 @@
 import { convertTime } from "./utils.js";
 
 
-const logInModal = document.querySelector(".log-in-modal");
-const mainBody = document.querySelector(".body-encapsulation");
-
-function toggleLogInModal() {
-	logInModal.classList.toggle("show-modal");
-}
-
-function toggleBlur() {
-	mainBody.classList.toggle("blur");
-}
-
 
 import { deleteEle } from "./delete-comment.js";
 import { editEle } from "./edit-comment.js";
 
 const addComment = document.querySelector('.add-comment-form');
+
 addComment.addEventListener('submit', async (e) => {
 
 	e.preventDefault();
@@ -39,10 +29,8 @@ addComment.addEventListener('submit', async (e) => {
     try {
         let userIdResponse = await fetch('/users/userid');
         let userId = await userIdResponse.json();
-        console.log(userId)
         if (!userId.userId){textBox.value = "";alert("You must be logged in to comment"); throw new Error("You must be logged in to comment")}
     } catch (error) {
-        console.log(error);
         return error
     }
     if (!content.comment || !String(content.comment).trim().length){textBox.setAttribute("placeholder", "Invalid Comment");textBox.value= ""; return}

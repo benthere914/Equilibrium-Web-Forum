@@ -112,7 +112,7 @@ h2 {
 	padding-left: 1em;
 }
 .social a[href*="github"]::after {
-	content: url("./github-logo.png");
+	content: url("../images/github-logo.png");
 	margin-left: 1em;
 	display: inline-block;
 }
@@ -125,7 +125,7 @@ h2 {
 	width: 15%;
 }
 .social a[href*="link"]::before {
-	content: url("./linkedin.png");
+	content: url("../images/linkedin.png");
 	padding-left: 1em;
 }
 .ben,
@@ -198,7 +198,13 @@ h2 {
 #details {
 	grid-area: details;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+	color: #4682b4;
+	padding-top: 5px;
+}
+#details:hover {
+	cursor: pointer;
+	text-decoration: underline;
 }
 .toggled {
 	background-color: rgba(25, 29, 25, 0.589) !important;
@@ -267,6 +273,10 @@ h2 {
 #signUp{
     grid-area: signUp;
     padding: 30px 0 0 0;
+	color:white;
+    font-size: 1.5em;
+	font-weight: 500;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
 
 }
 #splashImg{
@@ -274,21 +284,5 @@ h2 {
 	grid-area: splashImg;
 	width: 380px;
 	height: 380px;
-}
-
-#signUpSplashButton{
-
-    height: 40px;
-    width: 120px;
-    color: black;
-    background-color: white;
-    border-radius: 20px;
-    font-size: 1em;
-    font-weight: 300;
-    border: 2px solid black;
-
-}
-#signUpSplashButton:hover{
-    cursor: pointer;
-    background-color: lightgrey;
+	pointer-events: none;
 }

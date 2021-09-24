@@ -4,8 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER,
     topicId: DataTypes.INTEGER
   }, {});
-  TopicFollow.associate = function(models) {
-    // associations can be defined here
+  TopicFollow.associate = (models) => {
     TopicFollow.belongsTo(models.Topic, {foreignKey: 'topicId'});
   };
   return TopicFollow;

@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     postId: DataTypes.INTEGER,
     voteCount: DataTypes.INTEGER
   }, {});
-  Vote.associate = function(models) {
+  Vote.associate = (models) => {
     Vote.belongsTo(models.User, {
       foreignKey: 'userId'
     });

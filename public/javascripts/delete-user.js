@@ -2,7 +2,7 @@
 let body = document.body;
 document.querySelector(".deleteAccount").addEventListener("click", (e) => {confirmDelete(e)})
 
-function confirmDelete(e){
+ const confirmDelete = (e) => {
     let container = document.createElement("div");
     let warning = document.createElement("h2");
     let warningPt2 = document.createElement("h2");
@@ -18,13 +18,12 @@ function confirmDelete(e){
     submitButton.addEventListener("click", async (e) => {verifyPassword(e)})
     passwordBox.addEventListener("keydown", (e)=> {if (e.key === "Enter"){}})
 
-    async function verifyPassword(e){
+    const verifyPassword = async (e) => {
         let userId;
         try {
             let response = await fetch('/users/userid');
             userId = await response.json();
             userId = userId.userId;
-            console.log(userId)
             if (!userId){throw new Error("not logged in")}
             let body = {password: passwordBox.value};
             const res = await fetch(`/users/${userId}`, {
@@ -49,10 +48,8 @@ function confirmDelete(e){
                 container.append(errorBox);
             }else if (message){
                 window.location.replace("/");
-                console.log('deleted')
             }
         } catch (error) {
-            console.log(error);
             return error
         }
 
@@ -62,5 +59,4 @@ function confirmDelete(e){
     container.append(warning, warningPt2, passwordBox, submitButton);
     let changeDataForm = document.querySelector(".mainContent");
     changeDataForm.parentNode.replaceChild(container, changeDataForm)
-    // body.append(container)
 }
