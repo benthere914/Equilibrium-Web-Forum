@@ -135,11 +135,13 @@ h2 {
 	content: "Created By";
     background-image: linear-gradient(to left, white, #b08666, rgb(87, 56, 16));
 	color: white;
-	margin-bottom: 5px;
+	margin-top: 10px;
 	width: 100%;
-	height: 20px;
+	height: 15px;
 	z-index: 1;
 	padding-left: 1em;
+    padding-top: 3px;
+    font-size: 0.7em;
 }
 .social a[href*="github"]::after {
 	content: url("../images/github-logo.png");
