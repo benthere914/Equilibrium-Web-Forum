@@ -29,7 +29,7 @@ logInForm.addEventListener("submit", async (e) => {
 
 		const { error } = errorJSON;
 		console.log(error);
-		let errorsHtml
+		let errorsHtml;
 		if (error && Array.isArray(error)) {
 			errorsHtml = error.map(
 				(message) => `
@@ -42,6 +42,5 @@ logInForm.addEventListener("submit", async (e) => {
 		errorsHtml.unshift("<ul>");
 		errorsHtml.push("</ul>");
 		errorsContainer.innerHTML = errorsHtml.join("");
-
 	}
 });
