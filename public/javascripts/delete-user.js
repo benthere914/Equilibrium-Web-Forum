@@ -2,7 +2,7 @@
 let body = document.body;
 document.querySelector(".deleteAccount").addEventListener("click", (e) => {confirmDelete(e)})
 
- confirmDelete = (e) => {
+ const confirmDelete = (e) => {
     let container = document.createElement("div");
     let warning = document.createElement("h2");
     let warningPt2 = document.createElement("h2");
@@ -18,7 +18,7 @@ document.querySelector(".deleteAccount").addEventListener("click", (e) => {confi
     submitButton.addEventListener("click", async (e) => {verifyPassword(e)})
     passwordBox.addEventListener("keydown", (e)=> {if (e.key === "Enter"){}})
 
-    verifyPassword = async (e) => {
+    const verifyPassword = async (e) => {
         let userId;
         try {
             let response = await fetch('/users/userid');

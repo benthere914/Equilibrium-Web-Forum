@@ -23,7 +23,6 @@ const editEle = async (e) => {
          const updateFromButton = (e) => {update(e.target.previousSibling.value)}
          const updateFromEnter = (e) => {update(e.target.value)}
          const update = async (comment) => {
-            console.log(123)
             let body = {comment}
             const res = await fetch(`/comments/${commentId}`, {
                 method: "Put",
@@ -49,7 +48,6 @@ const editEle = async (e) => {
 
         commentText.parentElement.replaceChild(updateDiv, commentText)
     } catch (error) {
-        console.log(error)
         return
     }
 }
