@@ -186,7 +186,7 @@ h2 {
 	padding: 1em;
 	display: grid;
 	grid-template-columns: 3fr 0.2fr 1.5fr;
-	grid-template-rows: 0.5fr 0.8fr 1fr 0.2fr;
+	grid-template-rows: 0.5fr 0.8fr 1fr 0.5fr;
 	grid-template-areas:
 		"username . img"
 		"title . img"
@@ -202,9 +202,10 @@ h2 {
 	grid-area: img;
 	display: flex;
 	align-items: center;
-	width: 100%;
-	height: 100%;
+	height: 180px;
+	width: 200px;
 }
+
 #username {
 	grid-area: username;
 }
@@ -233,7 +234,6 @@ h2 {
 	padding-top: 5px;
 }
 #details:hover {
-	cursor: pointer;
 	text-decoration: underline;
 }
 .toggled {

@@ -23,7 +23,7 @@ router.get("/userid", (req, res) => {
     res.json({userId: NaN})
   });
 
-router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
+router.get("/:id(\\d+)", csrfProtection, asyncHandler( async (req, res) => {
     let userId;
     if (req.session.auth){userId = req.session.auth.userId}
     else {userId = NaN}
@@ -34,6 +34,15 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
 			posts = posts.map((e) => {
 				e = e.dataValues;
 				e.content = e.content.slice(0, 100, "...");
+        if (e.title.length > 50) {
+            while(e.title.length > 50){
+                e.title = e.title.split(" ");
+                e.title = e.title.slice(0, e.title.length-1)
+                e.title = e.title.join(' ');
+            }
+
+            e.title += "...";
+        };
 				if (req.session.auth) {
 					if (req.session.auth.userId) {
 						e.matches = (e.User.id === req.session.auth.userId);
@@ -45,7 +54,7 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
         const sameUser = (Number(req.params.id) === Number(userId));
 
 
-    res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated, userId});
+    res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated, userId, csrfToken: req.csrfToken()});
 }))
 
 const passWordValidators = [
@@ -93,9 +102,11 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 
         }
     }
+
     if (biography.length >= 250){
         errors.push("Biography is too long. No longer than 250 characters")
     }
+
 
     if (password){
         if (!String(oldPassword).trim()){errors.push("Must type current password");}
@@ -120,6 +131,7 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
     user.imgUrl = String(imgUrl).trim();
     user.username= username;
     await user.save()
+
     res.redirect(`/users/${userId}`);
 
 })));
