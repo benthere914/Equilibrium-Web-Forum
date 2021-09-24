@@ -59,7 +59,7 @@ check('password')
             throw new Error('Confirm Password does not match Password');
         }
         return true;
-        })];
+        }).withMessage('Confirm Password does not match Password')];
 
 router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandler((async(req, res)=>{
   const {username, oldPassword, password, confirmPassword, biography, imgUrl} = req.body;
@@ -68,28 +68,41 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
     const errors = [];
     const validationErrors = validationResult(req);
     const user = await User.findByPk(userId);
-
+    if (user.username === 'John Doe') {
+        errors.push('This user cannot be edited.');
+    }
+    if (!username) {
+        errors.push('User Name can not be empty');
+    }
+    if (!biography) {
+        errors.push('Biography cannot be empty');
+    }
+    if (!imgUrl) {
+        errors.push('Image Url cannot be empty');
+    }
     if (username !== user.username) {
       let userToCheck = await User.findOne({where: {username}});
         if (userToCheck !== null){
           errors.push(`Name already in use`);
           console.log(errors)
-          // return res.render("my-account", {user, errors, csrfToken: req.csrfToken()});
         }
     }
-    if (oldPassword.length) {
-      const passwordMatches = await bcrypt.compare(oldPassword, user.hashedPassword.toString());
-      if (!passwordMatches) {
 
-        errors.push(`Incorrect password`);
-
-        // return res.render("my-account", {user,errors, csrfToken: req.csrfToken()})
-      } errors.push(validationErrors.array().map(err => err.msg));
-
+    if (password){
+        if (!String(oldPassword).trim()){errors.push("Must type current password");}
+        if (!String(confirmPassword).trim()){errors.push("Must type confirmation password")}
+        if (!String(password).trim()){errors.push("new password cannot contain spaces")}
+        if (password !== String(password).trim()){errors.push("new password cannot contain spaces")}
+        if (oldPassword){
+            const passwordMatches = await bcrypt.compare(oldPassword, user.hashedPassword.toString());
+            if (!passwordMatches) {errors.push(`Incorrect password`);}
+            let validatorErrors = validationErrors.array().map(err => err.msg);
+            if (validatorErrors.length){errors.push(validatorErrors)}
+        }
     }
     console.log(errors);
     if (errors.length){
-      return res.render("my-account", {user, errors, csrfToken: req.csrfToken()})
+      return res.render("my-account", {user, errors, csrfToken: req.csrfToken(),loggedIn: res.locals.authenticated})
     }
     const newHashedPassword = await bcrypt.hash(password, 10);
     await user.update({hashedPassword: newHashedPassword, username, biography, imgUrl})
