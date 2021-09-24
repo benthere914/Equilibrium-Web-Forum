@@ -20,7 +20,6 @@
 .author .authorImage img{
     width: 200px;
     border-radius: 100px;
-    object-fit: contain;
 }
 .post{
     margin-top: 20px;
@@ -37,6 +36,7 @@
 }
 .postImage > img {
     width: 60%;
+    object-fit: contain;
 }
 .postTopic{
     width: 100%;
@@ -150,6 +150,7 @@
 .comment{
     display: flex;
     flex-direction: column;
+    max-width: 30%;
 }
 
 .commentsList{
