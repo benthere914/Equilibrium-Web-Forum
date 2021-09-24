@@ -28,7 +28,7 @@ window.addEventListener("load", async (event) => {
 			});
 			nodes.forEach((node) => {
 				node.classList.add("toggled");
-				node.style.order = current - 1;
+				node.style.order = 1;
 			});
 			let relevantUrls= [];
 			for (let each of followsTopics){
