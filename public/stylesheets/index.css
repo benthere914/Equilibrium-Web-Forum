@@ -245,8 +245,9 @@ h2 {
 }
 
 .toggled:hover {
-    background-color: rgba(242, 242, 242, 0.733) !important;
-    color: black;
+    background-color:rgba(14, 15, 14, 0.918) !important;
+    color: #eeede6;
+
 }
 
 #topic-display{
