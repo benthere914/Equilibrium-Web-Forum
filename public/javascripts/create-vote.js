@@ -3,10 +3,10 @@ const downvoteButton = document.querySelector(".downvote-button");
 const submitVote = document.querySelector(".submit-vote");
 const voteTotal = document.querySelector(".vote-total");
 
-function toggleLogInModal() {
+toggleLogInModal = () => {
 	logInModal.classList.toggle("show-modal");
 }
-function toggleBlur() {
+toggleBlur = () => {
 	mainBody.classList.toggle("blur");
 }
 

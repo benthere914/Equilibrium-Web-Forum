@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     imgUrl: DataTypes.STRING,
     hashedPassword: DataTypes.STRING
   }, {});
-  User.associate = function(models) {
+  User.associate = (models) => {
     User.hasMany(models.Post, {
       foreignKey: 'userId'
     });

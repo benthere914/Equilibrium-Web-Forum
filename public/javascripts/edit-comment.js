@@ -2,7 +2,7 @@ import {convertTime} from './utils.js'
 let editText = document.querySelectorAll(".comment-edit");
 editText.forEach(e => {e.addEventListener("click",(e) => {editEle(e)})})
 
-async function editEle(e){
+ editEle = async (e) => {
     try {
         let commentId = e.target.parentElement.previousSibling.value;
         let commentDiv = e.target.parentElement.previousSibling.parentElement;
@@ -20,9 +20,9 @@ async function editEle(e){
         cancelButton.innerText = "Back"
         cancelButton.addEventListener('click', e => {updateDiv.parentElement.replaceChild(commentText, updateDiv)})
         updateDiv.append(updateText, updateButton, cancelButton)
-        function updateFromButton(e){update(e.target.previousSibling.value)}
-        function updateFromEnter(e){update(e.target.value)}
-        async function update(comment){
+         updateFromButton = (e) => {update(e.target.previousSibling.value)}
+         updateFromEnter = (e) => {update(e.target.value)}
+         update = async (comment) => {
             let body = {comment}
             const res = await fetch(`/comments/${commentId}`, {
                 method: "Put",

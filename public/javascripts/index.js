@@ -60,13 +60,13 @@ window.addEventListener("load", async (event) => {
 	});
 });
 
-async function getData(url) {
+getData = async (url) => {
 	const response = await fetch(url);
 
 	return response.json();
 }
 
-function toggle(element) {
+ toggle = (element) => {
 	element.classList.add("toggled");
 }
 

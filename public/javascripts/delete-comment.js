@@ -1,7 +1,7 @@
 let deleteText = document.querySelectorAll(".comment-delete");
 deleteText.forEach(e => {e.addEventListener("click",(e) => {deleteEle(e)})})
 
-async function deleteEle(e){
+deleteEle = async (e) => {
     try {
         let commentId = e.target.parentElement.previousSibling.value
         let commentDiv = e.target.parentElement.previousSibling.parentElement;
