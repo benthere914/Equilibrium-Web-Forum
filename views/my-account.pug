@@ -5,6 +5,8 @@ append head
     link(rel="stylesheet" href="/stylesheets/account.css")
     link(rel="stylesheet" href="/stylesheets/deleteModal.css")
     script(src="/javascripts/delete-user.js" type="module")
+    script(src="/javascripts/count-char.js" type="module")
+
 
 
 
@@ -36,7 +38,7 @@ block content
 
             label(for="biography") Bio
             textarea(id="biography", name="biography", value=user.biography)= user.biography
-
+            label(id="charCount")= `${bioLength} / 250`
             label(for="imgUrl") Image Url
             input(type="text", id="imgUrl", name="imgUrl", value= user.imgUrl, autocomplete="off")
 

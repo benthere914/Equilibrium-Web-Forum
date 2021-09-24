@@ -93,7 +93,9 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 
         }
     }
-
+    if (biography.length >= 250){
+        errors.push("Biography is too long. No longer than 250 characters")
+    }
 
     if (password){
         if (!String(oldPassword).trim()){errors.push("Must type current password");}
@@ -114,8 +116,8 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
     if (errors.length){
       return res.render("my-account", {user, errors, csrfToken: req.csrfToken(),loggedIn: res.locals.authenticated})
     }
-    user.biography = biography;
-    user.imgUrl = imgUrl;
+    user.biography = String(biography).trim();
+    user.imgUrl = String(imgUrl).trim();
     user.username= username;
     await user.save()
     res.redirect(`/users/${userId}`);
