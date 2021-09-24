@@ -10,28 +10,21 @@
 
 }
 .profile-body{
-    grid-template-columns: 1fr 0.2fr 5fr 0.2fr 3fr;
-    grid-template-rows: 0.2fr auto;
+    padding-top: 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.3fr 4fr 3fr 1fr;
+    grid-template-rows: 0.2fr 1fr;
+    grid-template-areas:
+    ". userDiv . profile-title . ."
+    " . userDiv . posts topics .";
 }
-.profile{
-	/* display: flex; */
-    padding-top: 10px;
-    width: 40%;
-    margin-left: 20%;
-
-}
-
-div.bioContainer {
-    grid-area: bio;
-    margin-top: 10px;
-
-}
-.bioContainer p {
-    font-size: 0.8em;
-}
-div .bioTitle {
-    font-size: 1em;
-    margin-left: 4px;
+.profile-header{
+	grid-area: userDiv;
+    padding-top: 20px;
+    height: fit-content;
+    padding-right: 10px;
+    border-right: 1px solid lightslategray;
+    border-bottom: 1px solid lightslategray;
 }
 
 .username{
@@ -39,44 +32,39 @@ div .bioTitle {
     top: 120px;
     width:  300px;
 }
-.profile-header img {
-    grid-area: img;
-    object-fit: contain;
-    height: 12em;
+.profile-image img {
+    border-radius: 100px;
+    width: 200px;
+    height: 200px;
 }
-.profile-header {
-    background-color: none;
-    padding-top: 90px;
-    grid-area: header;
-    display: grid;
-    grid-template-columns: 20em 20em;
-    grid-template-rows: 12em 4em 2em;
-    grid-template-areas: "img  bio "
-                        "name  bio "
-                        "edit bio";
-
+.profile-username{
+    font-size: 1.5em;
+    text-align: center;
+    padding-bottom: 10px;
 }
-.profile-header h3 {
-    grid-area: edit;
-    place-self: center start;
-    padding-left: 1em;
-    font-size: 0.8em;
+.profile-title{
+    grid-area: profile-title;
+    width: 100%;
+}
+.bioTitle {
+    font-size: 1.2em;
+    padding-top: 15px;
+    text-decoration: underline;
+}
+.profile-title h2{
+    background-color: white;
+    text-align: left;
+    margin: 0 auto;
+}
+.profile-edit-account{
+    display: flex;
+    justify-content: flex-end;
+    font-style: italic;
+}
+.profile-edit-account:hover{
+    text-decoration: underline;
+    color:mediumblue;
     cursor: pointer;
-}
-.profile-header h3:hover {
-    color: blue;
-}
-.topics-container {
-    display: inline-block;
-    min-width: 400px;
-}
-.profile-body {
-    display: grid;
-    grid-template-columns: 40em 1fr 0.5fr;
-    grid-template-rows: 325px 1fr;
-    grid-template-areas: 'header body topics'
-                            '. body topics';
-
 }
 .posts .blog{
     margin-left: 0px !important;
@@ -85,17 +73,17 @@ div .bioTitle {
     width: 100%;
     margin-bottom: 20px;
 }
-.topics-container {
+.profile-body .topics-container {
     overflow-y: visible !important;
     grid-area: topics;
-    padding-top: 100px;
+    min-width: 200px;
+    width: 100%;
+    margin: 0 auto;
 
 }
 .posts {
-    grid-area: body;
+    grid-area: posts;
     margin-right: 1em;
-    place-self: start start;
-    margin-top: 110px;
 }
 .topics {
     cursor: pointer;

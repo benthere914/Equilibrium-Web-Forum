@@ -9,28 +9,38 @@ block content
     div(class="body-encapsulation")
       .profile-body
         .profile-header
-            h2= user.username
-            if sameUser
-                h3(onclick=`window.location.href='/my-account'`) Edit Account
-            div.bioContainer
-                h4.bioTitle Biography
-                p= user.biography
-            img(src= `${user.imgUrl}`, alt= `Profile picture of ${user.username}`)
+           .profile-image
+             img(src= `${user.imgUrl}`, alt= `Profile picture of ${user.username}`)
+           .profile-username=user.username
+           if sameUser
+             .profile-edit-account
+               h3(onclick=`window.location.href='/my-account'`) Edit Account
+           div.bioContainer
+             h4.bioTitle Biography
+             p= user.biography
+        .profile-title
+          if sameUser
+            h2 Your Posts
+          if (!sameUser)
+            h2 #{user.username}'s Posts
         .posts
-            each post in posts
-              a(href=`/posts/${post.id}` id="blog-card-link")
-                div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`)
-                  div(id="username")= post.User.username
-                    span(id="topic-display")= post.Topic.name
-                  div(id="title")= post.title
-                  - var url = post.imgUrl;
-                  - var urlString = `${url}`;
-                  div(id="blog_img")
-                  img(src=`${urlString}` id="blog_img")
-                  div(id="content") #{post.content}...
-                  div(id="details")
+           each post in posts
+             div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`)
+               div(id="username")
+                 a(href=`/users/${post.User.id}` id="username-link")=post.User.username
+                 span(id="topic-display")= post.Topic.name
+               a(href=`/posts/${post.id}` id="title")
+                 div(id="title")=post.title
+               - var url = post.imgUrl;
+               - var urlString = `${url}`;
+               div(id="blog_img")
+               img(src=`${urlString}` id="blog_img")
+               div(id="content") #{post.content}...
+               div(id="details")
+                 if post.matches
+                   a(href=`/posts/${userId}/edit`) Edit
         if sameUser
             .topics-container
-                h2.topics-title Followed Topics
+                h2.topics-title Your Followed Topics
                 each topic in user.Topics
                     div.topics(id=`topic-${topic.id}-followed`)= topic.name

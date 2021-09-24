@@ -70,15 +70,7 @@ getData = async (url) => {
 	element.classList.add("toggled");
 }
 
-const signUpModalTrigger = document.querySelector("#signUpSplashButton");
-const signUp = document.querySelector(".sign-up-modal");
-
-const mainBodyDiv = document.querySelector(".body-encapsulation");
+const startWriting = document.getElementById("signUp");
+const signUp = document.querySelector(".sign-up-modal-trigger")
 
 
-signUpModalTrigger.addEventListener("click", (ev) => {
-    const clickEvent = new Event("click", { bubbles: true, cancelable: false });
-
-		signUp.dispatchEvent(clickEvent);
-
-});

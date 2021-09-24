@@ -10,9 +10,7 @@ block content
       div.logged-out-banner
         #bigInfo Equilibrium is a place to write, read, and connect
         #smallInfo It's easy and free to post your thoughts on any <b>outdoor related activities</b> and connect with millions of readers.
-        #signUp
-          button(value="Start Writing")#signUpSplashButton Start Writing
-
+        #signUp Sign Up Above to Start Writing
         #splashImg
         include quote.pug
 
@@ -46,3 +44,5 @@ block content
             img(src=`${urlString}` id="blog_img")
             div(id="content") #{post.content}...
             div(id="details")
+              if post.matches
+                a(href=`/posts/${userId}/edit`) Edit

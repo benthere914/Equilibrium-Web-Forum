@@ -1,4 +1,5 @@
 const signUpForm = document.querySelector(".sign-up-form");
+const startWritingForm = document.querySelector(".start-writing-form");
 
 signUpForm.addEventListener("submit", async (e) => {
 	e.preventDefault();
@@ -46,3 +47,5 @@ signUpForm.addEventListener("submit", async (e) => {
 		errorsContainer.innerHTML = errorsHtml.join("");
 	}
 });
+
+
