@@ -150,7 +150,7 @@ h2 {
 	margin: 10px 0 3em 3em;
 	border: 1px solid #c3c1ab;
 	box-shadow: -5px 5px 2px #c3c1ab;
-	order: 9;
+	order: 12;
 	padding: 1em;
 	display: grid;
 	grid-template-columns: 3fr 0.2fr 1.5fr;
