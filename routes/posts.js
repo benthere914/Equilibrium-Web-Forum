@@ -213,7 +213,7 @@ router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
     post = post.dataValues;
     post.Topic = post.Topic.dataValues;
 
-		res.render("editPost", { post, topics });
+		res.render("editPost", { post, topics, loggedIn: res.locals.authenticated, });
 	})
 );
 
