@@ -1,10 +1,10 @@
 
-  
+
 
 window.addEventListener("load", async (event) => {
     document.querySelector(".nav-bar").scrollIntoView();
 
-	let current = 11;
+	let current = 12;
 
 	let loggedIn = false;
 	try {
@@ -25,8 +25,20 @@ window.addEventListener("load", async (event) => {
 			});
 			nodes.forEach((node) => {
 				node.classList.add("toggled");
-				node.style.order = current;
+				node.style.order = current - 1;
 			});
+			let relevantUrls= [];
+			for (let each of followsTopics){
+				relevantUrls.push(`relevant-${each.split('-')[1]}`)
+			}
+				let intiialRelevantNodes = [];
+				console.log(relevantUrls)
+			for (let i = 0; i < relevantUrls.length; i++){
+				let posts = document.querySelectorAll(`.${relevantUrls[i]}`);
+				if (posts.length){
+					posts.forEach(post => post.style.order = current -1);
+				}
+			}
 		}
 	} catch (e) {}
 
@@ -37,10 +49,10 @@ window.addEventListener("load", async (event) => {
 				toggle(e.target);
 				e.target.style.order = 1;
 				let cssId = `relevant-${topicId}`;
+				current--;
 				const relevantPosts = document.querySelectorAll(`.${cssId}`);
 				relevantPosts.forEach((post) => {
 					post.style.order = current;
-					current--;
 				});
 
 				if (loggedIn) {
@@ -57,7 +69,16 @@ window.addEventListener("load", async (event) => {
 						body: JSON.stringify(body),
 					});
 				}
-			}
+			} else if (e.target.classList.contains("toggled")){
+				e.target.classList.remove('toggled');
+				e.target.style.order = 12;
+				if (current < 12) current ++;
+			}let cssId = `relevant-${topicId}`;
+			const relevantPosts = document.querySelectorAll(`.${cssId}`);
+			relevantPosts.forEach((post) => {
+				post.style.order = current;
+			});
+
 		});
 	});
 });
@@ -71,25 +92,4 @@ async function getData(url) {
 function toggle(element) {
 	element.classList.add("toggled");
 }
-
-const signUpModalTrigger = document.querySelector("#signUpSplashButton");
-const signUp = document.querySelector(".sign-up-modal");
-
-const mainBodyDiv = document.querySelector(".body-encapsulation");
-
-
-signUpModalTrigger.addEventListener("click", (ev) => {
-    const clickEvent = new Event("click", { bubbles: true, cancelable: false });
-
-		//call event on element
-		signUp.dispatchEvent(clickEvent);
-	// mainBodyDiv.addEventListener(
-	// 	"click",
-	// 	(ev) => {
-	// 		ev.preventDefault();
-	// 		signUp.classList.toggle("show-modal");
-	// 		mainBodyDiv.classList.toggle("blur");
-	// 	},
-	// 	{ once: true }
-	// );
-});
+;
