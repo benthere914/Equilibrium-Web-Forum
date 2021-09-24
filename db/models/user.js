@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     imgUrl: DataTypes.STRING,
     hashedPassword: DataTypes.STRING
   }, {});
-  User.associate = function(models) {
+  User.associate = (models) => {
     User.hasMany(models.Post, {
       foreignKey: 'userId'
     });
@@ -22,14 +22,12 @@ module.exports = (sequelize, DataTypes) => {
 			foreignKey: "userId",
 		});
     const columnMappingOne = {
-			// User -> User, through UserFollow as follower
 			through: "UserFollow",
 			otherKey: "followId",
 			foreignKey: "userId",
 			as: "followings",
 		};
 		const columnMappingTwo = {
-			// User -> User, through UserFollow as following
 			through: "UserFollow",
 			otherKey: "userId",
 			foreignKey: "followId",

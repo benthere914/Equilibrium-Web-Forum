@@ -28,7 +28,6 @@ logInForm.addEventListener("submit", async (e) => {
 		const errorsContainer = document.querySelector(".log-in-errors-container");
 
 		const { error } = errorJSON;
-		console.log(error);
 		let errorsHtml;
 		if (error && Array.isArray(error)) {
 			errorsHtml = error.map(

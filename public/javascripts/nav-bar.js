@@ -1,5 +1,5 @@
 let loggedIn = false;
-async function getData(url) {
+ getData = async (url) => {
 	const response = await fetch(url);
 
 	return response.json();
@@ -13,7 +13,6 @@ window.addEventListener('load', async (ev) => {
             loggedIn = true;
         }
     }catch (e){
-        console.log(e);
     }
 
 
@@ -29,15 +28,15 @@ const logInModalTrigger = document.querySelector(".log-in-modal-trigger");
 const logInModal = document.querySelector(".log-in-modal");
 const mainBody = document.querySelector(".body-encapsulation");
 
-function toggleSignUpModal() {
+ toggleSignUpModal = () => {
     signUpModal.classList.toggle("show-modal");
 }
 
-function toggleLogInModal() {
+ toggleLogInModal = () => {
 	logInModal.classList.toggle("show-modal");
 }
 
-function toggleBlur() {
+ toggleBlur = () => {
     mainBody.classList.toggle("blur");
 }
 

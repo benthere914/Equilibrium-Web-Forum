@@ -1,4 +1,4 @@
-const asyncHandler = (handler) => (req, res, next) =>handler(req, res, next).catch(next);
+const asyncHandler = (handler) => (req, res, next) => handler(req, res, next).catch(next);
 const {check, validationResult} = require('express-validator');
 
 const handleValidationErrors = (req, res, next) => {
@@ -19,8 +19,7 @@ const handleValidationErrors = (req, res, next) => {
   const csrf = require('csurf');
   const csrfProtection = csrf({ cookie: true });
 
-  function convertTime(number, format){
-    console.log(number)
+convertTime = (number, format) => {
       number = Number(number);
       if (Number.isNaN(number)){return null}
       if (format === "date"){
@@ -56,6 +55,6 @@ const handleValidationErrors = (req, res, next) => {
         if (number <= 11 || number === 24){return `AM`}
         if (number >= 12){return `PM`}
       }
-  }
+  };
 
   module.exports = {asyncHandler, handleValidationErrors, check, validationResult, bcrypt, csrfProtection, convertTime}

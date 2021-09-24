@@ -112,7 +112,7 @@ h2 {
 	padding-left: 1em;
 }
 .social a[href*="github"]::after {
-	content: url("./github-logo.png");
+	content: url("../images/github-logo.png");
 	margin-left: 1em;
 	display: inline-block;
 }
@@ -125,7 +125,7 @@ h2 {
 	width: 15%;
 }
 .social a[href*="link"]::before {
-	content: url("./linkedin.png");
+	content: url("../images/linkedin.png");
 	padding-left: 1em;
 }
 .ben,

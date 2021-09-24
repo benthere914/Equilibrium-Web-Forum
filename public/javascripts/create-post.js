@@ -30,6 +30,6 @@ createPostForm.addEventListener("submit", async (e) => {
         window.location.href = `/posts/${post.id}`;
 	} catch (err) {
 		const errorJSON = await err.json();
-		console.log(errorJSON)
+        
 	}
 });
