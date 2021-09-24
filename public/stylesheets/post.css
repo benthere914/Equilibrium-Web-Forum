@@ -20,6 +20,7 @@
 .author .authorImage img{
     width: 200px;
     border-radius: 100px;
+    object-fit: contain;
 }
 .post{
     margin-top: 20px;
