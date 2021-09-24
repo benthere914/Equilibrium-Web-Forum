@@ -86,13 +86,13 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
     if (user.username === 'John Doe') {
         errors.push('This user cannot be edited.');
     }
-    if (!username) {
+    if (!(String(username).trim())) {
         errors.push('User Name can not be empty');
     }
-    if (!biography) {
+    if (!(String(biography).trim())) {
         errors.push('Biography cannot be empty');
     }
-    if (!imgUrl) {
+    if (!(String(imgUrl).trim())) {
         errors.push('Image Url cannot be empty');
     }
     if (username !== user.username) {
@@ -102,16 +102,10 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 
         }
     }
-    // if (oldPassword.length) {
-    //   const passwordMatches = await bcrypt.compare(oldPassword, user.hashedPassword.toString());
-    //   if (!passwordMatches) {
 
-    //     errors.push(`Incorrect password`);
-
-    //   } errors.push(validationErrors.array().map(err => err.msg));
-
-
-
+    if (biography.length >= 250){
+        errors.push("Biography is too long. No longer than 250 characters")
+    }
 
 
     if (password){
@@ -133,8 +127,8 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
     if (errors.length){
       return res.render("my-account", {user, errors, csrfToken: req.csrfToken(),loggedIn: res.locals.authenticated})
     }
-    user.biography = biography;
-    user.imgUrl = imgUrl;
+    user.biography = String(biography).trim();
+    user.imgUrl = String(imgUrl).trim();
     user.username= username;
     await user.save()
 
