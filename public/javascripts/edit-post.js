@@ -15,7 +15,6 @@ createPostForm.addEventListener("submit", async (e) => {
 	const body = { userId, topicId, title, content, imgUrl};
 
 	try {
-        console.log(imgUrl)
 		const res = await fetch(`/posts/${postId}/edit`, {
 			method: "PUT",
 			body: JSON.stringify(body),
@@ -30,11 +29,9 @@ createPostForm.addEventListener("submit", async (e) => {
 		}
         window.location.href = `/posts/${postId}`;
 	} catch (err) {
-		console.log(err)
 	}
 });
 
-//handler to delete a post that belongs to the user
 const deleteButton = document.querySelector('#delete-post-button');
 
 deleteButton.addEventListener('click', async (e)=> {
@@ -46,7 +43,6 @@ deleteButton.addEventListener('click', async (e)=> {
 
 	let confirmed = confirm(`Are you sure you want to delete?`);
 	if (confirmed) {
-		console.log(postId)
 		try{
 			fetch(`/posts/${postId}/delete`, {
 				 method: "DELETE",
@@ -57,7 +53,6 @@ deleteButton.addEventListener('click', async (e)=> {
 			 throw res;
 		 }
 		}catch(e){
-			console.log(e);
 		}
 		window.location.href = "/";
 	}

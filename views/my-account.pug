@@ -1,24 +1,24 @@
 extends layout
 
 append head
-    //- add page specific styles by appending to the head
     link(rel="stylesheet" href="/stylesheets/index.css")
     link(rel="stylesheet" href="/stylesheets/account.css")
     link(rel="stylesheet" href="/stylesheets/deleteModal.css")
     script(src="/javascripts/delete-user.js" type="module")
 
 
-    //- add page specific js
-    //- script(src="/javascripts/index.js" type="module" defer)
+
 block content
     .mainContent
-        h1(class= "userName")= user.username
+        .author
+            h1(class= "userName")= user.username
+            .profileImg
+                img(src= user.imgUrl, alt= `photo of ${user.username}`)
+            button.deleteAccount Delete Account
         if errors
-            .errorsContainer
-                each error in errors
-                    div.errorMsg= error
-        .profileImg
-            img(src= user.imgUrl, alt= `photo of ${user.username}`)
+                .errorsContainer
+                    each error in errors
+                        div.errorMsg= error
         form(class="accountEditForm" action=`/users/${user.id}/edit` method="POST")
             input(type="hidden" name='_csrf' value=csrfToken)
             input(type="hidden" name='userId' value=user.id)
@@ -44,4 +44,3 @@ block content
                 button.submitEditForm() Submit
 
                 span.goBackButton(onclick=`window.location.href='/users/${user.id}'`) Back
-        button.deleteAccount Delete Account

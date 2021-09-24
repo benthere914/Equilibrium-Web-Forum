@@ -8,7 +8,7 @@ const { logoutUser } = require('../auth');
 const {User, Post, Topic, TopicFollow, UserFollow, Vote, Comment} = db;
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   res.send('respond with a resource');
 });
 
@@ -66,22 +66,31 @@ check('password')
             throw new Error('Confirm Password does not match Password');
         }
         return true;
-        })];
+        }).withMessage('Confirm Password does not match Password')];
 
 router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandler((async(req, res)=>{
   const {username, oldPassword, password, confirmPassword, biography, imgUrl} = req.body;
-    // console.log( "Yesssss", userId);
     let userId = req.session.auth.userId;
     const errors = [];
     const validationErrors = validationResult(req);
     const user = await User.findByPk(userId);
-
+    if (user.username === 'John Doe') {
+        errors.push('This user cannot be edited.');
+    }
+    if (!username) {
+        errors.push('User Name can not be empty');
+    }
+    if (!biography) {
+        errors.push('Biography cannot be empty');
+    }
+    if (!imgUrl) {
+        errors.push('Image Url cannot be empty');
+    }
     if (username !== user.username) {
       let userToCheck = await User.findOne({where: {username}});
         if (userToCheck !== null){
           errors.push(`Name already in use`);
-          console.log(errors)
-          // return res.render("my-account", {user, errors, csrfToken: req.csrfToken()});
+
         }
     }
     if (oldPassword.length) {
@@ -90,13 +99,27 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 
         errors.push(`Incorrect password`);
 
-        // return res.render("my-account", {user,errors, csrfToken: req.csrfToken()})
       } errors.push(validationErrors.array().map(err => err.msg));
 
+
+        }
+    
+
+
+    if (password){
+        if (!String(oldPassword).trim()){errors.push("Must type current password");}
+        if (!String(confirmPassword).trim()){errors.push("Must type confirmation password")}
+        if (!String(password).trim()){errors.push("new password cannot contain spaces")}
+        if (password !== String(password).trim()){errors.push("new password cannot contain spaces")}
+        if (oldPassword){
+            const passwordMatches = await bcrypt.compare(oldPassword, user.hashedPassword.toString());
+            if (!passwordMatches) {errors.push(`Incorrect password`);}
+            let validatorErrors = validationErrors.array().map(err => err.msg);
+            if (validatorErrors.length){errors.push(validatorErrors)}
+        }
     }
-    console.log(errors);
     if (errors.length){
-      return res.render("my-account", {user, errors, csrfToken: req.csrfToken()})
+      return res.render("my-account", {user, errors, csrfToken: req.csrfToken(),loggedIn: res.locals.authenticated})
     }
     const newHashedPassword = await bcrypt.hash(password, 10);
     await user.update({hashedPassword: newHashedPassword, username, biography, imgUrl})
@@ -116,20 +139,6 @@ router.delete('/:id(\\d+)', asyncHandler(async (req, res)=>{
     let passwordMatches = await bcrypt.compare(req.body.password, user.hashedPassword.toString());
     if (passwordMatches){
         try {
-                //grabs all posts made by user
-                    //grabs all comments on each post
-                        //deletes each comment
-                    //grabs all votes on each post
-                        //deletes each vote
-                    //deletes each post
-                //grabs all comments made by user
-                    //deletes each comment
-                //grabs all votes made by user
-                    //deletes each vote
-                //grabs all userfollows where user is following
-                    //deletes each follow
-                //grabs all userfollows where user is followed
-                    //deletes each follow
                 let posts = await Post.findAll({where: {userId}})
                 posts.forEach(async post => {
                     let comments = await Comment.findAll({where: {postId: post.dataValues.id}})

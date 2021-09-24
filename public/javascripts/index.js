@@ -1,6 +1,9 @@
 
 
+
 window.addEventListener("load", async (event) => {
+    document.querySelector(".nav-bar").scrollIntoView();
+
 	let current = 11;
 
 	let loggedIn = false;
@@ -46,8 +49,6 @@ window.addEventListener("load", async (event) => {
 						userId: userId.userId,
 						topicId: parseInt(topicId, 10),
 					};
-					console.log(body);
-					//this line creates a follow between a user and a topic
 					let res = await fetch("/follows/topics", {
 						method: "POST",
 						headers: { "Content-Type": "application/json" },
@@ -59,19 +60,17 @@ window.addEventListener("load", async (event) => {
 	});
 });
 
-async function getData(url) {
+getData = async (url) => {
 	const response = await fetch(url);
 
 	return response.json();
 }
 
-function toggle(element) {
+ toggle = (element) => {
 	element.classList.add("toggled");
 }
 
 const startWriting = document.getElementById("signUp");
 const signUp = document.querySelector(".sign-up-modal-trigger")
 
-startWriting.onclick = () => {
-	signUp.click();
-}
+

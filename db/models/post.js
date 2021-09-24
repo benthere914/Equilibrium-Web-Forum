@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.TEXT,
     imgUrl: DataTypes.TEXT
   }, {});
-  Post.associate = function(models) {
+  Post.associate = (models) => {
     Post.belongsTo(models.User, {
       foreignKey: 'userId',
       onDelete: "CASCADE"
