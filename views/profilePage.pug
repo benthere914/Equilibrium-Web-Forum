@@ -45,4 +45,4 @@ block content
             .topics-container
                 h2.topics-title Your Followed Topics
                 each topic in user.Topics
-                    div.topics(id=`topic-${topic.id}-followed`)= topic.name
+                    div.topics.toggled(id=`topic-${topic.id}-followed`)= topic.name
