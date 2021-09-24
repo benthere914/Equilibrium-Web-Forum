@@ -149,4 +149,8 @@ router.get('/my-account',csrfProtection, restoreUser, asyncHandler(async (req, r
     user = user.dataValues;
     res.render('my-account', {user, loggedIn: res.locals.authenticated, csrfToken: req.csrfToken()})
 }))
+
+router.get('/404', (req, res) => {
+    res.render('404Error')
+})
 module.exports = {router};
