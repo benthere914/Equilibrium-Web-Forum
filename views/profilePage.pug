@@ -18,15 +18,17 @@ block content
             img(src= `${user.imgUrl}`, alt= `Profile picture of ${user.username}`)
         .posts
             each post in posts
-                div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`  onclick=`window.location.href='/posts/${post.id}'`)
-                    h4= user.username
-                    h3= post.title
-                    - var url = post.imgUrl;
-                    - var urlString = `url(${url})`;
-                    div(style={'background-image': `${urlString}`})
-                    p #{post.content}...
-                    if sameUser
-                        a(href=`/posts/${user.id}/edit`) Edit
+              a(href=`/posts/${post.id}` id="blog-card-link")
+                div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`)
+                  div(id="username")= post.User.username
+                    span(id="topic-display")= post.Topic.name
+                  div(id="title")= post.title
+                  - var url = post.imgUrl;
+                  - var urlString = `${url}`;
+                  div(id="blog_img")
+                  img(src=`${urlString}` id="blog_img")
+                  div(id="content") #{post.content}...
+                  div(id="details")
         if sameUser
             .topics-container
                 h2.topics-title Followed Topics
