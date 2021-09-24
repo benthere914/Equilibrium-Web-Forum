@@ -4,6 +4,7 @@ const { asyncHandler, csrfProtection, bcrypt, check } = require('../utils');
 const {userEditValidators } = require('./index.js')
 var router = express.Router();
 const db = require('../db/models');
+const { logoutUser } = require('../auth');
 const {User, Post, Topic, TopicFollow} = db;
 
 /* GET users listing. */
@@ -99,10 +100,15 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 router.delete('/:id(\\d+)', asyncHandler(async (req, res)=>{
     let userId;
     if (req.session.auth){userId = req.session.auth.userId;}
-    if (!userId || userId !== req.params.id){return res.json({"message": "Permission Denied"}).status(403)}
+    if (!userId || String(userId) !== String(req.params.id)){return res.json({error: "Permission Denied"}).status(403)}
     let user = await User.findByPk(req.params.id);
-    if (!user){return res.json({"message": "Permission Denied"}).status(403)}
-    await user.destroy();
+    if (!user){return res.json({error: "Permission Denied"}).status(403)}
+    let passwordMatches = await bcrypt.compare(req.body.password, user.hashedPassword.toString());
+    if (passwordMatches){
+        logoutUser(req, res);
+        await user.destroy();
+        return res.json({message: "Successfully Deleted"})}
+    else {res.json({error: "Invalid Password"})};
 }))
 
 module.exports = router;

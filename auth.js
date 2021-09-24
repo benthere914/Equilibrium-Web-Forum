@@ -13,7 +13,6 @@ const logoutUser = (req, res) => {
 const restoreUser = async (req, res, next) => {
   // Log the session object to the console
   // to assist with debugging.
-  console.log(req.session);
 
   if (req.session.auth) {
     const { userId } = req.session.auth;
@@ -25,7 +24,7 @@ const restoreUser = async (req, res, next) => {
         res.locals.authenticated = true;
 
         console.log(res.locals)
-        
+
         res.locals.user = user;
         next();
       }
