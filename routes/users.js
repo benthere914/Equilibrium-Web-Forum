@@ -96,7 +96,7 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 
 
         }
-    }
+    
 
 
     if (password){
