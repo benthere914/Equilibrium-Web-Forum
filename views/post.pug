@@ -19,6 +19,8 @@ block content
                     img(src= author.imgUrl alt= `Profile Picture for ${author.username}`)
                 .authorBio= author.biography
             .post
+                .postTopic
+                  span(id="topic-display-post")= post.Topic.name
                 .postTitle
                     .postTitleContent= post.title
                     form(class="submit-vote")
@@ -61,4 +63,3 @@ block content
                                     p(class="comment-delete") Delete
                             p(class="comment-content")= comment.comment
                             p(class="comment-date")= comment.date
-    
