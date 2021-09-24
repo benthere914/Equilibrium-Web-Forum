@@ -10,10 +10,12 @@ block content
   div.body-encapsulation
     if (!userId)
       div.logged-out-banner
-        div#bigInfo Equilibrium is a place to write, read, and connect
-        div#smallInfo It's easy and free to post your thoughts on any <b>outdoor related activities</b> and connect with millions of readers.
-        div#signUp
+        #bigInfo Equilibrium is a place to write, read, and connect
+        #smallInfo It's easy and free to post your thoughts on any <b>outdoor related activities</b> and connect with millions of readers.
+        #signUp
           button(value="Start Writing")#signUpSplashButton Start Writing
+        #splashImg
+          img(src="/images/SplashImg.png")
     div.main-body
       div.topics-container
         h2.topics-title Recommended Topics
@@ -32,14 +34,15 @@ block content
               a.linkedIn(href="https://www.linkedin.com/in/shaquilleoneal/")
       div.blogs-container
         each post in posts
-            a(href=`/posts/${post.id}` id="blog-card-link")
-              div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`)
-                div(id="username")= post.User.username
-                  span(id="topic-display")= post.Topic.name
-                div(id="title")= post.title
-                - var url = post.imgUrl;
-                - var urlString = `${url}`;
-                div(id="blog_img")
-                img(src=`${urlString}` id="blog_img")
-                div(id="content") #{post.content}...
-                div(id="details")
+          div.blog(id=`post-${post.id}` class=`relevant-${post.topicId}`)
+            div(id="username")
+              a(href=`/users/${post.User.id}` id="username-link")=post.User.username
+              span(id="topic-display")= post.Topic.name
+            a(href=`/posts/${post.id}` id="title")
+              div(id="title")=post.title
+            - var url = post.imgUrl;
+            - var urlString = `${url}`;
+            div(id="blog_img")
+            img(src=`${urlString}` id="blog_img")
+            div(id="content") #{post.content}...
+            div(id="details")

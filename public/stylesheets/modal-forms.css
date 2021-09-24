@@ -27,5 +27,8 @@ h2{
 }
 .err_msg li{
     font-weight: 800;
+    padding:2px;
+    margin:0;
+    font-size: 0.7em;
     color: black;
 }

@@ -1,18 +1,7 @@
-// const divCards = document.querySelectorAll(".blog");
 
-// function cardLink (ev) {
-//     const postIdString = ev.currentTarget.id;
-// 	const postId = postIdString.replace(/^\D+/g, "");
-// 	window.location.href = `/posts/${postId}`;
-// }
-
-// divCards.forEach(card => {
-// card.addEventListener("click", cardLink);
-// })
 
 window.addEventListener("load", async (event) => {
-	let current = 8;
-
+	let current = 11;
 	let loggedIn = false;
 	try {
 		let userId = await getData("/users/userid");
@@ -78,3 +67,25 @@ async function getData(url) {
 function toggle(element) {
 	element.classList.add("toggled");
 }
+
+const signUpModalTrigger = document.querySelector("#signUpSplashButton");
+const signUp = document.querySelector(".sign-up-modal");
+
+const mainBodyDiv = document.querySelector(".body-encapsulation");
+
+
+signUpModalTrigger.addEventListener("click", (ev) => {
+    const clickEvent = new Event("click", { bubbles: true, cancelable: false });
+
+		//call event on element
+		signUp.dispatchEvent(clickEvent);
+	// mainBodyDiv.addEventListener(
+	// 	"click",
+	// 	(ev) => {
+	// 		ev.preventDefault();
+	// 		signUp.classList.toggle("show-modal");
+	// 		mainBodyDiv.classList.toggle("blur");
+	// 	},
+	// 	{ once: true }
+	// );
+});
