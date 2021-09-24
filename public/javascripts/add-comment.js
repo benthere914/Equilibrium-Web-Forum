@@ -12,11 +12,7 @@ addComment.addEventListener('submit', async (e) => {
 	e.preventDefault();
 	const formData = new FormData(addComment);
 	const comment = formData.get('comment');
-	const userId = formData.get("userId");
-	if (userId === "null"){
-		toggleLogInModal();
-		toggleBlur();
-	} else {
+
 	const content = { comment };
 	let obj;
     let id;
@@ -91,4 +87,4 @@ addComment.addEventListener('submit', async (e) => {
     newComment.firstChild.nextSibling.firstChild.nextSibling.addEventListener("click", (e) => {editEle(e)})
     document.querySelector(".commentTextBox").value = ""
 
-}});
+});
