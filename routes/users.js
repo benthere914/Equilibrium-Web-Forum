@@ -34,6 +34,15 @@ router.get("/:id(\\d+)", csrfProtection, asyncHandler( async (req, res) => {
 			posts = posts.map((e) => {
 				e = e.dataValues;
 				e.content = e.content.slice(0, 100, "...");
+        if (e.title.length > 50) {
+            while(e.title.length > 50){
+                e.title = e.title.split(" ");
+                e.title = e.title.slice(0, e.title.length-1)
+                e.title = e.title.join(' ');
+            }
+
+            e.title += "...";
+        };
 				if (req.session.auth) {
 					if (req.session.auth.userId) {
 						e.matches = (e.User.id === req.session.auth.userId);
