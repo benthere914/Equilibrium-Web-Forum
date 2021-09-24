@@ -1,17 +1,37 @@
 h1.userName {
-    padding-top: 100px;
+    padding: 115px 0 20px 20px;
+    place-self: start start;
+
 }
 
+.mainContent {
+    display: grid;
+    grid-template-columns: 15em 25em 1fr 1fr 0.2fr;
+    grid-template-rows: 20em 1fr;
+    grid-template-areas: "name image form  errors ."
+                        "button . form errors . ";
+
+}
 .accountEditForm  {
     display: flex;
     flex-direction: column;
     background-color: #B08666;
     max-width: 60%;
-    margin: 20px auto;
+    min-width: 30em;
+
     padding: 2em 1em;
     position: relative;
+    grid-area: form;
+    margin-top: 100px;
+    place-self: center start;
+
+
 }
 
+.profileImg {
+    display: inline-block;
+    padding-top: 105px;
+}
 .accountEditForm input,textarea{
     margin-left: 5px;
     color: black;
@@ -54,9 +74,27 @@ h1.userName {
 .errorsContainer {
  background-color: black;
  padding: 10px 5px;
+ grid-area: errors;
+ margin: 100px 2px 0px 2px;
+ max-height: 30%;
+ max-width: 500px;
+ overflow: hidden;
+
+
 }
 .errorsContainer div {
     color: red;
+}
+.deleteAccount {
+    box-sizing: border-box;
+    padding: 0.6em 1.3em;
+    align-self: center;
+    background-color: #f51010;
+    grid-area: button;
+    font-size: 1em;
+    font-weight: 700;
+    margin: 5px 3px 0 5px;
+    place-self: start start;
 }
 /* .mainContent{
     display: flex;
