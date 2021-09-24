@@ -14,7 +14,8 @@ module.exports = {
         {name: "Boating", createdAt: new Date(), updatedAt: new Date()},
         {name: "Bird Watching", createdAt: new Date(), updatedAt: new Date()},
         {name: "Kayaking", createdAt: new Date(), updatedAt: new Date()},
-        {name: "Horseback Riding", createdAt: new Date(), updatedAt: new Date()}
+        {name: "Horseback Riding", createdAt: new Date(), updatedAt: new Date()},
+        {name: "Wildlife", createdAt: new Date(), updatedAt: new Date()}
       ], {});
   },
 
