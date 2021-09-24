@@ -3,13 +3,6 @@ const downvoteButton = document.querySelector(".downvote-button");
 const submitVote = document.querySelector(".submit-vote");
 const voteTotal = document.querySelector(".vote-total");
 
-toggleLogInModal = () => {
-	logInModal.classList.toggle("show-modal");
-}
-toggleBlur = () => {
-	mainBody.classList.toggle("blur");
-}
-
 upvoteButton.addEventListener("click", async (e) => {
 	const formData = new FormData(submitVote);
 	const postId = formData.get("postId");

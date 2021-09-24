@@ -60,17 +60,12 @@ window.addEventListener("load", async (event) => {
 	});
 });
 
-getData = async (url) => {
+let getData = async (url) => {
 	const response = await fetch(url);
 
 	return response.json();
 }
 
- toggle = (element) => {
+ let toggle = (element) => {
 	element.classList.add("toggled");
 }
-
-const startWriting = document.getElementById("signUp");
-const signUp = document.querySelector(".sign-up-modal-trigger")
-
-
