@@ -49,6 +49,7 @@ li {
 	display: flex;
 	flex-direction: row-reverse;
 	padding-top: 100px;
+    padding-bottom: 50px;
 }
 .topics-container {
 	margin-left: auto;
