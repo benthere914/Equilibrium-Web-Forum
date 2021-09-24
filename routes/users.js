@@ -117,7 +117,7 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
             let validatorErrors = validationErrors.array().map(err => err.msg);
             if (validatorErrors.length){errors.push(validatorErrors)}
         }
-        if (!errors){
+        if (!errors.length){
             const newHashedPassword = await bcrypt.hash(password, 10);
             await user.update({hashedPassword: newHashedPassword, username, biography, imgUrl})
         }
@@ -125,7 +125,7 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
     if (errors.length){
       return res.render("my-account", {user, errors, csrfToken: req.csrfToken(),loggedIn: res.locals.authenticated})
     }
-    
+
     res.redirect(`/users/${userId}`);
 
 })));
