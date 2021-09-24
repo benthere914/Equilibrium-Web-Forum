@@ -18,7 +18,10 @@ window.addEventListener("load", async (event) => {
 			followsTopics = followsTopics.map((each) => {
 				return `topic-${each.topicId}`;
 			});
-
+			let allTopics = document.querySelectorAll(".topics-only .topics");
+			allTopics.forEach(topic => {
+				topic.classList.add("loggedIn");
+			})
 			let nodes = [];
 			followsTopics.forEach((x) => {
 				nodes.push(document.getElementById(`${x}`));

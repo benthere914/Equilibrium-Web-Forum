@@ -91,16 +91,16 @@
 }
 
 .topics:hover::after{
-    content: "Unfollow?";
+    content: "Unfollow?" !important;
     position: absolute;
-    width: 100px;
-    height:40px;
-    left: 0px;
-    top: -50px;
+    width: 90px !important;
+    height:35px !important;
+    left: 0px !important;
+    top: -50px !important;
     background-color: black;
     color: white;
-    padding: 10px 15px 2px 15px;
-    border-radius: 17px;
+    padding: 10px 10px 0px 10px !important;
+    border-radius: 17px !important;
 
     text-align: center;
 
@@ -117,5 +117,5 @@
     border-top: 10px solid black;
     border-bottom: 10px solid transparent;
     right: 40%;
-    bottom: 33px;
+    bottom: 39px !important;
 }
