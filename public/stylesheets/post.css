@@ -15,9 +15,11 @@
     align-items: flex-start;
     width: 300px;
     height: min-content;
+    border-right: 1px solid lightslategray;
 }
 .author .authorImage img{
     width: 200px;
+    border-radius: 100px;
 }
 .post{
     margin-top: 20px;
