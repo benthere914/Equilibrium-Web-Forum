@@ -27,7 +27,7 @@ router.delete("/:id(\\d+)", asyncHandler(async (req, res)=> {
     if (currentComment.userId !== userId){err = 'Permission Denied'}
     if (currentComment && !err){
         currentComment.destroy();
-        return res.json({"message": "successfully Destroyed"})
+        return res.json({"message": "Successfully Destroyed"})
     }else{
         return res.json({"message": "Permission Denied"}).status(403)
     }

@@ -23,7 +23,7 @@ router.get("/userid", (req, res) => {
     res.json({userId: NaN})
   });
 
-router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
+router.get("/:id(\\d+)", csrfProtection, asyncHandler( async (req, res) => {
     let userId;
     if (req.session.auth){userId = req.session.auth.userId}
     else {userId = NaN}
@@ -45,7 +45,7 @@ router.get("/:id(\\d+)",asyncHandler( async (req, res) => {
         const sameUser = (Number(req.params.id) === Number(userId));
 
 
-    res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated, userId});
+    res.render('profilePage', {user, posts, sameUser, loggedIn: res.locals.authenticated, userId, csrfToken: req.csrfToken()});
 }))
 
 const passWordValidators = [
@@ -103,7 +103,7 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 
 
         }
-    
+
 
 
     if (password){
@@ -121,6 +121,7 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
     if (errors.length){
       return res.render("my-account", {user, errors, csrfToken: req.csrfToken(),loggedIn: res.locals.authenticated})
     }
+  
     const newHashedPassword = await bcrypt.hash(password, 10);
     await user.update({hashedPassword: newHashedPassword, username, biography, imgUrl})
     res.redirect(`/users/${userId}`);
