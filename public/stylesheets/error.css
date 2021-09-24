@@ -1,0 +1,15 @@
+.ErrorContent{
+    position: relative;
+    top: 200px;
+    left: 27%;
+    width:  45%;
+    text-align: center;
+}
+button{
+    position: relative;
+    left: 850px;
+    top: 300px;
+    width: 200px;
+    height: 55px;
+    border-radius: 5%;
+}
