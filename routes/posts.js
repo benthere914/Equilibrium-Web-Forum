@@ -204,6 +204,11 @@ router.post(
 	}));
 
 router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
+    let userId;
+    if (req.session.auth){
+        userId = req.session.auth.userId;
+    }
+    if (!userId){return res.redirect('/404')}
     let post = await Post.findOne({where: {id: req.params.id}, include: {model: Topic}});
     let topics = await Topic.findAll();
 		if (topics == null || post == null){
@@ -212,8 +217,11 @@ router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
     topics = topics.map(e => e.dataValues)
     post = post.dataValues;
     post.Topic = post.Topic.dataValues;
+    if (post.userId !== userId){
+        return res.redirect('/404')
+    }
 
-		res.render("editPost", { post, topics });
+		res.render("editPost", { post, topics, loggedIn: res.locals.authenticated, });
 	})
 );
 
