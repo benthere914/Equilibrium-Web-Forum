@@ -19,6 +19,9 @@ window.addEventListener('load', async (ev) => {
 
 });
 
+
+
+
 if (!loggedIn){
 const signUpModalTrigger = document.querySelector(".sign-up-modal-trigger");
 const signUpModal = document.querySelector(".sign-up-modal");
