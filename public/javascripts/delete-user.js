@@ -20,11 +20,11 @@ function confirmDelete(e){
 
     async function verifyPassword(e){
         let userId;
-        let deleted;
         try {
             let response = await fetch('/users/userid');
             userId = await response.json();
             userId = userId.userId;
+            console.log(userId)
             if (!userId){throw new Error("not logged in")}
             let body = {password: passwordBox.value};
             const res = await fetch(`/users/${userId}`, {
