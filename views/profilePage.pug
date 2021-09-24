@@ -40,7 +40,7 @@ block content
                 a(href=`/posts/${post.id}`) #{post.content}...
               div(id="details")
                 if post.matches
-                  a(href=`/posts/${userId}/edit`) Edit
+                  a(href=`/posts/${post.id}/edit`) Edit
         if sameUser
             .topics-container
                 h2.topics-title Your Followed Topics
