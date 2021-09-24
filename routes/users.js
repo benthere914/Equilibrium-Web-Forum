@@ -93,16 +93,15 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
 
         }
     }
-    if (oldPassword.length) {
-      const passwordMatches = await bcrypt.compare(oldPassword, user.hashedPassword.toString());
-      if (!passwordMatches) {
+    // if (oldPassword.length) {
+    //   const passwordMatches = await bcrypt.compare(oldPassword, user.hashedPassword.toString());
+    //   if (!passwordMatches) {
 
-        errors.push(`Incorrect password`);
+    //     errors.push(`Incorrect password`);
 
-      } errors.push(validationErrors.array().map(err => err.msg));
+    //   } errors.push(validationErrors.array().map(err => err.msg));
 
 
-        }
 
 
 
@@ -117,13 +116,19 @@ router.post('/:userId(\\d+)/edit',csrfProtection, passWordValidators, asyncHandl
             let validatorErrors = validationErrors.array().map(err => err.msg);
             if (validatorErrors.length){errors.push(validatorErrors)}
         }
+        if (!errors.length){
+            const newHashedPassword = await bcrypt.hash(password, 10);
+            await user.update({hashedPassword: newHashedPassword, username, biography, imgUrl})
+        }
     }
     if (errors.length){
       return res.render("my-account", {user, errors, csrfToken: req.csrfToken(),loggedIn: res.locals.authenticated})
     }
-  
-    const newHashedPassword = await bcrypt.hash(password, 10);
-    await user.update({hashedPassword: newHashedPassword, username, biography, imgUrl})
+    user.biography = biography;
+    user.imgUrl = imgUrl;
+    user.username= username;
+    await user.save()
+
     res.redirect(`/users/${userId}`);
 
 })));
