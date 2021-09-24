@@ -63,7 +63,16 @@ router.get('/', csrfProtection, restoreUser, asyncHandler(async (req, res, next)
     });
     posts = posts.map(e => {
         e = e.dataValues
-        e.content = e.content.slice(0, 100, '...');
+        e.content = e.content.slice(0, 100);
+        if (e.title.length > 50) {
+            while(e.title.length > 50){
+                e.title = e.title.split(" ");
+                e.title = e.title.slice(0, e.title.length-1)
+                e.title = e.title.join(' ');
+            }
+
+            e.title += "...";
+        };
         let userId
         if (req.session.auth){
             if (req.session.auth.userId){
