@@ -68,12 +68,13 @@ h2 {
 }
 .topics-title {
 	font-size: 1em;
+    background-image: linear-gradient(to left, white, #b08666, rgb(75, 47, 11));
 }
 
 .topics-container div[id^="topic"] {
 	display: inline-block;
 	padding: 1.5em 1em;
-	border-radius: 100%;
+	border-radius: 25px;
 	margin: 2px;
 	order: 12;
 	background-color: rgba(242, 242, 242, 0.733);
@@ -101,7 +102,7 @@ h2 {
 }
 .social::before {
 	content: "Created By";
-	background-color: #b08666;
+    background-image: linear-gradient(to left, white, #b08666, rgb(87, 56, 16));
 	color: white;
 	margin-bottom: 5px;
 	width: 100%;
