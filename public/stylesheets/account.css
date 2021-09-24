@@ -7,11 +7,19 @@ h1.userName {
     display: grid;
     grid-template-columns: 12em 15em 1fr 1fr 1fr;
     grid-template-rows: 10em 10em 1fr;
-    grid-template-areas: "name . .  . errors"
-                        "image . form form errors"
+    grid-template-areas: "author . .  . errors"
+                        "author . form form errors"
                         "button . form form .";
                         padding-bottom: 75px;
 
+}
+div.author {
+    grid-area: author;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 20px;
+    align-items: center;
 }
 .accountEditForm  {
     display: flex;
@@ -36,6 +44,7 @@ h1.userName {
     object-fit: contain;
     margin-left: 5px;
     align-self: center center;
+    border-radius: 100px;
 }
 .accountEditForm input,textarea{
     margin-left: 5px;
@@ -109,13 +118,12 @@ h1.userName {
     grid-area: button;
     font-size: 0.7em;
     font-weight: 700;
-    margin: 30px 3px 13px 5px;
-    place-self: start start;
+    margin-top: 30px;
     cursor: pointer;
     border: 1px solid black;
-
+    max-width: 75px;
 
 }
 .deleteAccount:hover {
-    background-color: #c53e3e;
+    background-color: rgb(247, 71, 71);
 }
