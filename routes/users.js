@@ -103,7 +103,7 @@ router.delete('/:id(\\d+)', asyncHandler(async (req, res)=>{
     if (!userId || String(userId) !== String(req.params.id)){return res.json({error: "Permission Denied"}).status(403)}
     let user = await User.findByPk(req.params.id);
     if (user.username === "John Doe"){
-        return res.json({error: "Cannot Delete this user"})
+        return res.json({error: "Cannot Delete This User"})
     }
     if (!user){return res.json({error: "Permission Denied"}).status(403)}
     let passwordMatches = await bcrypt.compare(req.body.password, user.hashedPassword.toString());
@@ -154,7 +154,6 @@ router.delete('/:id(\\d+)', asyncHandler(async (req, res)=>{
             }
 
         return res.json({message: "Successfully Deleted"})}
-
     else {res.json({error: "Invalid Password"})};
 }))
 
