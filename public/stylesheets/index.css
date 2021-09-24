@@ -239,7 +239,7 @@ h2 {
     " . bigInfo . splashImg ."
     " . smallInfo . splashImg ."
     ". signUp . splashImg . "
-	". . . splashImg .";
+    ". signUp . splashImg spashImg ";
 }
 
 #bigInfo{
