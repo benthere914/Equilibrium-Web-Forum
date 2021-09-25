@@ -241,3 +241,8 @@
 .comment-edit, .comment-delete{
     cursor: pointer;
 }
+
+.comment-username:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

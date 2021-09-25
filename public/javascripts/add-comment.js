@@ -16,6 +16,7 @@ addComment.addEventListener('submit', async (e) => {
 	const content = { comment };
 	let obj;
     let id;
+    let userId;
     let url = window.location.href;
     url = url.split("/");
 
@@ -24,7 +25,7 @@ addComment.addEventListener('submit', async (e) => {
     let textBox = document.querySelector(".commentTextBox");
     try {
         let userIdResponse = await fetch('/users/userid');
-        let userId = await userIdResponse.json();
+        userId = await userIdResponse.json();
         if (!userId.userId){textBox.value = "";alert("You must be logged in to comment"); throw new Error("You must be logged in to comment")}
     } catch (error) {
         return error
@@ -51,6 +52,8 @@ addComment.addEventListener('submit', async (e) => {
 	let list = document.querySelector('.commentsList');
 	let newComment = document.createElement('div');
 	let author = document.createElement('p');
+    author.setAttribute("onclick", `window.location.href='/users/${userId.userId}'`)
+    author.setAttribute("class", "comment-username")
 	let commentContent = document.createElement('p');
 	let date = document.createElement('p');
     let topContent = document.createElement("div");

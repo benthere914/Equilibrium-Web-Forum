@@ -58,7 +58,7 @@ block content
                         div.comment-container
                             input(type="hidden", value= comment.id)
                             .top-of-comment
-                                p(class="comment-username")= comment.User.username
+                                p(class="comment-username", onclick=`window.location.href='/users/${comment.User.id}'`)= comment.User.username
                                 if comment.matches
                                     p(class="comment-edit" ) Edit
                                     p(class="comment-delete") Delete
