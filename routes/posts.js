@@ -252,11 +252,19 @@ router.post("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
 }));
 
 router.delete("/:id(\\d+)/delete", asyncHandler(async(req,res)=> {
-
-	const postId = parseInt(req.params.id, 10);
-	let postToDelete = await Post.findByPk(postId);
-	await postToDelete.destroy();
-	res.json({post: `${postId}`})
+    let success = false;
+    try {
+        const postId = parseInt(req.params.id, 10);
+        let postToDelete = await Post.findByPk(postId);
+        let comments = await Comment.findAll({where: {postId: postToDelete.dataValues.id}})
+        comments.forEach(async comment => comment.destroy())
+        let votes = await Vote.findAll({where: {postId: postToDelete.dataValues.id}})
+        votes.forEach(async vote => vote.destroy())
+        await postToDelete.destroy();
+        success = true;
+    } catch (error) {
+    }
+    res.json({success})
 }));
 
 module.exports = router;

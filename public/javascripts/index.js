@@ -35,7 +35,6 @@ window.addEventListener("load", async (event) => {
 				relevantUrls.push(`relevant-${each.split('-')[1]}`)
 			}
 				let intiialRelevantNodes = [];
-				console.log(relevantUrls)
 			for (let i = 0; i < relevantUrls.length; i++){
 				let posts = document.querySelectorAll(`.${relevantUrls[i]}`);
 				if (posts.length){

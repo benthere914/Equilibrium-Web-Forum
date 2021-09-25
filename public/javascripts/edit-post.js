@@ -44,16 +44,12 @@ deleteButton.addEventListener('click', async (e)=> {
 	let confirmed = confirm(`Are you sure you want to delete?`);
 	if (confirmed) {
 		try{
-			fetch(`/posts/${postId}/delete`, {
-				 method: "DELETE",
-
-		 }).then(res => res.json())
-
-		 if(!res.ok){
-			 throw res;
-		 }
+			let res = await fetch(`/posts/${postId}/delete`, {method: "DELETE",})
+            let success = await res.json();
+            if (success.success){return window.location.replace("/");}
+            throw new Error(`success: ${success}`)
 		}catch(e){
 		}
-		window.location.href = "/";
+
 	}
 })
