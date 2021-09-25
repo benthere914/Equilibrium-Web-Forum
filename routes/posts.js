@@ -227,13 +227,23 @@ router.get("/:id(\\d+)/edit", asyncHandler(async (req, res, next) => {
 
 
 router.put("/:id(\\d+)/edit", asyncHandler(async (req, res) => {
-    let {title, content, imgUrl} = req.body;
-    let post = await Post.findByPk(req.params.id);
-    post.title = title;
-    post.content = content;
-    post.imgUrl = imgUrl;
-    await post.save();
-    res.json({post})
+    try {
+        let {title, content, imgUrl, topicId} = req.body;
+        let post = await Post.findByPk(req.params.id);
+        if (!Number(topicId)){
+            let topic = await Topic.findOne({where: {name: topicId}});
+            topic = topic.dataValues;
+            topicId = topic.id;
+        }
+        post.title = title;
+        post.content = content;
+        post.imgUrl = imgUrl;
+        post.topicId = topicId;
+        await post.save();
+        res.json({post})
+    } catch (error) {
+        console.log(error)
+    }
 }));
 
 router.post("/:id(\\d+)/comments", asyncHandler(async (req, res) => {
