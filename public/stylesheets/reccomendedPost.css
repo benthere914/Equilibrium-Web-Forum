@@ -1,22 +1,28 @@
 .reccomended{
+    margin-right: 200px;
     display: flex;
     width: 200px;
-    /* display: none; */
+    height: 150px;
     flex-direction: column;
     cursor: pointer;
+    position: relative;
 }
+
 .reccomended h2{
     background-color: white;
     font-size: medium;
+    text-align: center;
 
 }
 
 .reccommendedPostHeader h3, .reccommendedPostContent h5{
     color: black;
+    text-align: center;
 }
 .reccommendedPostContent img{
-
     width: 200px;
+    height: 125px;
+    object-fit: cover;
 }
 
 .reccomended ul li{
@@ -30,4 +36,9 @@
     font-weight: 900;
     font-size: 1.2em;
     cursor: pointer;
+}
+
+#reccomendePostAuthor{
+    text-align: left;
+    font-size: 14px;
 }

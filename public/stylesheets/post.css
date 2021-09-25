@@ -1,7 +1,7 @@
 .body{
     display: flex;
     width: 90%;
-    justify-content: center;
+    justify-content: space-around;
     margin: 0 auto;
     padding-top: 100px;
 
@@ -20,7 +20,8 @@
 
 
 .post{
-    margin: 0;
+    position: relative;
+    right: 30px;
     align-items: center;
     justify-content: center;
     width: 670px;
@@ -172,6 +173,9 @@
 }
 
 .comment{
+    position: relative;
+    left: 8%;
+    justify-self: flex-end;
     background-color: white;
     max-width: 15vw;
     color: black;
