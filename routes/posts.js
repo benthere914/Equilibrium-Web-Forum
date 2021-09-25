@@ -54,15 +54,18 @@ router.get(
 		let output = {};
 		for (let i = 0; i < posts.length; i++) {
 			posts[i] = posts[i].dataValues;
-			posts[i].content = cutContent(posts[i].content, 75);
-			posts[i].title = cutContent(posts[i].title, 25);
             let addToOutput = true;
             if (addToOutput && (output[posts[i].title])){addToOutput = false;}
             if (addToOutput && (Object.keys(output).length > 3)) {addToOutput = false;}
 			if (addToOutput && (output[posts[i].title])) {addToOutput = false;}
             if (addToOutput && (posts[i].id === post.id)) {addToOutput = false;}
+            if (addToOutput && posts[i].content.length < 25){addToOutput = false;}
+            if (addToOutput && posts[i].title.length < 7){addToOutput = false;}
+
+			posts[i].content = cutContent(posts[i].content, 75);
+			posts[i].title = cutContent(posts[i].title, 25);
             if (addToOutput){output[posts[i].title] = posts[i];}
-            
+
 
 
 		}
