@@ -232,7 +232,7 @@
 }
 
 .edit-comment-text-box{
-    border: solid red 5px;
+    border: solid gray 5px;
     font-size: 15px;
     color: black;
     width: 250px;
