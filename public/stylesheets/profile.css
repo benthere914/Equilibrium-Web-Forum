@@ -11,7 +11,7 @@
 .profile-body {
 	padding-top: 100px;
 	display: grid;
-	grid-template-columns: 1fr 1fr 0.3fr 4fr 3fr 1fr;
+	grid-template-columns: 1fr 1.7fr 0.3fr 6fr 2fr 0.5fr;
 	grid-template-rows: 0.2fr 1fr;
 	grid-template-areas:
 		". userDiv . profile-title . ."
@@ -74,30 +74,32 @@
 .profile-body .topics-container {
 	overflow-y: visible !important;
 	grid-area: topics;
-	min-width: 200px;
+	min-width: 250px;
 	width: 100%;
 	margin: 0 auto;
 }
 .posts {
 	grid-area: posts;
-	margin-right: 1em;
+	margin-right: 2em;
 }
 .topics {
 	cursor: pointer;
 	position: relative;
 }
-
+.topics-container {
+    place-self: start end;
+}
 
 .topics:hover::after{
     content: "Unfollow?" !important;
     position: absolute;
-    width: 90px !important;
-    height:35px !important;
-    left: 0px !important;
+    width: 80px !important;
+    height:32px !important;
+    left: -10px !important;
     top: -50px !important;
     background-color: black;
     color: white;
-    padding: 10px 10px 0px 10px !important;
+    padding: 8px 8px 0px 8px !important;
     border-radius: 17px !important;
     text-align: center;
 
