@@ -133,16 +133,16 @@
 .upvote-button{
     width: 0;
     height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-bottom: 20px solid green;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+    border-bottom: 17px solid green;
 }
 .downvote-button{
     width: 0;
     height: 0;
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 20px solid red;
+    border-left: 17px solid transparent;
+    border-right: 17px solid transparent;
+    border-top: 17px solid red;
 }
 .increment-active{
     text-align: center;
@@ -161,7 +161,7 @@
   font-weight: 900;
 }
 .vote-total{
-    width: 40px;
+    width: 34px;
 }
 .edit-button{
  color: rgb(64, 137, 182);
