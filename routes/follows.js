@@ -19,7 +19,7 @@ router.get('/topics/:userId', asyncHandler(async(req,res)=> {
 
 router.post('/topics', asyncHandler(async(req, res, next) =>{
   const {userId, topicId} = req.body;
-  let alreadyFollows = await TopicFollow.findOne({where: topicId});
+  let alreadyFollows = await TopicFollow.findOne({where:{ topicId, userId} });
     if (!alreadyFollows){
       const newFollow = await TopicFollow.create({userId, topicId});
 

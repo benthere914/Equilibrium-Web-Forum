@@ -101,6 +101,11 @@
     margin: auto;
     margin-top: 1em;
 }
+.saveButtons *:focus {
+    outline: none;
+    border: rgb(0, 0, 0) solid 2px;
+}
+
 .accountEditForm label{
     margin: 0.5em, 0, 0.2em 1em;
     font-size: 1em;
@@ -157,11 +162,11 @@
     cursor: pointer;
     font-size: 0.8em;
     border-radius: 8px;
-    border:
 
 }
 
-.deleteAccount:hover {
+.deleteAccount:hover, .deleteAccount:focus {
     background-color: #f51010;
     color: white;
+    outline: none;
 }
