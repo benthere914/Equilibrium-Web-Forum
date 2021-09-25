@@ -93,9 +93,17 @@
     background-image: url('../images/High-Res-Seamless-Oak-Wood-Texture-Background.jpg');
     font-family:'Courier New', Courier, monospace;
 }
-.accountEditForm textarea {
+.accountEditForm textarea{
     min-height: 7em;
-    text-align: center;
+    text-align: left;
+    padding-left: 10px;
+    padding-top: 8px;
+}
+
+.accountEditForm input[type="text"], .accountEditForm input[type="password"]{
+    text-align: left;
+    padding-left: 10px;
+    padding: 8px;
 }
 .saveButtons {
     margin: auto;
