@@ -12,7 +12,8 @@ const { restoreUser } = require("../auth");
 const db = require("../db/models");
 const { Post, User, Topic, Comment, Vote } = db;
 const {convertTime} = require('../utils');
-
+const { Sequelize } = require("../db/models");
+const Op = Sequelize.Op
 router.get(
 	"/:id(\\d+)",
 	restoreUser,
@@ -29,6 +30,25 @@ router.get(
 			where: { id: postId },
 			include: [{ model: User }, { model: Topic }],
 		});
+        let postsByTopic = await Post.findAll({where: {topicId: post.dataValues.topicId}, include: [{model: User}, {model: Topic}]})
+        let postsByAuthor = await Post.findAll({where: {userId: post.dataValues.userId}, include: [{model: User}, {model: Topic}]})
+        let posts = [...postsByTopic, ...postsByAuthor]
+        let output = [];
+        for (let i = 0; i < posts.length; i++){
+            posts[i] = posts[i].dataValues;
+            if (!(posts[i].id === post.id)){output.push(posts[i])}
+                posts[i].content = posts[i].content.slice(0, 100);
+            if (posts[i].title.length > 50) {
+                while(posts[i].title.length > 50){
+                    posts[i].title = posts[i].title.split(" ");
+                    posts[i].title = posts[i].title.slice(0, posts[i].title.length-1)
+                    posts[i].title = posts[i].title.join(' ');
+                }
+                posts[i].title += "...";
+            }
+        }
+        posts = output;
+
 		let updatedTime = post.updatedAt;
 			let day = convertTime(updatedTime.getDate(), 'date');
             let month = convertTime(updatedTime.getMonth(), 'month');
@@ -101,6 +121,7 @@ router.get(
 	}
 
 		res.render("post", {
+            posts,
 			post,
 			postId,
 			author: post.User,

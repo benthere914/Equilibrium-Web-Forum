@@ -1,0 +1,33 @@
+.reccomended{
+    display: flex;
+    width: 200px;
+    /* display: none; */
+    flex-direction: column;
+    cursor: pointer;
+}
+.reccomended h2{
+    background-color: white;
+    font-size: medium;
+
+}
+
+.reccommendedPostHeader h3, .reccommendedPostContent h5{
+    color: black;
+}
+.reccommendedPostContent img{
+
+    width: 200px;
+}
+
+.reccomended ul li{
+    border: 1px solid #c3c1ab;
+    box-shadow: -5px 5px 2px #c3c1ab;
+    padding: 10px 10px 10px 15px;
+}
+
+#reccomendePostTitle{
+    text-align: left;
+    font-weight: 900;
+    font-size: 1.2em;
+    cursor: pointer;
+}
