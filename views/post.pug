@@ -13,36 +13,38 @@ append head
 block content
     div.body-encapsulation
         .body
-            .author(onclick=`window.location.href='/users/${author.id}'`)
-                .authorName
-                    h3= author.username
-                .authorImage
-                    img(src= author.imgUrl alt= `Profile Picture for ${author.username}`)
-                .authorBio= author.biography
             .post
                 .postTopic
                   span(id="topic-display-post")= post.Topic.name
-                .postTitle
-                    .postTitleContent= post.title
-                    form(class="submit-vote")
-                        div(class="vote")
-                            if userVoteStatus === 0
-                                div(class="increment upvote-button")
-                                div(class="vote-count-display vote-total")=voteTotal
-                                div(class="increment downvote-button")
-                            if userVoteStatus === 1
-                                div(class="increment-active upvote-button")
-                                div(class="vote-count-display vote-total")=voteTotal
-                                div(class="increment downvote-button")
-                            if userVoteStatus === -1
-                                div(class="increment upvote-button")
-                                div(class="vote-count-display vote-total")=voteTotal
-                                div(class="increment-active downvote-button")
-                            input(type="hidden" value=postId name="postId")
-                            input(type="hidden" value=userId name="userId")
-                if postMatches
+                  if postMatches
                     div.edit-button
                         a(href=`/posts/${post.id}/edit`) Edit Your Post
+                .postTitle
+                    .postTitleContent= post.title
+                .postDetails
+                  .authorImage
+                    img(src= author.imgUrl alt= `Profile Picture for ${author.username}` class="authorImageCrop" onclick=`location.href='/users/${author.id}'`)
+                  .authorName
+                    a(href=`/users/${author.id}`)=author.username
+
+                    p= `/ ${postUpdateTime}`
+                  .voteDiv
+                    form(class="submit-vote")
+                            div(class="vote")
+                                if userVoteStatus === 0
+                                    div(class="increment upvote-button")
+                                    div(class="vote-count-display vote-total")=voteTotal
+                                    div(class="increment downvote-button")
+                                if userVoteStatus === 1
+                                    div(class="increment-active upvote-button")
+                                    div(class="vote-count-display vote-total")=voteTotal
+                                    div(class="increment downvote-button")
+                                if userVoteStatus === -1
+                                    div(class="increment upvote-button")
+                                    div(class="vote-count-display vote-total")=voteTotal
+                                    div(class="increment-active downvote-button")
+                                input(type="hidden" value=postId name="postId")
+                                input(type="hidden" value=userId name="userId")
                 .postImage
                     img(src= post.imgUrl alt="Main image for #{post.title}")
                 .postContent
