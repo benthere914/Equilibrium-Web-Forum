@@ -73,11 +73,12 @@ window.addEventListener("load", async (event) => {
 			} else if (e.target.classList.contains("toggled")){
 				e.target.classList.remove('toggled');
 				e.target.style.order = 12;
-				if (current < 50) current ++;
+
 			}let cssId = `relevant-${topicId}`;
 			const relevantPosts = document.querySelectorAll(`.${cssId}`);
 			relevantPosts.forEach((post) => {
 				post.style.order = current;
+				if (current < 50) current ++;
 			});
 
 		});
