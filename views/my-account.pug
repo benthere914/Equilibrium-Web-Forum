@@ -24,6 +24,7 @@ block content
                     each error in errors
                         div.errorMsg= error
         form(class="accountEditForm" action=`/users/${user.id}/edit` method="POST")
+            h2.form-title Edit Account
             input(type="hidden" name='_csrf' value=csrfToken)
             input(type="hidden" name='userId' value=user.id)
             label(for="username") User Name
