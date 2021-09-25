@@ -29,6 +29,14 @@ router.get(
 			where: { id: postId },
 			include: [{ model: User }, { model: Topic }],
 		});
+		let updatedTime = post.updatedAt;
+			let day = convertTime(updatedTime.getDate(), 'date');
+            let month = convertTime(updatedTime.getMonth(), 'month');
+            let year = convertTime(updatedTime.getYear(), 'year');
+            let hour = convertTime(updatedTime.getHours(), 'hours');
+            let minutes = convertTime(updatedTime.getMinutes(), 'minutes');
+            let format = convertTime(updatedTime.getHours(), 'format');
+		const postUpdateTime = `${month}, ${day}, ${year}, ${hour}:${minutes} ${format}`;
 		let comments = await Comment.findAll({
 			where: { postId },
 			include: { model: User },
@@ -101,6 +109,7 @@ router.get(
       		userId,
 			voteTotal,
 			userVoteStatus,
+			postUpdateTime,
 			csrfToken: req.csrfToken(),
       		postMatches
 		});
