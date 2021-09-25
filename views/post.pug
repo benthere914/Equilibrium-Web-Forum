@@ -20,8 +20,7 @@ block content
                     each reccomendedPost in posts
                         li(onclick=`window.location.href='/posts/${reccomendedPost.id}'`)
                             .reccommendedPostHeader
-                                h3(id="reccomendePostTitle", onclick=`window.location.href='/users/${reccomendedPost.User.id}'`)= `${reccomendedPost.User.username}`
-                                h3= reccomendedPost.title
+                                h3(id="reccomendePostTitle")= reccomendedPost.title
                             .reccommendedPostContent
                                 img(src= reccomendedPost.imgUrl, alt= `Image for ${reccomendedPost.title}`)
                                 h5= reccomendedPost.content
