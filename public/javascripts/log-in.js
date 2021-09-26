@@ -20,7 +20,18 @@ logInForm.addEventListener("submit", async (e) => {
 		});
         let response = await res.json();
         let {error, message} = response;
-        if (message){window.location.reload();}
+        if (message){
+            let path = window.location.href;
+            path = path.split('/');
+            path = path[path.length - 1];
+            setInterval(() => {console.log(path)}, 1000)
+            if (path === '404'){
+                window.location.replace('/')
+            }
+            else {
+                window.location.reload();
+            }
+        }
         if (error){
             const errorsContainer = document.querySelector(".log-in-errors-container");
             let errorsHtml;

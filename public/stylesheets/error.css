@@ -5,7 +5,7 @@
     width:  45%;
     text-align: center;
 }
-h2{
+.ErrorContent h2{
     position: relative;
     top: 40px;
 }
@@ -24,3 +24,5 @@ button{
 button:hover{
     opacity: 1;
 }
+
+

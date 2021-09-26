@@ -203,7 +203,13 @@ router.get(
 	})
 );
 
-router.get('/404', restoreUser, (req, res) => {
-	res.render('404Error', {loggedIn: res.locals.authenticated});
+router.get('/404',csrfProtection, restoreUser, (req, res) => {
+    let userId;
+		if (req.session.auth) {
+			userId = req.session.auth.userId;
+		} else {
+			userId = NaN;
+		}
+	res.render('404Error', {loggedIn: res.locals.authenticated, csrfToken: req.csrfToken(), userId});
 });
 module.exports = { router };
