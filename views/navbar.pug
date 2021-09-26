@@ -32,9 +32,9 @@ div(class="log-in-modal")
     form(class="log-in-form")
       input(type="hidden" name='_csrf' value=csrfToken autocomplete="off")
       label(for="username") Username
-      input(type="text" name="username" autocomplete="username")
+      input(type="text" name="username" autocomplete="username" class='userNameTextBoxLogIn')
       label(for="password") Password
-      input(type="password" name="password" autocomplete="current-password")
+      input(type="password" name="password" autocomplete="current-password" class="passwordTextBoxLogIn")
       input(type="submit" value="Log In")
 div(class="sign-up-modal")
   div(class="modal-content")
@@ -43,9 +43,9 @@ div(class="sign-up-modal")
     form(class="sign-up-form")
       input(type="hidden" name='_csrf' value=csrfToken)
       label(for="username") Username
-      input(type="text" name="username" autocomplete="username")
+      input(type="text" name="username" autocomplete="username" class='userNameTextBoxSignUp')
       label(for="password") Password
-      input(type="password" name="password" autocomplete="new-password")
+      input(type="password" name="password" autocomplete="new-password" class="passwordTextBoxSignUp")
       label(for="confirmPassword") Confirm Password
-      input(type="password" name="confirmPassword" autocomplete="confirm-password")
+      input(type="password" name="confirmPassword" autocomplete="confirm-password" class="confirmPasswordTextBoxSignUp")
       input(type="submit" value="Sign Up")

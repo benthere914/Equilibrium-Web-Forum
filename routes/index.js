@@ -106,11 +106,10 @@ router.post('/sign-up',
             const hashedPassword = await bcrypt.hash(password, 10);
             let user = await User.create({username, hashedPassword});
             loginUser(req, res, user);
-            res.status(201);
-            res.redirect("/");
+            res.json({message: 'success'})
         } else {
             error = validatorErrors.array().map((e) => e.msg);
-            res.status(400).json({error});
+            res.json({error});
         }
   }));
 
@@ -127,14 +126,14 @@ router.post('/log-in', loginValidators, csrfProtection, asyncHandler( async (req
         }
         if (passwordMatches) {
             loginUser(req, res, user);
-            return res.redirect('/')
+            return res.json({message: 'success'})
         }
         error.push('Incorrect login credentials')
-        res.status(400).json({error});
+        res.json({error});
     }
     else {
         error = validatorErrors.array().map(e => e.msg)
-        res.status(400).json({ error });
+        res.json({ error });
     }
 }));
 
