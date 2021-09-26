@@ -191,13 +191,14 @@ router.get(
         if (userId){
 		    let user = await User.findByPk(userId);
 		    user = user.dataValues;
-		    res.render('my-account', {
+		    return res.render('my-account', {
                 userId,
 			    user,
 			    loggedIn: res.locals.authenticated,
 			    csrfToken: req.csrfToken(),
 			    bioLength: user.biography.length,
 		    });
+            
         }
         return next();
 	})
