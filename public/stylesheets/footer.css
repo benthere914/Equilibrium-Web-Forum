@@ -6,33 +6,42 @@
     background-color: #B08666;
     width: 100%;
     bottom: 0;
-}
-
-.footer * img{
-    height: 30px;
-    width: 30px;
-    object-fit: contain;
+    border-top: 2px solid black;
 }
 
 .footer > div{
     display: flex;
     align-items: center;
+    position: relative;
 }
+.footer  h3.footer-name {
+    justify-content: space-evenly;
+    flex: 1 1 25%;
+    font-size: 1em;
+    margin-right: 5px;
+    font-weight: 600;
+    letter-spacing: -1px;
 
-.footer > div > *{
-    padding-left: 10px;
-    padding-right: 10px;
 }
-
-.footer > div > img{
-    cursor: pointer;
-    margin: 0 5px;
-    padding: 0;
-    height: 35px;
-    width: 40px;
-}
-
 body {
     min-height: 100vh;
     position: relative;
+}
+
+.footer a {
+    margin-right: 9px;
+}
+
+.footer .github{
+    background-image: url("../images/github-logo.png");
+    height: 25px;
+    width: 25px;
+    background-size: contain;
+}
+
+.footer .linkedin{
+    background-image: url("../images/linkedin.png");
+    height: 25px;
+    width: 25px;
+    background-size: contain;
 }
