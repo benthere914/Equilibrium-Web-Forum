@@ -162,7 +162,7 @@ router.get(
 	'/create',
 	csrfProtection,
 	restoreUser,
-	asyncHandler(async (req, res) => {
+	asyncHandler(async (req, res, next) => {
 		if (res.locals.authenticated === true) {
 			const userId = req.session.auth.userId;
 			const user = await User.findByPk(userId);
@@ -175,7 +175,7 @@ router.get(
 				userId: req.session.auth.userId,
 			});
 		} else {
-			res.redirect('/');
+			next()
 		}
 	})
 );
