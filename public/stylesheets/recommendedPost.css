@@ -4,7 +4,6 @@
     width: 300px;
     max-height: 300px;
     flex-direction: column;
-    cursor: pointer;
     position: relative;
     box-sizing: border-box;
 
@@ -49,6 +48,7 @@
     box-shadow: -5px 5px 2px #c3c1ab;
     padding: 10px 10px 10px 15px;
     max-height: 300px;
+    cursor: pointer;
 }
 
 .recommended li {
