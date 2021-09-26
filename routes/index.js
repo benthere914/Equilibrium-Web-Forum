@@ -188,9 +188,6 @@ router.get(
 		if (req.session.auth) {
 			userId = req.session.auth.userId;
 		}
-		// if (!userId) {
-		// 	return next();
-		// }
         if (userId){
 		    let user = await User.findByPk(userId);
 		    user = user.dataValues;
@@ -202,6 +199,7 @@ router.get(
 			    bioLength: user.biography.length,
 		    });
         }
+        return next();
 	})
 );
 
