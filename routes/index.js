@@ -203,7 +203,7 @@ router.get(
 	})
 );
 
-router.get('/404', (req, res) => {
-	res.render('404Error');
+router.get('/404', restoreUser, (req, res) => {
+	res.render('404Error', {loggedIn: res.locals.authenticated});
 });
 module.exports = { router };
