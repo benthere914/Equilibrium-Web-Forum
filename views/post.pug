@@ -2,7 +2,7 @@ extends layout
 append head
     link(rel="stylesheet" href="/stylesheets/index.css")
     link(rel="stylesheet" href="/stylesheets/post.css")
-    link(rel="stylesheet" href="/stylesheets/reccomendedPost.css")
+    link(rel="stylesheet" href="/stylesheets/recommendedPost.css")
     link(rel="stylesheet" href="/stylesheets/footer.css")
     script(src="/javascripts/default-Img.js" type="module")
     script(src="/javascripts/create-vote.js" type="module")
@@ -14,16 +14,16 @@ append head
 block content
     div.body-encapsulation
         .body
-            .reccomended
+            .recommended
                 h2 You might also like...
                 ul
-                    each reccomendedPost in posts
-                        li(onclick=`window.location.href='/posts/${reccomendedPost.id}'`)
-                            .reccommendedPostHeader
-                                h3(id="reccomendePostTitle")= reccomendedPost.title
-                            .reccommendedPostContent
-                                img(src= reccomendedPost.imgUrl, alt= `Image for ${reccomendedPost.title}`)
-                                h5= reccomendedPost.content
+                    each recommendedPost in posts
+                        li(onclick=`window.location.href='/posts/${recommendedPost.id}'`)
+                            .recommendedPostHeader
+                                h3(id="recommendedPostTitle")= recommendedPost.title
+                            .recommendedPostContent
+                                img(src= recommendedPost.imgUrl, alt= `Image for ${recommendedPost.title}`)
+                                p= recommendedPost.content
             .post
                 .postTopic
                   span(id="topic-display-post")= post.Topic.name

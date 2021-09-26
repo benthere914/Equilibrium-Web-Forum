@@ -75,27 +75,49 @@
 }
 
 .form-buttons {
-
     grid-area: options;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .edit-title {
     text-align: center;
 
-
 }
+
+.form-buttons button:focus {
+    outline: none;
+    border: 3px solid black !important;
+}
+
 .form-buttons button {
-   background-color: #0a6a09;
-   margin: 5px 0px;
-   padding: 10px;
-   width: 200px;
+   margin: 5px auto;
+   padding: 0.5em 0.60em;
+   width: 160px;
+   border-radius: 10px;
     font-size: 1.1em;
     font-weight: 700;
     font-family:Georgia, 'Times New Roman', Times, serif;
+    transition: all 0.15s;
+}
 
+#edit-post-button button{
+    background-color: transparent;
+    border: 3px solid #0a6a09;
+    margin-bottom: 8px;
+}
+#edit-post-button button:hover {
+    border: 3px solid black;
+    background-color: #1cb31a;
 }
 
 #delete-post-button  button{
-    background-color: #a34528;
+    background-color: transparent;
+    border: 3px solid #a34528;
+}
 
-
+#delete-post-button button:hover {
+    border: 3px solid black;
+    background-color: #d3603d;
 }
