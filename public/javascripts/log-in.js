@@ -18,28 +18,32 @@ logInForm.addEventListener("submit", async (e) => {
 				"CSRF-Token": token,
 			},
 		});
-
-		if (!res.ok) {
-			throw res;
-		}
-		window.location.reload();
+        let response = await res.json();
+        let {error, message} = response;
+        if (message){
+            let path = window.location.href;
+            path = path.split('/');
+            path = path[path.length - 1];
+            setInterval(() => {console.log(path)}, 1000)
+            if (path === '404'){
+                window.location.replace('/')
+            }
+            else {
+                window.location.reload();
+            }
+        }
+        if (error){
+            const errorsContainer = document.querySelector(".log-in-errors-container");
+            let errorsHtml;
+            if (error && Array.isArray(error)) {errorsHtml = error.map((message) => `<li>${message}</li>`);}
+            errorsHtml.unshift("<ul>");
+            errorsHtml.push("</ul>");
+            setTimeout(() => {
+                errorsContainer.innerHTML = errorsHtml.join("");
+                document.querySelector('.userNameTextBoxLogIn').value = "";
+                document.querySelector('.passwordTextBoxLogIn').value = "";
+            }, 250)
+        }
 	} catch (err) {
-		const errorJSON = await err.json();
-		const errorsContainer = document.querySelector(".log-in-errors-container");
-
-		const { error } = errorJSON;
-		let errorsHtml;
-		if (error && Array.isArray(error)) {
-			errorsHtml = error.map(
-				(message) => `
-          <li>
-              ${message}
-          </li>
-        `
-			);
-		}
-		errorsHtml.unshift("<ul>");
-		errorsHtml.push("</ul>");
-		errorsContainer.innerHTML = errorsHtml.join("");
 	}
 });
