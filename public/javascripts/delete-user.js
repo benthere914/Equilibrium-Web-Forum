@@ -16,7 +16,7 @@ document.querySelector(".deleteAccount").addEventListener("click", (e) => {confi
     warningPt2.innerText = "Enter your password to confirm";
     submitButton.innerText = "Confirm Delete My Account"
     submitButton.addEventListener("click", async (e) => {verifyPassword(e)})
-    passwordBox.addEventListener("keydown", (e)=> {if (e.key === "Enter"){}})
+    passwordBox.addEventListener("keydown", (e)=> {if (e.key === "Enter"){verifyPassword(e)}})
 
     const verifyPassword = async (e) => {
         let userId;
