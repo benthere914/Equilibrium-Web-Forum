@@ -55,7 +55,6 @@ const topics = document.querySelectorAll(".topics").forEach((topic) => {
 			if (relevantPosts.length){ current = current -1};
 			relevantPosts.forEach((post) => {
 				post.style.order = current;
-				console.log(`!!!!!!${current}`)
 			});
 
 			if (loggedIn) {
@@ -80,7 +79,6 @@ const topics = document.querySelectorAll(".topics").forEach((topic) => {
 
 		relevantPosts.forEach((post) => {
 			post.style.order = 50;
-			console.log(`!!!!!!${current}`)
 		});
 		}
 
