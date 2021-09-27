@@ -20,12 +20,12 @@
 
 
 .post{
-    position: relative;
     right: 30px;
     align-items: center;
     justify-content: center;
     width: 670px;
     display: grid;
+    margin: 0 auto;
     grid-template-columns: auto;
     grid-template-rows: auto auto auto auto auto;
     grid-template-areas:
@@ -173,7 +173,6 @@
 }
 
 .comment{
-    position: relative;
     left: 8%;
     justify-self: flex-end;
     background-color: white;
