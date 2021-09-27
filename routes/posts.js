@@ -64,12 +64,14 @@ router.get(
 
 			posts[i].content = cutContent(posts[i].content, 75);
 			posts[i].title = cutContent(posts[i].title, 25);
+            if (addToOutput && posts[i].title[posts[i].title.length -1] > 15){addToOutput = false;}
+            if (addToOutput && posts[i].title[posts[i].title.length -1] > 15){addToOutput = false;}
             if (addToOutput){output[posts[i].title] = posts[i];}
 
 
 
 		}
-		posts = [...Object.values(output)];
+		posts = [...Object.values(output)].slice(0,3)
 
 		let updatedTime = post.updatedAt;
 		let day = convertTime(updatedTime.getDate(), 'date');
