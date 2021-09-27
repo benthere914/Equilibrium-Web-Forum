@@ -12,7 +12,7 @@
 	padding-top: 100px;
 	display: grid;
 	grid-template-columns: 1fr 1.7fr 0.3fr 6fr 2fr 0.5fr;
-	grid-template-rows: 0.2fr auto;
+	grid-template-rows: auto 1fr;
 	grid-template-areas:
 		". userDiv . profile-title . ."
 		" . userDiv . posts topics .";
