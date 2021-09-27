@@ -2,10 +2,10 @@
     height: 50px;
     display: flex;
     justify-content: space-around;
-    position: absolute;
     background-color: #B08666;
     width: 100%;
     bottom: 0;
+    margin-top: 100px;
     border-top: 2px solid black;
 }
 
