@@ -39,6 +39,7 @@
 
 .recommendedPostContent img{
     width: 200px;
+    max-height: 150px;
     align-self: center;
     object-fit: contain;
     padding-bottom: 7px;
