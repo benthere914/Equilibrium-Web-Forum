@@ -117,11 +117,13 @@
 
 .postText{
      width: 100%;
-   line-height: 1.8;
+   line-height: 2em;
    padding-top: 20px;
     border-top: 1px solid lightslategray;
     font-size: 1em;
     white-space: pre-wrap;
+    font-family: charter, Georgia, Cambria, "Times New Roman", Times, serif;
+    letter-spacing: -0.003em;
 }
 
 

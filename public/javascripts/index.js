@@ -36,6 +36,7 @@ try {
 			let posts = document.querySelectorAll(`.${relevantUrls[i]}`);
 			if (posts.length){
 				posts.forEach(post => post.style.order = current -1);
+
 			}
 		}	if(relevantUrls.length){current--};
 	}
@@ -74,10 +75,10 @@ const topics = document.querySelectorAll(".topics").forEach((topic) => {
 
 			let cssId = `relevant-${topicId}`;
 		const relevantPosts = document.querySelectorAll(`.${cssId}`);
-		if (relevantPosts.length){if (current < 50) current ++}
+		// if (relevantPosts.length){if (current < 50) current ++}
 
 		relevantPosts.forEach((post) => {
-			post.style.order = current;
+			post.style.order = 50;
 		});
 		}
 
