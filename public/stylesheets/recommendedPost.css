@@ -1,7 +1,6 @@
 .recommended{
     display: flex;
     width: 250px;
-    max-height: 250px;
     flex-direction: column;
 
 }
