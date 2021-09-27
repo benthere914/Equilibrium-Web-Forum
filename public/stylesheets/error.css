@@ -10,6 +10,8 @@
     top: 40px;
     border: 2px solid black;
     background: transparent;
+    font-size: 1.3em;
+    padding: 1.5em 2em;
 }
 button{
     position: relative;
