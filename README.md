@@ -33,7 +33,7 @@ Equilibrium is a fullstack app that allows the user to find posts to read, list 
       * ![image](https://user-images.githubusercontent.com/8016326/144484356-9b69dfd3-efb3-4d31-b728-21bd00f1aad5.png)
 
 ## Application Architecture
-As mentioned before, Acquire is a fullstack application.
+As mentioned before, Equilibrium is a fullstack application.
    * Backend Server - Express
    * Database - PostgreSQL
    * Frontend - HTML with AJAX
@@ -70,13 +70,12 @@ Properties used frequently:
 
 ## Conclusion and Next Steps
 
-Acquire was a blast to create and I look forward to managing it in the future.
+Equilibrium was a blast to create and I look forward to managing it in the future.
 There are some features that I plan on implementing in the future 
    * WebSockets for realtime comments
    * search feature
    * AWS for photo upload
-   * Responsive styling 
-   * Conversion to mobile app with React-Native
+   * Responsive styling
 
 
 
