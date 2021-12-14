@@ -146,10 +146,13 @@ h2 {
 	content: url("../images/github-logo.png");
 	margin-left: 1em;
 	display: inline-block;
+    position: absolute;
+    right: 370px;
 }
 .social a[href*="github"] {
 	width: 35%;
 	display: inline-block;
+
 }
 .linkedIn {
 	display: inline-block;
