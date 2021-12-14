@@ -22,9 +22,18 @@ h2{
 .sign-up-errors-container, .log-in-errors-container {
     display: flex;
     flex-direction: column;
-    background-color: lightpink;
+    background-color: red;
     border-radius: 5px;
     width: 100%;
+    margin-bottom: 25px;
+    color: black;
+}
+
+.log-in-errors-container li{
+    font-size: 15px !important;
+    color: black;
+    margin: 0;
+
 }
 .err_msg ul {
     list-style-type: disc;
@@ -33,6 +42,6 @@ h2{
     font-weight: 800;
     padding:2px;
     margin:0;
-    font-size: 0.7em;
     color: black;
+    font-size: 15px;
 }
