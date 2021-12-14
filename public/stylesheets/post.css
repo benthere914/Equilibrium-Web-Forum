@@ -196,6 +196,22 @@
 .commentsList{
     display: flex;
     flex-direction: column;
+    height: 70vh;
+    overflow-y: scroll;
+}
+
+.commentsList::-webkit-scrollbar{
+    width: 15px;
+}
+
+.commentsList::-webkit-scrollbar-track{
+
+}
+
+.commentsList::-webkit-scrollbar-thumb{
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.1);
+    background-color: slategray;
+    outline: 1px solid slategray;
 }
 .comment-input{
     border: 1px solid black;
