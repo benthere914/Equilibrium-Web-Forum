@@ -28,10 +28,12 @@ if (!loggedIn) {
 
 	const toggleSignUpModal = () => {
 		signUpModal.classList.toggle("show-modal");
+		logInModal.classList.remove("show-modal");
 	};
 
 	const toggleLogInModal = () => {
 		logInModal.classList.toggle("show-modal");
+		signUpModal.classList.remove("show-modal");
 	};
 
 	const toggleBlur = () => {
@@ -39,30 +41,40 @@ if (!loggedIn) {
 	};
 
 	signUpModalTrigger.addEventListener("click", (ev) => {
-		toggleSignUpModal();
-		toggleBlur();
-		mainBody.addEventListener(
-			"click",
-			(ev) => {
-				ev.preventDefault();
-				toggleSignUpModal();
-				toggleBlur();
-			},
-			{ once: true }
-		);
+		if (logInModal.classList.contains("show-modal")) {
+			toggleSignUpModal();
+		} else {
+			toggleSignUpModal();
+			toggleBlur();
+			mainBody.addEventListener(
+				"click",
+				(ev) => {
+					ev.preventDefault();
+					signUpModal.classList.remove("show-modal");
+					logInModal.classList.remove("show-modal");
+					toggleBlur();
+				},
+				{ once: true }
+			);
+		}
 	});
 
 	logInModalTrigger.addEventListener("click", (ev) => {
-		toggleLogInModal();
-		toggleBlur();
-		mainBody.addEventListener(
-			"click",
-			(ev) => {
-				ev.preventDefault();
-				toggleLogInModal();
-				toggleBlur();
-			},
-			{ once: true }
-		);
+		if (signUpModal.classList.contains("show-modal")) {
+			toggleLogInModal();
+		} else {
+			toggleLogInModal();
+			toggleBlur();
+			mainBody.addEventListener(
+				"click",
+				(ev) => {
+					ev.preventDefault();
+					signUpModal.classList.remove("show-modal");
+					logInModal.classList.remove("show-modal");
+					toggleBlur();
+				},
+				{ once: true }
+			);
+		}
 	});
 }
